@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Advanced Setup - Management</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/adv_language.js"></script>
+
+
+</head>
+
+<body>
+	<div id="wrapper">    
+
+<? include(top_nav.inc) ?>
+
+<? include(left_adv.inc) ?>
+
+  
+		
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1><span id="language_title" style="font-weight:bold;font-size:16px;">Language Settngs</span></h1>
+
+                <form method="post" name="language_form" id="language_form" action="adv_language.cgi">
+                <input type="hidden" name="command" id="id_command" value="changeLang" />
+                <input type="hidden" name="mypage" value="/adv_language.html" />
+				
+                <input type="hidden" name="cur_lang_stat" id="cur_lang_stat" value="0" />
+                
+                <input type="hidden" id="waiting_page" name="waiting_page" value="thankyou.html">            
+                <input type="hidden" name="confirm_page" id="confirm_page" value="wcb_confirm.html">
+                <input type="hidden" id="isconfirm" name="isconfirm" value="1">   
+                <input type="hidden" id="apply_page" name="apply_page" value="adv_language.html"/>  		 	    
+
+  				
+				<table cellpadding="0" cellspacing="2" border="0">	
+					<tr>
+						<td width="198"><B><span id="lang_lang">Language</span>:</B></td>
+
+						<td>
+								<select name="lang_select" id="lang_select" >
+										<option value="0">Auto-detect</option>
+										<option value="1">English</option>
+										<option value="2">French</option>
+						               </select>
+						 </td>
+				      </tr>
+				</table>
+				</form>
+
+				<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="200">&nbsp;</td>
+						<td>
+							<div><a class="button" href="###" id="diy_apply_btn"><span id="apply_btn_span">Apply</span></a></div>
+						</td>
+					</tr>
+				</table>
+				
+	        	<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+        
+    <? include(wcb_footer.inc) ?>
+
+	</div>
+</body>
+</html>
+

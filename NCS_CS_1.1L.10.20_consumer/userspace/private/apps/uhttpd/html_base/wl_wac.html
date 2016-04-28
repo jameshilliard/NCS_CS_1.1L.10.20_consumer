@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Wireless Access Control</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/wl_wac.js"></script>
+</head>
+
+
+
+
+<body>
+	<div id="wrapper">    
+
+<? include(top_nav.inc) ?>
+
+<? include(left_wl.inc) ?>
+		
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1><span id="wac_title" style='font-weight:bold;font-size:16px;'>Wireless Access Control</span></h1>
+
+				<form id="wac_form" method="POST" action="wl_wac.cgi">
+		 	    <input type="hidden" name="wireless_index_vlan" id="wireless_index_vlan" value="">
+		 	    
+                <input type="hidden" id="waiting_page" name="waiting_page" value="thankyou.html">            
+                <input type="hidden" name="confirm_page" id="confirm_page" value="wcb_confirm.html">
+                <input type="hidden" id="isconfirm" name="isconfirm" value="1">   
+                <input type="hidden" id="apply_page" name="apply_page" value="wl_wac.html"/>  
+                
+                <input type="hidden" id="submit_button_name" name="submit_button_name" value=""/>  		 	    
+                <input type="hidden" name="wireless_maclist" id="wireless_maclist">
+                <input type="hidden" name="wireless_macCount" id="wireless_macCount">
+
+	        	<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="250"><label><span id="wl_fre_span">Multiple SSID</span>:</label></td>
+                        <td>
+                            <select name="wireless_index_ssid" id="wireless_index_ssid">
+                                <option value="1">SSID1-5G</option>
+                                <option value="2">SSID2-5G</option>
+                                <option value="3">SSID3-5G</option>
+                                <option value="4">SSID4-5G</option>
+                                <option value="5">SSID5-2.4G</option>
+                                <option value="6">SSID6-2.4G</option>
+                                <option value="7">SSID7-2.4G</option>
+                                <option value="8">SSID8-2.4G</option>
+                            </select>
+                        </td>
+					</tr>					
+				</table>		 	    
+		 	    
+				<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="250"><label for="id_macenabled"><span id="wac_ctr_mode">Wireless Access Control Mode</span>:</label></td>
+						<td>
+							<select size="1" name="wireless_macPolicy" id="id_macenabled">
+					          <option value="0">Disable&nbsp;</option>
+					          <option value="1" selected >Allow Listed&nbsp;</option>
+					          <option value="2">Deny Listed&nbsp;</option>
+					        </select>
+					    </td>
+					</tr>
+					<tr>
+						<td><label for="id_mac"><span id="wac_mac">MAC Address</span>:</label></td>
+						<td><input type="text" name="wl_mac" id="id_mac" size="20" maxlength="17" style="height: 16px"/></td>
+					</tr>
+					<tr style="display:none;">
+						<td><label for="id_maccomment"><span id="wac_comment">Comment</span>:</label></td>
+						<td><input type="text" name="wl_maccomment" id="id_maccomment" size="20" maxlength="20" style="height: 16px"/></td>
+					</tr>
+					<tr>
+						<td width="220">&nbsp;</td>
+						<td>
+							<div><a class="button" href="###" id="diy_add_btn"><span id="span_add_btn">Add</span></a></div>
+						</td>
+					</tr>
+				</table>
+
+				<span id="maclist_span">
+                    <br>
+                    <table cellpadding="0" cellspacing="1" border="0" width="540px" id="macFilterList">
+                      <tr><td colspan="4"><strong><span id="wac_list_ctr2">Current Access Control List</span>:</strong></td></tr>
+                      <tr>
+                        <td align="center" width="35%" bgcolor="#3f78ad"><strong class="white"><span id="wl_fre_span2">Multiple SSID</span></strong></td>
+                        <td align="center" width="20%" bgcolor="#3f78ad"><strong class="white"><span id="wac_ctr_mode2">Access</span></strong></td>
+                        <td align="center" width="30%" bgcolor="#3f78ad"><strong class="white"><span id="wac_macaddr2">MAC Address</span></strong></td>
+                        <td align="center" width="15%" bgcolor="#3f78ad"><strong class="white"><span id="wac_select2">Remve</span></strong></td>
+                      </tr>
+                    </table>                    
+                </span>
+				</form>
+				
+				<table cellpadding="0" cellspacing="1" border="0" width="440px">
+					<tr>
+						<td>
+                            <div><a class="button" href="###" id="diy_apply_btn"><span id="apply_btn_span">Apply</span></a></div>
+						</td>
+					</tr>
+				</table>
+
+				<br><br>
+	        	<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+<? include(wcb_footer.inc) ?>
+
+	</div>
+</body>
+</html>

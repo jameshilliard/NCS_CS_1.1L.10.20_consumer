@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Advanced Setup - Factory Default</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/adv_default.js"></script>
+
+</head>
+
+<body>
+	<div id="wrapper">    
+<? include(top_nav.inc) ?>
+
+<? include(left_adv.inc) ?>
+
+  
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1><span id="adv_default_title" style="font-weight:bold;font-size:16px;">Factory Default</span></h1>
+
+				<form id="default_form" method="post" action="adv_default.cgi">      
+		        <input type="hidden" name="command" value="apply" />
+				
+                <input type="hidden" id="waiting_page" name="waiting_page" value="thankyou.html">            
+                <input type="hidden" name="confirm_page" id="confirm_page" value="wcb_confirm.html">
+                <input type="hidden" id="isconfirm" name="isconfirm" value="1">   
+                <input type="hidden" id="apply_page" name="apply_page" value="adv_default.html"/>   				
+
+		        <br>
+				<table cellpadding="0" cellspacing="2" border="0">
+		        	<tr>
+		            	<td width="250">
+			      	  		<strong><span id="adv_def_setting"  style="font-weight:bold;font-size:12px;">Factory default setting</span>:</strong>
+		              	</td>
+						<td>
+							<div><a class="button2" href="###" id="restore_btn"><span id="restore_btn_span">Restore Default Settings</span></a></div>
+						</td>		    
+		            </tr>
+		        </table>
+		        </form>
+
+				<br><br><br>
+	        	<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+<? include(wcb_footer.inc) ?>
+  
+</body>
+</html>

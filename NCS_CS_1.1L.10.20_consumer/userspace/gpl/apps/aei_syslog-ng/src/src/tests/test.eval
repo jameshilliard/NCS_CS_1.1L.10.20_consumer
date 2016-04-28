@@ -1,0 +1,39 @@
+#!/bin/sh
+rm d?
+
+$SYSLOG_NG -f syslog-ng.conf.eval -p syslog-ng.pid 2>/dev/null
+
+$LOGGER -u input -p local0.debug "msg: local0.debug"
+$LOGGER -u input -p local1.debug "msg: local1.debug"
+$LOGGER -u input -p local1.info  "msg: local1.info"
+$LOGGER -u input -p local2.debug "msg: local2.debug"
+$LOGGER -u input -p local2.info  "msg: local2.info"
+$LOGGER -u input -p local3.debug "msg: local3.debug"
+$LOGGER -u input -p local4.info  "msg: local4.info"
+$LOGGER -u input -p local6.info  "msg: local6.info"
+$LOGGER -u input -p local4.debug "msg: local4.debug"
+$LOGGER -u input -p local6.info  "msg: local6.info"
+
+pid=`cat syslog-ng.pid`
+sleep 2
+kill -TERM $pid 2>/dev/null
+sleep 2
+kill -TERM $pid 2>/dev/null
+rm syslog-ng.pid
+
+result=`wc -l d?`
+#rm d?
+if [ "$result" != \
+"      1 d1
+      1 d2
+      1 d3
+      9 d4
+      6 d5
+      6 d6
+      4 d7
+     28 total" ]; then
+	echo "evaluation test failed"
+	exit 1
+fi
+echo "evaluation test passed"
+exit 0

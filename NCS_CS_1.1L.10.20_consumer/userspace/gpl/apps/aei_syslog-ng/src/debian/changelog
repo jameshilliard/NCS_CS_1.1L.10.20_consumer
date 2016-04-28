@@ -1,0 +1,6 @@
+syslog-ng (1.6.12) syslogng16; urgency=low
+
+  * New upstream version.
+
+ -- Balazs Scheidler <bazsi@balabit.hu>  Fri, 02 Feb 2007 10:00:12 +0100
+

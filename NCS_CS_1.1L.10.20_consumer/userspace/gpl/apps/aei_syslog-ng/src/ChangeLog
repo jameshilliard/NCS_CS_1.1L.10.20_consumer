@@ -1,0 +1,1667 @@
+2007-02-02  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped version to 1.6.12
+
+	* NEWS: added NEWS entry for 1.6.12
+
+	* src/afunix.c, src/afinet.c, src/affile.c: force the minimum
+	value for log_fifo_size to 1000 elements
+
+2006-11-09  Pal Tamas <folti@balabit.hu>
+
+	* syslog-ng.spec.bb.in: Enabled building with spoof-protection. Added
+	libnet as a requirement for building. During upgrade, Syslog-ng's
+	config and logrotate's	config snippet no longer gets overwritten.
+	Added SuSE  specific packaging instructions.
+	
+	* contrib/init.d.SuSE: Updated script for today's SuSE distributions.
+	Now provides syslog-ng service. Added Default stopping on runlevels
+	0,1 and 6. Includes /etc/rc.status. Default binary path are now
+	/sbin/.
+	
+2006-10-13  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: changed "source" to "." as the source command is a
+	bashism, changed a couple of double equal signs to single ones,
+	moved libol to the statically linked libs as AIX links to .a files
+	dynamically unless static linking is explicitly requested
+
+	* contrib/aix-packaging/syslog-ng.spec, syslog-ng.conf: added AIX
+	specific RPM spec files
+
+2006-08-22  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/cfg-grammar.y: added KW_SO_RCVBUF option
+
+	* src/cfg-lex.l: added so_rcvbuf keyword
+
+	* src/afinet.c (afinet_src_set_so_rcvbuf): new function, sets
+	so_rcvbuf value,
+	(do_init_afinet_source): set SO_RCVBUF value
+
+2006-07-03  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* contrib/rhel-packaging/syslog-ng.conf: fixed example
+	configuration
+
+2006-06-30  Pal Tamas <folti@balabit.hu>
+
+	* contrib/rhel-packaging/syslog-ng.conf: Fixed typo in RHEL
+	configuration file.
+
+2006-06-12  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: HP-UX on PA-RISC does not contain the string HP in
+	its ld -V output, thus detect it using "uname -s" (reported by
+	Jenny Lou Sequeira)
+
+	* src/destinations.c (add_host): use 256 character long buffer to
+	store hostnames
+
+	* src/sources.c (get_source_hostname): use 256 character buffer to
+	store hostnames
+
+	* src/syslog-ng.h: removed some obsolete defines
+	
+2006-05-26  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/macros.c: added LEVEL_NUM and FACILITY_NUM macros
+
+2006-05-08  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/filters.c (do_filter_netmask): fixed negation for the
+	netmask() filter
+
+2006-05-03  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped version to 1.6.11
+
+2006-04-30  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/sources.c (do_read_line): don't read multiple blocks if
+	LF_NO_MULTI_READ flags is specified
+
+	* src/affile.c (do_init_affile_source): add LF_NO_MULTI_READ to
+	flags
+
+	* src/cfg-grammar.y (options_item): added missed KW_TIME_SLEEP
+
+2006-04-23  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/filters.c (do_filter_call): make sure the error message
+	about a non-existing filter does not cause a never-ending
+	recursion
+
+2006-03-27  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped to 1.6.10
+
+	* added AIX static linking options, by Jochen Kirn
+
+	* syslog-ng.spec.bb.in: removed PS file from package
+
+	* configure.in: check for nanosleep in -lrt
+
+2006-03-14  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/sources.c (do_read_line): iterate multiple times on dgram
+	sources as well instead of returning immediately
+
+        * src/cfg-grammar.y: added KW_TIME_SLEEP processing
+
+        * src/cfg-lex.l: added keyword for KW_TIME_SLEEP
+
+        * src/main.c: wait using nanosleep if time_sleep() is set
+	(backported from 1.9.9 by John Morrissey)
+
+2006-03-01  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* solbuild/*: added solaris packaging
+
+2006-02-23  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/sources.c (do_read_line): read up to 30 lines in a single go
+	to avoid spinning in the main loop
+
+2006-02-14  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/macros.c (format_tzofs): fixed timezone formatting for
+	platforms which do not have a %z strftime option
+
+2005-11-23  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped version number to 1.6.9
+
+2005-11-05  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/affile.c: do not warn on permission change in /dev if no
+	permission change is requested
+
+2005-11-03  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/cfg-grammar.y: added NUMBER->string conversion rule, so that
+	NUMBER can be specified in place of <string>
+
+	* src/cfg-lex.l: added a possible sign mark in front of numbers
+
+2005-11-02  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: added test for %z format string in strftime
+
+	* src/macros.c (format_tzofs): fixed timezone calculation for systems
+	that do not support %z format string in strftime
+
+2005-10-28  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/affile.c: separate user/group id setting so they can fail
+	independently (previously if one of them failed, the other failed
+	too)
+
+2005-10-15  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/afuser.c: do not treat utmp->ut_name and utmp->ut_user NUL
+	terminated
+
+2005-09-09  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* fixed RHEL packaging in syslog-ng.spec.bb.in
+
+2005-07-14  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* doc/sgml/syslog-ng.sgml: clarified netmask() filter
+
+2005-06-29  Sandor Geller  <wildy@balabit.hu>
+
+	* updated RHEL packaging
+
+2005-06-27  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* added debian subdirectory with Debian packaging
+
+2005-06-24  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* added contrib/rhel-packaging
+
+	* added syslog-ng.spec.bb a separate RPM specfile used by the
+	internal BalaBit build system
+
+2005-06-23  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: added support for bundled libol and dist.conf
+
+2005-05-26  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped version number to 1.6.8
+
+	* configure.in: added --enable-full-dynamic option to configure to
+	make it easier to create a dynamically linked syslog-ng, if
+	dynamic libraries in /usr/lib are not a concern,
+	fixed HP-UX ld detection
+
+2005-05-25  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/sources.c (do_read_line): define salen as socklen_t instead
+	of size_t to solve a 64bit compatibility issue (reported by
+	Bostjan Golob)
+
+2005-05-19  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/sources.c (get_source_hostname): treat use_fqdn() correctly,
+	e.g. use the resolver to get the full hostname if gethostname()
+	returns only a short name
+
+2005-05-04  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* doc/syslog-ng.8: removed "Process will not become a deamon" from
+	-v option as it is not true.
+
+2005-05-03  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: never try to link to -lwrap if
+	--enable-tcp-wrapper was not specfied
+
+2005-04-18  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: added experimental ld support for HP-UX
+
+2005-04-15  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: added detection code for ld static linking
+	arguments (-Bstatic and -Bdynamic) which currently works for
+	Solaris/Linux. On other platforms syslog-ng might link to some
+	libraries dynamically.
+
+2005-04-08  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped to version 1.6.7
+
+	* src/afinet.c: fixed possible LibNET context leak when the target
+	system is down
+
+2005-03-04  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/afinet.c: fixed memory leak in spoof-source support, also
+	fixed port specification for libnet
+
+2005-02-12  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* doc/syslog-ng.conf.5: updated (by Jose Pedro Oliveira and me)
+
+2005-02-03  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/sources.c (do_read_line): added a notification about
+	messages exceeding log_msg_size()
+
+	* doc/sgml/syslog-ng.sgml: clarified a paragraph on klogd
+
+	* doc/syslog-ng.8: fixed another typo (by Jose Pedro Oliveira)
+
+	* contrib/syslog2ng: fixed typo in emerg generation (by Jose Pedro
+	Oliveira)
+
+2005-01-31  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* contrib/relogger.pl: new script by Ed Ravin to replay syslog
+	messages from a logfile
+
+2005-01-30  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* doc/man/syslog-ng.8: updated manpage (patch by Jose Pedro
+	Oliveira)
+
+2005-01-21  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: added patch to link against various libs
+	statically
+
+2005-01-20  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/main.c: fix possible log message losing during HUP as
+	syslog-ng was not accepting messages for 1 second and these
+	messages were dropped, processing changed so we still wait 1
+	second to flush buffers but also accept messages in this interval,
+	so the window of losing messages becomes much smaller. (fixes:
+	http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=282771)
+
+2004-12-13  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/macros.gprf: added PRI macro
+
+2004-11-18  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/main.c (main): some platform seems to require that a tzset()
+	is run at startup
+
+	* src/afprogram.c: call setsid() in the forked program to make the
+	subshell part of another process group to avoid the termination of
+	syslog-ng when someone invokes a kill 0 there. Fixes a program()
+	related problem in OpenBSD 3.5
+
+2004-09-17  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* cfg-grammar.y: added log_fifo_size option to TCP/UDP
+	destinations
+
+2004-08-05  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped to version 1.6.5, changed libol requirement
+	to 0.3.14, added a more terse message on required libol version,
+	added descriptions to AC_DEFINEs to avoid the deprecated
+	acconfig.h, made autoconf2.50 and automake-1.7 compliant
+
+	* src/*.c: switched MIN/MAX macro names to LIBOL_MIN and LIBOL_MAX
+	to fix a couple of warning messages
+
+	* acconfig.h: removed
+
+2004-06-04  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* sources.c: strip one trailing LF or NUL character when a packet
+	is received through UDP
+
+2004-05-27  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* INSTALL: updated info about Solaris 9
+
+	* src/macros.c: fixed TZOFS generation for platforms which do not
+	have a global timezone variable
+
+2004-05-14  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped version number to 1.6.4
+
+2004-05-13  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/afstreams.c: the dynamic sizing of log messages broke Sun
+	STREAMS support (the maximum size variable was not initialized)
+	(fixes #3967)
+
+2004-05-06  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped version number to 1.6.3
+
+	* src/cfgfile.c: do not abort when several persistent configuration items have
+	the same name, report it as an error instead (fixes #3515)
+
+	* src/afinet.c: merged spoof-source support (see the file
+	README.spoof) (fixes #3887)
+
+	* src/affile.c: added support for sanitize_filenames() option
+	(fixes #2156)
+
+	* src/afunix, src/afinet.c: do not prefix the message contents
+	with priority if template() was specified explicitly
+
+	* src/cfg-grammar.y, src/cfg-lex.l, src/afinet.c: added support
+	for tcp-keep-alive (fixes #3534)
+
+	* doc/sgml/syslog-ng.sgml: added documentation on MSGONLY and tcp-keep-alive()
+
+	* src/macros.c: added support for MSGONLY macro which expands to
+	the message only without the program name (fixes #3533)
+
+2004-04-15  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/afinet.c (inet_address_setport): fixed possible segfault
+	when the value of '0' is used in the configuration file as a
+	string
+
+2004-03-22  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/afprogram.c: do not prepend <pri> to messages when sending
+	it to a program
+
+2004-03-10  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/tests/test_nscache.c: fixed problem which was triggerred
+	when compiling with TCP wrappers enabled
+
+2004-03-09  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* macros.c: instead of relying on the non-portable %z specifier
+	for strftime, use the global timezone variable, if present. This
+	solution should be more portable. (this was an IRIX specific
+	problem)
+
+	* afstreams.c: support IRIX by terminating all messages with a
+	'\0', make maximum message size runtime configurable using
+	configuration->max_log_line (previously its size was fixed at 10k)
+
+	* configure.in: added tests for the global "timezone" variable
+
+2004-01-19  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped version number to 1.6.2
+
+2004-01-13  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/tests/: updated the eval and logflags regression tests, they
+	should be working again
+
+	* src/: added a lot of HP-UX related portability fixes (mostly
+	warning fixes), now compiles cleanly with HPUX cc
+
+2004-01-09  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped version number to 1.6.1
+
+	* src/macros.c: added PRI macro which inserts the combination of
+	priority and level
+
+2003-10-15  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/log.c: fixed a problem in PIX log parsing, a terminating NUL
+	character was included in the written message
+
+2003-10-03  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped version number to 1.6.0rc4
+
+2003-09-24  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/main.c: close stderr in setup_fds
+
+2003-09-04  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/affile.c: set file sources into nonblocking mode to avoid
+	possible blocking when both syslog-ng and klogd reads the same
+	/proc/kmsg
+
+2003-04-26  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/log.c: added support for PIX timestamps	
+
+2003-04-10  Balazs Scheidler  <bazsi@bzorp.balabit.hu>
+
+	* configure.in: bumped version number to 1.6.0rc2
+
+	* src/Makefile.am: added rules to rebuild the gperf hash
+
+	* src/macros.c: added interface to gperf hash
+
+	* src/macros.gprf: new file, gperf input file for macro name resolution
+
+	* configure.in: fixed libol version detection
+
+	* added contrib/syslog-ng.conf.doc (a configuration sample with inline documentation)
+
+	* added RedHat spec file by Richard E Perlotto
+
+2003-02-28  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* added documentation updated by Achim Gsell <achim@cybercity.ch>
+
+2003-02-21  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/macros.c: implemented faster macro search (can be made even
+	faster, but it will be in 2.0)
+
+2003-02-20  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 1.6.0rc1
+
+	* src/afinet.c: always reconnect regardless it was an ECONNREFUSED
+	or something else, this will not prohibit starting syslog-ng when
+	an interface is not yet configured
+
+	* src/affile.c (do_destroy_affile_source): instead of using
+	KILL_RESOURCE_NODE to close the opened file descriptor, use
+	closekill_fd directly, as BSDs don't like when their kernel log
+	file is opened multiple times
+
+2003-01-31  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* applied patch by Achim Gsell to add template() functions to all
+	drivers
+
+	* src/macros.c, src/macros.h: new files, separated macro functions
+	from affile
+
+	* configure.in: bumped version number to 1.5.26
+
+	* src/afprogram.c: use message based buffering
+
+	* src/afinet.c: use stream based buffering for TCP and message based
+	for UDP
+
+	* src/afunix.c: use stream based buffering for unix-stream and message
+	based for UDP
+
+	* src/affile.c: use stream based buffering for files and message based
+	for pipes
+
+2003-01-20  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/afstreams.c: fixed problems caused by the bad_hostname() feature
+
+2003-01-06  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* af*.c: updated to call make_log_reader according to the latest
+	interface change
+
+	* src/log.c (make_log_info): expect a new argument (bad_hostname),
+	(parse_log_msg): check if the hostname matches bad_hostname, and
+	if it does do not interpret it as a hostname
+
+	* src/sources.c (make_log_reader): new argument, a regular
+	expression which matches bad hostnames
+
+2002-12-18  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 1.5.24
+
+2002-12-05  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/afinet.c (inet_address_setip): check addr if it is NULL
+
+2002-10-30  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* main.c: added checking return values for setuid(), setgid(),
+	setgroups() and chroot()
+
+	* configure.in: fixed tests for res_init, and -lresolv
+
+	* doc/sgml/syslog-ng.sgml: added docs on TZ & TZOFFSET macros
+
+	* src/affile.c: added TZ & TZOFFSET macros, implemented by
+	pretender@parts-unknown.com
+
+2002-10-28  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 1.5.23
+
+	* configure.in: added a better way to detect res_init() (it is
+	defined as a macro on linux)
+
+	* src/sources.c: allocate self->buffer correctly (as specified by
+	log_msg_size) fixed an off-by-one
+
+	* src/affile.c: handle the situation when length is -1 (possible
+	return value of snprintf) or larger than *left (also possibly
+	returned by snprintf)
+
+2002-10-18  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* signedness audit
+
+	* src/affile.c: affile_dest->sync_freq changed to int (-1 is a
+	valid value),
+  	(expand_macro): added a couple of explicit casts to avoid
+	signedness warnings, check if length is -1 (when the buffer is
+	full), or larger than the available space
+	(expand_macros): changed i, j and left to be unsigned
+
+	* src/cfgfile.h (syslog_configuration): changed log_fifo_size to
+	int (as -1 is a valid value)
+
+	* src/log.c (parse_log_msg): changed all character counters (left,
+	old_left) to be unsigned, changed pri to be unsigned
+
+	* src/syslog_names.c: changed value to be unsigned int everywhere
+	(only fixes some warnings)
+	
+
+2002-10-14  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 1.5.22
+
+	* src/main.c: do not wait more than 1 second after SIGTERM (this
+	waiting is needed to flush output buffers)
+
+2002-09-27  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 1.5.21
+
+	* affile.c (expand_macros): security fix, decrement 'left' counter
+	when appending a constant character
+
+2002-08-21  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 1.5.20
+
+	* sources.c: a supposed fix which solves the linux kernel messages
+	problem
+
+	* main.c: fixed STATS timeout (caused an infinite loop when it
+	should have been disabled)
+
+	* cfg-grammar.y: added KW_CHECK_HOSTNAME token
+
+	* affile.c, afinet.c, afunix.c: pass check_hostname flags to
+	log_reader
+
+	* configure.in: fixed a small problem with -lwrap detection
+
+2002-07-24  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/log.c: implemented check_hostname by verifying whether a
+	hostname only contains [A-Za-z0-9./@:], the check is triggered if
+	check_hostname is enabled in global config
+
+2002-07-23  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* updated INSTALL file to reflect latest OS hints
+
+2002-07-15  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 1.5.19
+
+	* affile.c: initial pad_size support (for HP-UX), remove the
+	template output limitation of 2048 bytes (the limit specified in
+	log_msg_size is used instead)
+
+2002-06-17  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/main.c: stats_freq is checked against <= 0, instead of != -1
+	to disable stats reporting
+
+2002-06-10  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* cfg-grammar.y: always include stdio.h (new bison doesn't include
+	it by default)
+
+	* configure.in: --with-debug changed to --enable-debug
+
+2002-05-29  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 1.5.18
+
+	* src/afinet.c (do_destroy_afinet_dest): call closekill_fd()
+	directly instead of KILL_RESOURCE
+
+	* src/cfg-grammar.y: add log_prefix to pipe() sources, added a few
+	missing ';' the newer bison complained about
+
+2002-04-26  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 1.5.17
+
+	* src/sources.c: added support for runtime tunable log message length
+
+	* src/cfg-lex.l: added log_msg_size
+
+	* src/cfg-grammar.y: added KW_LOG_MSG_SIZE
+
+	* src/cfgfile.c: added log_msg_size (defaults to 2048 bytes)
+
+	* src/affile.c: fixed large file support, fixed a memory
+	corruption problem (ol_string_use was not used if a destination
+	file didn't have macros in its name)
+
+	* doc/sgml/syslog-ng.sgml: added some missing options
+
+	* configure.in: fixed the test for -lwrap (on some platforms the
+	AC_CHECK_LIB macro is not sufficient, as there are some variables
+	the test program must define)
+
+2002-04-25  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* affile.c: new macro $HOST_FROM and $FULLHOST_FROM to include the
+	source hostname
+
+	* sources.c (do_add_source_name): store the name of the source
+	host in msg->host_from
+
+2002-04-17  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* af*.c: changed invocation of make_log_reader to pass new required arguments
+
+	* sources.c: changed make_log_reader() to accept log_msg_size argument
+
+	* cfg-grammar.y: added log_msg_size
+
+	* cfg-lex.l: added log_msg_size
+
+2002-04-12  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/afinet.c: tcp wrapper fix (added two variable
+	initialization)
+
+	* configure.in: bumped version number to 1.5.16, require libol
+	version 0.3.2
+
+	* src/affile.c: added UNIXTIME macros (contributed by Gert Menke)
+
+2002-04-03  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/main.c: do not close fds 0, 1, 2. 0 and 1 is redirected to
+	/dev/null, 2 is kept open, messages during initialization are sent
+	to fd2 (as incompletely initialized config might prevent sending
+	internal messages)
+
+	* src/affile.c: added O_LARGEFILE to open flags if defined
+
+2002-03-28  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/afinet.c: fixed localip() and localport() directives for IP
+	destinations
+
+2002-03-19  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/sources.c: fixed internal dns cache
+
+2002-03-08  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/affile.c, src/sources.c, src/cfg-grammar.y, src/cfg-lex.l: 
+	added log_prefix support for file sources
+
+2002-02-28  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/main.c: reload the configuration even if no I/O operations
+	are pending (reload_config state change occured only when io_iter
+	returned)
+
+	* src/afunix.c: fixed a reload problem, we didn't pickup the
+	correct persistent info (afunix_%z_%z instead of afunix_%z)
+
+2002-02-15  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/sources.c: take use_fqdn() into account even when generating
+	local hostnames
+
+2002-02-06  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/affile.c: close file source during cfg destroy
+
+2002-02-05  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/affile.c: add "127.0.0.1" if source address is NULL
+
+2002-02-05  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 1.5.14
+
+	* src/affile.c: added new macros (R_*, S_*) patch by gert
+
+	* doc/sgml/syslog-ng.sgml: documented WEEKDAY macro and
+	remove_if_older option
+
+	* src/affile.c, src/cfg-lex.l, src/cfg-grammar.y: implemented
+	remove_if_older (patch by klaas.vangend@philips.com)
+
+2002-02-04  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/filters.c (netmask filter): new filter by gert@menke.za.net
+	implementing source ip/netmask based filtering
+
+	* src/affile.c (expand_macro): new macro SOURCEIP
+
+	* src/affile.c (expand_macro): fixed a typo (patch sent by
+	gert@menke.za.net)
+
+2002-01-15  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* doc/sgml/syslog-ng.sgml: fixed s_tcp sample
+
+2001-10-27  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: added checks for tcp wrapper support
+
+	* src/afinet.c: added tcp wrapper support
+
+2001-10-26  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 1.5.13
+
+2001-10-24  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/main.c: restart STATS reporting after HUP
+
+	* src/affile.c: increment refcount when calling make_io_fd()
+
+2001-10-20  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* affile.c: fix pipe permissions
+
+2001-10-19  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* afunix.c: fixed dropping source connections.
+
+2001-10-15  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* afinet.c: added an experimental patch for Solaris 2.6 systems,
+	they sometimes return ECONNREFUSED when connecting in non-blocking mode
+
+2001-08-26  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* main.c (do_report_stats): new function, reports statistics, for
+	now it it writes how many messages were dropped.
+
+	* afinter.c: translate supplied message level to syslog PRIORITYa
+
+	* configure.in: bumped version to 1.5.9, require libol 0.2.24
+
+	* src/affile.c (do_init_dest_writer): enable FSYNC on the created fd,
+	if the config requires it,
+	(affile_set_fsync): new function to set fsync parameter of a
+	destination file
+
+	* src/cfg-grammar.y: new token KW_FLAGS, KW_FSYNC, added syntax for
+	log statement flags, and fsync
+
+	* src/cfg-lex.l: added strings corresponding to KW_FLAGS and KW_FSYNC
+
+	* doc/sgml/syslog-ng.sgml: updated to the latest changes
+
+	* src/center.c: finalized log processing options (catchall, final,
+	fallback)
+
+	* src/tests/test.logflags, src/tests/syslog-ng.conf.logflags: new files
+	to test new log processing
+
+2001-07-08  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version to 1.5.8, require libol 0.2.23,
+	honor --sysconfdir (default location of config file may change!)
+
+	* src/affile.c: specifying -1 as either mode or owner, disables
+	explicit setting of mode or owner
+
+	* src/log.c: do not change ownerships of files opened for reading
+	(by _tgz)
+
+	* src/afinet.c, src/afprogram.c, src/afsocket.c, afstreams.c,
+	afunix.c: change invocations of libol functions that were changed.
+	(by _tgz)
+
+	* src/afremctrl.c, src/afremctrl.h: new files (by _tgz)
+
+	* src/center.c: log connection data structure has been
+	reorganized, it's faster and cleaner, and has more options (by _tgz)
+
+	* src/cfg-grammar.y, src/cfg-lex.l: slightly changed grammar
+	options catchall, fallback and final has been added, commas has
+	been made optional. (by _tgz)
+
+2001-06-11  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/log.c (parse_log_msg): fixed year recognition logic (reported
+	by <dj@gregor.com>
+
+2001-06-08  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number to 1.5.7
+
+2001-05-14  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/main.c: fixed typos which caused segfaults
+
+2001-05-11  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/nscache.c: replaced INADDR_NONE with 0, no host with this address
+	will ever exist
+
+2001-05-08  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/filters.c: applied filter call bugfix by Jon Marks
+
+2001-05-04  Balazs Scheidler  <bazsi@balabit.hu>
+
+        * configure.in: bumped version number to 1.5.6
+	
+	* src/log.c: applied parsing AIX messages, patch by Jon Marks
+	<j-marks@uiuc.edu>
+
+	* src/afuser.c: fixed a gccism, ! cannot be used in preprocessor
+	expressions
+
+2001-05-03  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/main.c: added possibility for chroot() and uid/gid
+	switching, reloading the process won't work, idea Tommi Virtanen
+	<tv@debian.org>
+
+2001-04-14  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/center.c (driver_reinit_on_close): added description parameter,
+	report this description when the close callback is invoked
+
+	* src/afunix.c: pass the socket path as description to
+	driver_reinit_on_close
+	
+	* src/afinet.c: integrated Mathew Copeland's patch to support sync
+	frequency for TCP destinations,
+	(do_afinet_dest_connected): pass the remote address as description
+	to driver_reinit_on_close
+
+	* src/afinet.c: added explicit chmod for directory and file creation
+
+2001-03-30  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number to 1.5.5a
+
+	* src/Makefile.am: added nscache.h to dist
+
+	* configure.in: fixed search for libol-config, it was using a bash
+	specific construct
+
+	* configure.in: bumped version number to 1.5.5
+
+	* nscache.c: new file implementing DNS cache, implemented by 
+	Gaël Roualland <gael.roualland@iname.com>
+
+	* main.c: disable I/O callbacks while reloading
+
+	* affile.c: added support for escaping output templates
+
+	* configure.in: added dependency for libol 0.2.22
+
+2001-02-25  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/main.c: fixed -HUP problem (an I/O callback was called while
+	restarting, and it touched an already freed callout structure)
+
+2001-01-24  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* utils/klogctl.c: New file to control kernel log level
+
+	* Makefile.am: added utils to SUBDIRS
+
+	* configure.in: added utils/Makefile to AC_OUTPUT, 
+	added tests for sys/klog.h
+
+2001-01-18  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number to 1.5.3
+
+2001-01-17  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* implemented macros for destination files
+
+2001-01-15  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number to 1.5.2
+
+	* integrated service name patch by Matthew Crosby <mcrosby@marthon.org>
+
+	* Makefile.am: added strptime.c, strptime.h to dist
+
+2000-12-06  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/strptime.c: new file for systems lacking an strptime()
+	function
+
+2000-11-29  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/center.c (do_distribute_log): evaluate DEFAULT filters in
+	order as suggested by afort@staff.webcentral.com.au and
+	matthewm@staff.webcentral.com.au 
+
+	* src/cfgfile.c (add_log_connection): preserve the order how log
+	connections are added.
+
+	* CVS: rebranched 1.5.x, bumped version number to 1.5.0
+
+2000-11-27  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version to 1.4.10
+
+	* reverted HP-UX workaround
+
+2000-11-22  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version to 1.4.9
+
+	* src/sources.c (do_handle_line): removed HP-UX workaround,
+	because it breaks other platforms
+
+	* src/log.c (parse_log_msg): if a line was broken within the
+	priority specifier, it could cause a SIGSEGV. A DoS is possible,
+	other exploitation is not.
+
+2000-11-03  Balazs Scheidler  <bazsi@bzorp>
+
+	* configure.in: bumped version number to 1.4.8
+
+	* src/affile.c (expand_macro): added macros $SEC for seconds, $MIN
+	for minutes and $HOUR for hours
+	(do_reap_affile_dest): fixed a memory leak wrt destination files
+	(cfg->resources kept a reference to closed files)
+	(make_affile_dest_reaper): added parameter struct syslog_config	*cfg, 
+	which is needed by the fix above.
+	(expand_macro): new parameter syslog_config, to implement
+	use_time_recvd() value
+
+	* doc/sgml/syslog-ng.sgml: added note about possible DoS attack,
+	fixed some typos, updated to include information about the new
+	features
+
+2000-09-29  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version to 1.4.7, require libol 0.2.20
+
+	* src/center.c: increment refcount for messages going to the
+	default log destination
+
+2000-08-27  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/log.c (parse_log_msg): filter characters below 32 and
+	replace them with a dot, reported by:
+	morty@sanctuary.arbutus.md.us
+
+2000-08-22  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version to 1.4.6
+
+	* src/main.c (go_background): add \n to the end of pid file
+
+	* src/afinet.c (do_afinet_destroy): add the socket type to the persistent config name
+
+2000-07-31  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/main.c: exit after processing the -V command line option
+
+2000-06-05  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version to 1.4.5
+
+2000-06-03  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/main.c (main_loop): free all callouts before reinitializing
+	configuration (some callouts may reference old configuration)
+
+	* src/afinet.c (do_init_afinet_source), src/afunix.c
+	(do_init_afunix_source): set owner of persistent connection to
+	self to avoid referencing an old configuration, REMEMBER_RESOURCE
+	the connecting fd
+
+	* src/cfg-grammar.y: added support for dir_owner, dir_group option
+	for destination file statements
+
+2000-05-26  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version to 1.4.4
+
+	* updated documentation
+
+2000-05-22  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: added check for stdarg.h
+
+2000-05-21  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/cfg-grammar.y: added permission options to pipe()
+
+2000-04-12  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* bumped version number to 1.4.3
+
+	* added test suite beginnings, test for evaluation
+
+2000-04-05  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/sources.c: check for 0 length loglines
+
+2000-03-24  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: added check for snprintf, vsnprintf
+
+	* src/Makefile.am: snprintf.c added to EXTRA_DIST
+
+2000-03-13  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* cfg-grammar.y: added support for keep_hostname()
+
+	* cfg-lex.l: -"-
+
+	* sources.c (do_add_hostname): -"-
+
+2000-03-10  Balazs Scheidler  <bazsi@balabit.hu>
+
+        * configure.in: bumped version number to 1.4.1
+
+	* src/sources.c: changed do_read_line to avoid as much memmove()
+	as possible
+
+	* src/cfg-lex.l: readded lex_init to restart flex on new files,
+	requires GNU flex.
+
+	* src/filters.c: fixed negation handling for 'or' and 'and',
+	reported by lt@toetsch.at
+
+	* src/main.c (main_loop): set restarting to 0, if a syntax error
+	was encountered
+
+2000-03-04  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/affile.c: cleaned up pipe support, open pipes RW -> no need
+	to handle closed pipes
+
+	* forked 1.5.0 development tree
+
+2000-03-03  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* bumped version number to 1.4.0
+
+	* configure.in: fixed the check for I_CONSLOG, Sun STREAMS are now
+	detected correctly
+
+	* src/affile.c (do_init_affile_source): open pipes in RDWR mode so
+	that they don't have to be closed after each message
+
+	* src/cfg-grammar.y: fixed a bug again in priority range parsing
+	
+2000-02-29  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number to 1.4.0rc4
+
+	* src/log.c (parse_log_msg): dereference the src pointer,
+	(make_internal_message): set the stamp field to current date
+
+2000-02-25  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number to 1.4.0rc3
+
+	* src/filters.c (do_filter_pri): split this to two functions,
+	priorities are filtered by 8 bits, where the bit position denotes
+	the value of the priority (0-7), at facilities bit position
+	denotes an index to the sl_facilities array, (do_filter_lev): new
+	function, (do_filter_fac) new function
+
+	* src/cfg-grammar.y: changed the way valid masks are composed for
+	facility/priority filters, display warnings when a
+	priority/facility is unknown, added possibility to select a
+	facility code by number.
+
+	* src/log.c (parse_log_msg): don't remove programname from the
+	whole message, set programname to "kernel" when a message comes
+	from LOG_KERN facility (needed for SunOS)
+
+	* src/cfg-lex.l: IDENTIFIER regex fix.
+
+2000-02-22  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: added test to grep for I_CONSLOG, if not defined
+	sun-streams support is not compiled in
+
+	* src/log.c (parse_log_msg): if no date is received on a logline
+	parse the first word as programname
+
+2000-02-21  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/affile.c (expand_macro): rewritten to be less architecture
+	specific, should compile on Alpha and PPC as well
+	(expand_macros): -"-
+
+	* src/syslog-ng.h: declare strcasecmp() if not defined by system
+	headers
+
+	* src/Makefile.am: add strcasecmp.c to the dist
+
+	* src/cfg-lex.l: '..' is not taken part of the word
+
+2000-02-18  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/afunix.c (do_destroy_afunix_connection): changed close_fd to
+	closekill_fd
+
+	* src/afinet.c (do_destroy_afinet_connection): changed close_fd to
+	closekill_fd
+
+	* src/affile.c (do_open_file): check for spurious filenames
+	(containing ../ or /..), fix for create_dirs
+
+2000-02-17  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/main.c (do_reread_config): give some time for marked fds to
+	close before initializing new config (so we can bind to the same
+	address)
+
+	* src/afstreams.c (do_init_afstreams_source): added omitted
+	parameter to close_fd
+
+	* configure.in: added configure test for strcasecmp(), bumped
+	version number to 1.3.16
+
+        * strcasecmp.c: new file taken from GNU libc
+
+        * src/cfg-lex.l: removed option %noyywrap since it required GNU
+	flex, commented out lex_init(), nothing uses it, and references
+	GNU flexism.
+
+        * src/cfgfile.c: reset linenum to 1 before reading a new config
+	file
+
+2000-02-15  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* affile.c: added inclusion <sys/types.h> and <sys/stat.h>
+
+2000-02-13  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/main.c (main): added -V option to display version number
+
+	* configure.in: bumped version number to 1.3.15
+
+	* src/cfg-grammar.y: added support for create_dirs() and dir_perm()
+
+	* src/cfg-lex.l: added create_dirs and dir_perm keywords
+
+	* src/affile.h: added AFFILE_CREATE_DIRS
+
+	* src/affile.c (make_affile_dest): added dir_perm field,
+	create_dirs flag
+	(do_open_file): added the possibility to create directories on the
+	fly
+	
+	* src/main.c (sig_child): waitpid() hang fix.
+
+2000-02-04  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/afinet.c (do_init_afinet_source_connection): don't use the
+	returned address in recvfrom in SOCK_STREAM mode, required for
+	2.3.x kernels.
+
+	* src/affile.c (expand_macro): fixed a bug in $LEVEL and $FACILITY
+	(make_affile_dest): set default permission to 0600, instead of
+	0000 (ok. I've been paranoid :)
+
+2000-01-17  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: added explicit --enable options for Sun STREAMS
+	and Sun door support, require libol 0.2.13, bumped version number
+	to 1.3.13
+
+	* src/affile.c (affile_set_owner, affile_set_group,
+	affile_set_perm): new functions, allows setting created file
+	permissions
+
+	* src/afunix.c (do_init_afunix_source): look up owner and group at
+	parse time, instead of open time
+
+2000-01-04  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* cfg-grammar.y: fixed a nasty bug in the parser
+
+	* configure.in: bumped version number to 1.3.12
+
+2000-01-03  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* destinations.c, center.c: moved make_dest_reopen etc. from
+	destinations to center.c, and generalized it a bit, to make it
+	usable for source drivers.
+
+	* affile.c: some pipe related fixes
+
+	* configure.in: bumped version number to 1.3.11
+
+1999-12-18  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* affile.c: added AFFILE_NO_EXPAND flag, destinations having this 
+	flag are not reaped, and it's filename is not expanded. It's used
+	with named pipes, and with filenames without macros.
+
+	* cfg-grammar.y, cfg-lex.l: added gc_threshold option, added
+	KW_PIPE token, and using pipe() results in the AFFILE_NO_EXPAND
+	flag automatically added.
+
+	* configure.in: bumped version number to 1.3.10
+
+1999-12-17  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* affile.c: fixed a bug in pipe() handling
+
+	* configure.in: bumped version number to 1.3.9, required libol
+	version changed to 0.2.10
+	
+
+1999-12-15  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* main.c: added sig_child handler to reap children
+
+	* configure.in: use make_class from libol dir, if --with-libol is used,
+	bumped version number to 1.3.8
+
+Tue Dec 14 16:53:43 1999    <bazsi@edge.tii.matav.hu>
+
+	* src/sources.c (get_source_hostname): fixed use_dns handling
+
+	* src/main.c: added O_TRUNC to pidfile opening, and changed open mode
+	to 0600 from 0666.
+
+1999-12-09  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/afinet.c (do_open_afinet_source): fixed a bug with DGRAM
+	socket initializtion
+
+	* src/afunix.c (do_init_afunix_source): fixed the same bug with
+	af_unix sockets
+
+	* cfg-lex.l: long_hostnames() option renamed to chain_hostnames(),
+	while keeping an alias for backward compatibility, two new options
+	use_dns() and use_fqdn()
+
+	* cfg-grammar.y: added support for new options
+
+	* sources.c: added support for new options
+
+	* configure.in: bumped version number
+
+1999-12-03  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/main.c (main_loop): restarting variable, to prevent processing of
+	sighup while restart is in progress
+
+1999-11-24  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/afinet.c: fixed a bug in the UDP driver.
+
+	* configure.in: bumped version number to 1.3.5
+
+1999-11-23  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/afunix.c, src/afinet.c, src/cfg-grammar.y, src/cfg-lex.l: 
+	added support for max_connections
+
+	* configure.in: bumped version number to 1.3.4
+
+1999-11-22  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/afunix.c, src/afinet.c, src/afsocket.c: implemented
+	keep-alive option, reorganization complete (phew ... )
+
+1999-11-20  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/afunix.c: new file
+
+	* src/afinet.c: new file
+
+	* src/afsocket.c: completely reorganized, cleaned up
+
+1999-11-18  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/log.c: added include <string.h> for memcpy
+	(parse_log_msg): tm.tm_isdst is initialized as -1 as suggested by 
+	<Goran.Lowkrantz@infologigruppen.se>
+
+1999-11-17  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number
+
+	* src/center.c (do_distribute_log): added DEFAULT log statement handling
+
+	* src/cfgfile.c (do_init_config): added DEFAULT log statement handling
+
+	* src/affile.c (expand_macro): fixed $HOST handling
+
+1999-11-16  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/afstreams.c: moved some things from the stable branch
+
+1999-11-15  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/filters.c: changed FILTER_EVAL to include a log_filter * param
+
+	* doc/Makefile.am (EXTRA_DIST): added syslog-ng.conf.solaris
+
+1999-11-01  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* released 1.2.0 stable version (tagged syslog_ng_stable_1_2)
+
+	* added macro expansion to destination filenames (1.3.x branch)
+
+	* fixed a documentation bug pointed out by: drawa@suct.uu.ru
+
+1999-09-02  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/utils.c: added #include <netinet/in.h> and <sys/socket.h> to
+	fix a compilation problem under FreeBSD
+
+	* configure.in: fixed detection of modern utmp structure
+
+1999-08-29  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/afprogram.c, src/afprogram.h: new files, program destination
+
+1999-08-07  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* afuser.c: works on old utmp structures too (NetBSD)
+
+	* configure.in: added test for modern utmp structure, bumped version 
+	number, changed required libol version to 0.2.3
+
+	* utils.c: fixed a bug in getutent() implementation
+
+	* main.c: fixed a bug in SIGTERM handling, exit message is now displayed
+
+1999-08-04  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* utils.c: added getutent(), endutent() implementation
+
+	* utils.h: added getutent() prototypes
+
+	* configure.in: added check for getutent()
+
+	* afstreams input driver cleaned up
+
+1999-07-22  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* added error checking to regcomp()
+
+	* added shell like single quotation marks
+
+1999-07-21  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* bumped version number to 1.1.28
+
+	* cfgfile.c: fixed a bug in variable resolving
+
+	* added BSD recvfrom fix
+
+1999-07-18  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* afinter.c: write_internal_message() added check for 
+	assigned_configuration
+
+1999-07-10  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped to version 1.1.27 aka 1.2.0rc1
+	
+	* added pidfile support
+
+	* configuration file reading checks whether the file exists.
+
+	* added new sgml documentation.
+
+	* formalized the config grammar, and added a lot of options 
+	(some of them are not used yet)
+
+	* fixed a bug in afsocket_dest, which made syslog-ng exit if a given 
+	TCP port was not opened at startup.
+
+	* adapted to the new libol version
+
+1999-06-23  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* moved affile_dest declaration from affile.h to affile.c, and changed
+	the parser not to refer affile_dest directly, but through a wrapper 
+	function
+
+	* Makefile.am: afdoor.{c,h} removed
+
+	* removed afdoor.{c,h}, doors are not used for input according to a 
+	newsgroup post, code will be added to the sun-streams driver
+
+	* cfg-grammar.y: everything can be specified using parenthesis 
+
+1999-06-15  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* cfg-grammar.y: added support for sun-streams
+
+	* cfg-lex.l: added keywords sun-stream & sun-streams
+
+	* configure.in: added test for stropts.h (STREAMS)
+
+	* added source files afstreams.{c,h}
+
+	* afdoor uses a pipe to communicate with the main poll() loop
+
+1999-06-10  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* fixed a typo in center.c (pthread_mutex_lock instead of 
+	pthread_lock_mutex)
+
+1999-06-08  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* named pipes work now with the file driver (I may introduce a pipe
+	driver later on, which could be an alias for "file")
+	
+	* fixed a bug in log_handler.destroy handling
+
+	* changed -HUP handling, it reverts to the old config if the new cannot
+	be initialized
+
+	* changed afsocket_dest_reopen to be a general callback, capable of
+	reinitializing any log_handler (and moved to destinations.c)
+
+	* debian control file fixes (reported by Peter Gervai, grin@tolna.net)
+
+	* internal source driver checks if used once
+
+	* fixed a bug in syslog-ng.h, which used the config file in cwd even
+	if debugging was turned off
+
+1999-06-06  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* added reference documentation to doc/syslog-ng.html
+
+	* changed the parser, so IDENTIFIER's can always be quoted using 
+	quotation marks (")
+
+1999-06-05  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* added experimental Sun Door support
+
+	* added some bits to the syslog-ng.conf manpage
+
+	* added user targets
+
+1999-05-29  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* fixed a bug in -HUP handling
+
+1999-05-28  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* changed configure.in to link to static libol instead of dynamic one
+
+	* added debian control files
+
+	* adapted to new libol version
+
+1999-05-25  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* HP-UX log sources should work now
+
+	* global and destination file specific sync() option added
+
+	* -HUP doesn't lose data even if it is sync()-ed
+
+	* adapted to new libol version
+
+1999-05-06  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* changed program filter to use regexps
+
+	* added match filter
+
+	* fixed a header bug in utils.h
+
+	* added host filter
+
+1999-05-05  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* removed a reference to yydebug (cfgfile.c)
+
+1999-05-04  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* fixed a bug in the lexer (removed '.') from the 
+	check_reserved_words rule
+
+	* fixed several memory leaks, syslog-ng now doesn't eat memory
+
+	* if internal message source was not registered -> segfault
+
+	* error messages during initialization was not written to stderr, 
+	since it was closed before any messages could go out
+
+1999-05-03  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* the inet_aton SunOS compatibility fix caused problems on Linux. 
+	Fixed.
+
+1999-04-28  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* some portability fixes for Solaris (added getopt.c, getopt1.c 
+	and getopt.h to the source distribution, inet_aton wrapper, 
+	socklen_t checking)
+
+1999-04-26  Balazs Scheidler  <bazsi@balabit.hu>
+
+        * released 1.1.9
+	
+	* implemented internal logsource, werror() and its peers generate 
+	internal messages
+
+	* source name is added to the log message
+
+	* host name is added to the log message
+
+1999-04-20  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* released 1.1.8
+
+	* implemented af_inet and af_unix destinations
+
+	* some build fixes
+
+	* changed dest_driver semantics, so a given line is allocated once, 
+	and referenced from multiple places
+
+1999-04-11  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* renamed afunix.{c,h} to afsocket.{c,h} and began udp support
+
+	* added SIGHUP handling
+
+	* released 1.1.6
+
+	* implemented priority & level filters as suggested by 
+	Richi Plana <richip@mozcom.com>
+
+	* fixed a couple of build fixes
+
+1999-04-10  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* released 1.1.5
+
+	* implemented priority and facility filters, both parsing and 
+	evaluation
+
+	* evaluation objects and other filter related stuff moved to 
+	filter.{c,h}
+
+	* added syslog-names.{c.h}
+
+1999-04-09  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* cfgfile.c: added the skeleton of filter evaluation objects
+
+	* released 1.1.3
+
+	* cfg-grammar.y: added the beginnings of filter rule parsing
+
+	* Makefile.am: removed scsh dependency, so the tarball can be compiled 
+	without scsh installed
+
+1999-04-08  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* converted to new libol and removed old libol specific files (libol
+	has now its own repository)
+	
+	* fixed a few bugs in parse_log_msg()
+
+1999-03-25  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* renamed line_buffer to pkt_buffer, since this better describes its
+	  functionality
+
+1999-03-21  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* moved abstract_buffer.h to abstract_io.h
+
+1999-03-15  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* fixed af_unix sock_stream mode. sock_dgram should work, 
+	but is not tested yet
+	
+	* released 1.1.1.
+
+1999-02-26  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* anonymous cvs server set up (syncs to local)
+
+1999-02-10  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* log_center implementation
+	
+	* syslog_conf class
+	
+	* parser should more or less work now
+
+1999-02-09  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* added object code from lsh
+
+	* set up autoconf/automake build system
+
+	* created the basis of log forwarding (log_handler_pipe)
+
+	* released preview release 1.1
+
+1999-01-15  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* added some things to the grammar
+
+1999-01-14  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* cfg-grammar.y added the skeleton code which will create the configuration structure.
+	* header files now define __headername instead of _headername

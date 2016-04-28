@@ -1,0 +1,20 @@
+Source: syslog-ng
+Section: admin
+Priority: extra
+Maintainer: SZALAY Attila <sasa@debian.org>
+Uploaders: Magosányi Árpád (mag) <mag@debian.org>
+Build-depends: bison, flex, debhelper (>=3.0.0), sgmltools-lite, jadetex, w3m
+Standards-Version: 3.6.1
+
+Package: syslog-ng
+Architecture: any
+Depends: ${shlibs:Depends}, util-linux (>= 2.12-10)
+Recommends: logrotate
+Provides: system-log-daemon, linux-kernel-log-daemon
+Conflicts: system-log-daemon, sysklogd, linux-kernel-log-daemon
+Description: Next generation logging daemon
+ Syslog-ng tries to fill the gaps original syslogd's were lacking:
+   * powerful configurability
+   * filtering based on message content
+   * portability
+   * better network forwarding

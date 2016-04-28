@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Advanced Setup - Factory Default</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/adv_swap.js"></script>
+</head>
+
+<body>
+	<div id="wrapper">    
+
+<? include(top_nav.inc) ?>
+
+<? include(left_adv.inc) ?>
+
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1><span id="restore_title" style="font-weight:bold;font-size:16px;">Firmware Restore</span></h1>
+
+				<form id="swap_form" method="post" action="adv_swap.cgi">      
+				<input type="hidden" name="command" id="id_command" value="apply" />
+				<input type="hidden" name="adv_autoconfig" id="adv_autoconfig" />
+		       
+                <input type="hidden" id="waiting_page" name="waiting_page" value="thankyou.html">            
+                <input type="hidden" name="confirm_page" id="confirm_page" value="wcb_confirm.html">
+                <input type="hidden" id="isconfirm" name="isconfirm" value="1">   
+                <input type="hidden" id="apply_page" name="apply_page" value="adv_swap.html"/>  	      
+
+                <input type="hidden" id="swap_currentversion" name="swap_currentversion" value=""/>
+
+		        <br>
+				<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="250"><strong><span id="restore_active_vers">Active Firmware Version</span>:</strong></td>
+						<td>
+							<span id="active_version"></span>
+						</td>
+					</tr>
+					<tr>
+						<td width="250"><strong><span id="rest_back_ver">Backup Firmware Version</span>:</strong></td>
+						<td>
+							<span id="inactive_version"></span>
+						</td>
+					</tr>
+		        	<tr>
+		            	<td width="250">
+			      	  		<strong><span id="swap_set_span" style="font-weight:bold;font-size:12px;">Firmware swap setting</span>:</strong>
+		              	</td>
+		              	<td><a href="###" class="button" id="swap_btn"><span id="restr_swap">Swap Firmware</span></a></td>
+		            </tr>
+		        </table>
+		        </form>
+
+				<br><br><br>
+	        	<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+<? include(wcb_footer.inc) ?>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Advanced Wireless Setup</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/wl_adv.js"></script>
+
+</head>
+
+<body>
+	<div id="wrapper">    
+	
+<? include(top_nav.inc) ?>
+
+<? include(left_wl.inc) ?>
+		
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1><span id="adv_title" style='font-weight:bold;font-size:16px;'>Advanced Wireless Setup</span></h1>
+
+				<form id="adv_form" method="POST" action="wl_adv.cgi">
+				<input type="hidden" name="command" value="apply" />
+		 	    <input type="hidden" name="mypage" value="/wl_adv.html" />
+		 	    <input type="hidden" name="wireless_index_vlan" id="wireless_index_vlan" value="">
+		 	    
+                <input type="hidden" id="waiting_page" name="waiting_page" value="thankyou.html">            
+                <input type="hidden" name="confirm_page" id="confirm_page" value="wcb_confirm.html">
+                <input type="hidden" id="isconfirm" name="isconfirm" value="1">   
+                <input type="hidden" id="apply_page" name="apply_page" value="wl_adv.html"/>  		 	    
+
+				
+				<table cellpadding="0" cellspacing="2" border="0">
+                    <tr>
+                        <td width="250"><label><span id="wl_fre_span">Multiple SSID</span>:</label></td>
+                        <td>
+                            <select name="wireless_index_ssid" id="wireless_index_ssid">
+                                <option value="1">SSID1-5G</option>
+                                <option value="2">SSID2-5G</option>
+                                <option value="3">SSID3-5G</option>
+                                <option value="4">SSID4-5G</option>
+                                <option value="5">SSID5-2.4G</option>
+                                <option value="6">SSID6-2.4G</option>
+                                <option value="7">SSID7-2.4G</option>
+                                <option value="8">SSID8-2.4G</option>
+                            </select>
+                        </td>
+                    </tr>
+					<tr style="display:none;">
+						<td width="250"><label><span id="adv_protec">Protection</span>:</label></td>
+						<td>
+							<input name="wl_protection" id="id_protectionon" type="radio" value="1" checked="checked"/> 
+              	  			<label for="id_protectionon"><span id="adv_pro_enable">Enable</span></label>  
+                            <input name="wl_protection" id="id_protectionoff" type="radio" value="0" />
+              	  			<label for="id_protectionoff"><span id="adv_pro_disable">Disable</span></label> 
+						</td>
+					</tr> 					
+					<tr style="display:none;">
+						<td><label>STBC:</label></td>
+						<td>
+							<input name="wl_stbc" id="id_stbcon" type="radio" value="1" checked="checked"/> 
+              	  			<label for="id_stbcon"><span id="adv_stbc_enable">Enable</span></label>  
+                            <input name="wl_stbc" id="id_stbcoff" type="radio" value="0" />
+              	  			<label for="id_stbcoff"><span id="adv_stbc_disable">Disable<span></label> 
+						</td>
+					</tr>
+					<tr style="display:none;">
+						<td><label><span id="adv_aggre">Aggregation MSDU(A-MSDU)</span>:</label></td>
+						<td>
+							<input name="wl_aggregation" id="id_aggregationon" type="radio" value="1" checked="checked"/> 
+              	  			<label for="id_aggregationon"><span id="adv_aggre_enable">Enable</span></label>  
+                            <input name="wl_aggregation" id="id_aggregationoff" type="radio" value="0" />
+              	  			<label for="id_aggregationoff"><span id="adv_aggre_disable">Disable</span></label> 
+						</td>
+					</tr>
+					<!--
+					<tr>
+						<td><label>Auto Block Ack:</label></td>
+						<td>
+							<input name="wl_block" id="id_blockon" type="radio" value="1" checked="checked"/> 
+              	  			<label for="id_blockon">Enable</label>  
+             	 			<input name="wl_block" id="id_blockoff" type="radio" value="0" />
+              	  			<label for="id_blockoff">Disable</label> 
+						</td>
+					</tr>
+					-->
+					<tr style="display:none;">
+						<td><label><span id="adv_short_gi">Short GI</span>:</label></td>
+						<td>
+							<input name="wl_gi" id="id_gion" type="radio" value="1" checked="checked"/> 
+              	  			<label for="id_gion"><span id="adv_short_enable">Enable</span></label>  
+             	 			<input name="wl_gi" id="id_gioff" type="radio" value="0" />
+                            <label for="id_gioff"><span id="adv_short_disable">Disable</span></label> 
+						</td>
+					</tr>
+
+                    <tr style="display:none;">
+                        <td><label><span id="wl_secu_broad">SSID Broadcast</span>:</label></td>
+                        <td>
+                            <input name="wl_broadcast" id="id_broadcaston" type="radio" value="1"  checked="checked"/>
+                            <label for="id_broadcaston"><span id="wl_secu_br_enab">Enable</span></label>
+                            <input name="wl_broadcast" id="id_broadcastoff" type="radio" value="0" /> 
+                            <label for="id_broadcastoff"><span id="wl_secu_br_disa">Disable</span></label>
+                        </td>
+                    </tr>   
+
+					<tr style="display:none;">
+						<td><label>WMM:</label></td>
+						<td>
+							<input name="wl_wmm" id="id_wmmon" type="radio" value="1"  checked="checked"/>
+             	 			<label for="id_wmmon"><span id="wl_secu_wmm_enab">Enable</span></label>
+                            <input name="wl_wmm" id="id_wmmoff" type="radio" value="0" /> 
+				 			<label for="id_wmmoff"><span id="wl_secu_wmm_disa">Disable</span></label>
+						</td>
+					</tr>
+
+                    <tr style="display:none;">
+                        <td><label for="id2_transmit"><span id="wl_power2_span">Transmit Power</span>:</label></td>
+                        <td>
+                            <select name="wireless_trans_power" id="wireless_trans_power" >
+                             <option value="100">100%&nbsp;</option>
+                             <option value="70">70%&nbsp;</option>
+                             <option value="50">50%&nbsp;</option>
+                             <option value="35">35%&nbsp;</option>
+                            </select>
+                        </td>
+                    </tr>
+
+					<tr>
+						<td><label for="id_beacon"><span id="adv_beacon">Beacon Interval</span>:</label></td>
+						<td>
+							<input name="wl_beacon" id="id_beacon" type="text" size="10" maxlength="4" style="height: 16px"/> (20-1024 ms)
+						</td>
+					</tr>
+				</table>
+				</form>
+
+				<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="220">&nbsp;</td>
+						<td>
+							<div><a class="button" href="###" id="diy_apply_btn"><span id="apply_btn_span">Apply</span></a></div>
+						</td>
+					</tr>
+				</table>
+
+				<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+<? include(wcb_footer.inc) ?>
+        
+	</div>
+</body>
+</html>

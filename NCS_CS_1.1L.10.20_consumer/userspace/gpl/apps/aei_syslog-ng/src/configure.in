@@ -1,0 +1,454 @@
+dnl $Id: configure.in,v 1.72.4.36 2007/02/02 08:58:30 bazsi Exp $
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(src/affile.c)
+AC_PREREQ(2.50)
+
+if test -r $srcdir/dist.conf; then
+        # read defaults, dist.conf does not change
+        # values for parameters that are already set
+        . $srcdir/dist.conf
+fi
+
+AM_INIT_AUTOMAKE(syslog-ng, "1.6.12")
+if test -n "$SNAPSHOT_VERSION"; then
+	VERSION=$VERSION+$SNAPSHOT_VERSION
+else
+	SNAPSHOT_VERSION=""
+fi
+
+if test -z "$RELEASE_TAG"; then
+	RELEASE_TAG="syslogng16"
+fi
+LIBOL_REQ_MAJOR=0
+LIBOL_REQ_MINOR=3
+LIBOL_REQ_PATCH=16
+
+AM_CONFIG_HEADER(src/config.h)
+
+if test "x$prefix" = "xNONE"; then
+        prefix=$ac_default_prefix
+fi
+
+# We want an absolute path to the source-dir.
+case "$srcdir" in
+    /*)
+	;;
+    *)
+        oldsrcdir="$srcdir"
+        srcdir="`cd \"$srcdir\"; pwd`"
+	;;
+esac
+
+dnl Check for arguments
+dnl Check options
+dnl AM_MAINTAINER_MODE
+
+AC_ARG_ENABLE(debug,
+   [  --enable-debug            include debug info],,
+   enable_debug=no)
+
+AC_ARG_WITH(libol,
+   [  --with-libol=path       use an uninstalled copy of libol],
+   [with_libol=`cd $with_libol; pwd`],
+   [with_libol=""])
+   
+AC_ARG_WITH(libnet,
+   [  --with-libnet=path      use path to libnet-config script],
+   ,
+   [with_libnet=""])
+
+AC_ARG_ENABLE(sun-streams,
+   [  --enable-sun-streams    enable Sun STREAMS support even if not detected])
+
+AC_ARG_ENABLE(sun-door,
+   [  --enable-sun-door       enable Sun door support even if not detected],,
+   enable_sun_door=auto)
+
+AC_ARG_ENABLE(tcp-wrapper,
+   [  --enable-tcp-wrapper    enable using /etc/hosts.deny & /etc/hosts.allow for TCP access],,
+   enable_tcp_wrapper=no)
+
+AC_ARG_ENABLE(spoof-source,
+   [  --enable-spoof-source    enable spoof_source feature],,
+   enable_spoof_source=no)
+
+AC_ARG_ENABLE(full-static,
+   [  --enable-full-static    Link everything in statically],,
+   enable_full_static=no)
+
+AC_ARG_ENABLE(full-dynamic,
+   [  --enable-full-dynamic    Link everything in dynamically],,
+   enable_full_dynamic=no)
+
+sysconfdir="${sysconfdir}/syslog-ng"
+
+AM_SANITY_CHECK
+
+dnl Checks for programs.
+AC_PROG_CC
+AM_PROG_CC_STDC
+AC_PROG_YACC
+AM_PROG_LEX
+AC_PROG_MAKE_SET
+
+dnl Checks for libraries.
+
+dnl Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS(malloc.h unistd.h door.h stropts.h sys/strlog.h stdarg.h sys/klog.h arpa/nameser.h)
+AC_CHECK_HEADERS(tcpd.h)
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_HEADER_TIME
+
+AC_CACHE_CHECK(for modern utmp,
+	       blb_cv_c_modern_utmp,
+[AC_TRY_COMPILE([
+#include <time.h>
+#include <utmp.h>
+],
+[
+int foo(void)
+{
+	struct utmp ut;
+	return &ut.ut_type && &ut.ut_user;
+}
+],
+blb_cv_c_modern_utmp=yes,
+blb_cv_c_modern_utmp=no)])
+
+AC_CACHE_CHECK(for global timezone variable,
+	       blb_cv_c_global_timezone,
+[AC_TRY_COMPILE([
+#include <time.h>
+],
+[
+int foo(void)
+{
+	timezone = 0;
+}
+],
+blb_cv_c_global_timezone=yes,
+blb_cv_c_global_timezone=no)])
+
+if test "x$blb_cv_c_modern_utmp" = "xyes"; then
+	AC_DEFINE(HAVE_MODERN_UTMP, 1, [new style UTMP is defined on the system])
+fi
+
+
+dnl Seek a type for UINT32
+AC_CHECK_SIZEOF(short, 2)
+AC_CHECK_SIZEOF(int, 4)
+AC_CHECK_SIZEOF(long, 4)
+
+AC_CACHE_CHECK(for I_CONSLOG, blb_cv_c_i_conslog,
+  [AC_EGREP_CPP(I_CONSLOG, 
+[
+#include <sys/strlog.h>
+I_CONSLOG
+],
+  blb_cv_c_i_conslog=no, blb_cv_c_i_conslog=yes)])
+
+old_CPPFLAGS=$CPPFLAGS
+CPPFLAGS=-D_GNU_SOURCE
+AC_CACHE_CHECK(for O_LARGEFILE, blb_cv_c_o_largefile,
+  [AC_EGREP_CPP(O_LARGEFILE, 
+[
+#include <fcntl.h>
+O_LARGEFILE
+],
+  blb_cv_c_o_largefile=no, blb_cv_c_o_largefile=yes)])
+CPPFLAGS=$old_CPPFLAGS
+
+if test "x$blb_cv_c_o_largefile" = "xyes"; then
+	AC_DEFINE(HAVE_O_LARGEFILE, 1, [O_LARGEFILE is present])
+fi
+
+if test "x$blb_cv_c_global_timezone" = "xyes"; then
+	AC_DEFINE(HAVE_GLOBAL_TIMEZONE, 1, [have a global timezone variable])
+fi
+
+AC_CACHE_CHECK(for res_init in <resolv.h>, blb_cv_c_res_init,
+  [AC_EGREP_HEADER(res_init, resolv.h, blb_cv_c_res_init=yes)])
+
+if test "x$blb_cv_c_res_init" = "xyes"; then
+	AC_DEFINE(HAVE_RES_INIT, 1, [have a res_init() function])
+fi
+
+dnl Checks for library functions.
+AC_FUNC_ALLOCA
+AC_FUNC_VPRINTF
+AC_CHECK_LIB(resolv, res_init)
+dnl on Linux res_init is a macro
+AC_CHECK_LIB(resolv, __res_init)
+AC_CHECK_LIB(door, door_create)
+AC_CHECK_LIB(socket, socket)
+AC_CHECK_LIB(nsl, gethostbyname)
+AC_CHECK_LIB(rt, nanosleep)
+AC_CHECK_FUNCS(select snprintf vsnprintf strerror inet_aton strncpy getutent)
+AC_CHECK_FUNCS(getopt_long strcasecmp strptime strftime)
+
+
+old_LIBS=$LIBS
+
+
+AC_CACHE_CHECK(for TCP wrapper library,
+		blb_cv_c_lwrap,
+
+for libwrap in "-lwrap" "/usr/local/lib/libwrap.a"; do
+	LIBS="$old_LIBS $libwrap"
+
+	[AC_TRY_LINK(,
+	[
+}
+
+int allow_severity;
+int deny_severity;
+extern int hosts_access(void);
+
+int foo(void)
+{
+	hosts_access();
+],
+	[blb_cv_c_lwrap=$libwrap
+	break],
+	blb_cv_c_lwrap="")
+done
+
+])
+LIBS=$old_LIBS
+LIBWRAP_LIBS=$blb_cv_c_lwrap
+
+AC_CACHE_CHECK([for %z format string in strftime],
+	       blb_cv_c_strftime_percent_z,
+[AC_TRY_RUN([
+#include <time.h>
+#include <string.h>
+
+int main(void)
+{
+	struct tm tm;
+	char buf[32];
+
+	memset(&tm, 0, sizeof(tm));
+	strftime(buf, sizeof(buf), "%z", &tm);
+
+	if (strlen(buf) == 5)
+		return 0;
+	return 1;
+}
+],
+blb_cv_c_strftime_percent_z=yes,
+blb_cv_c_strftime_percent_z=no,
+blb_cv_c_strftime_percent_z=no)])
+
+if test "x$blb_cv_c_strftime_percent_z" = "xyes"; then
+	AC_DEFINE(HAVE_STRFTIME_PERCENT_Z, 1, [strftime has a %z format argument])
+fi
+
+
+if test "x$ac_cv_func_snprintf" = "xno" -o \
+	"x$ac_cv_func_vsnprintf" = "xno"; then
+	AC_LIBOBJ(snprintf)
+fi
+
+if test "x$ac_cv_func_getopt_long" != "xyes"; then
+	AC_LIBOBJ(getopt)
+	AC_LIBOBJ(getopt1)
+fi
+
+if test "x$ac_cv_func_strcasecmp" != "xyes"; then
+	AC_LIBOBJ(strcasecmp)
+fi
+
+
+if test "x$ac_cv_func_strptime" != "xyes"; then
+	AC_LIBOBJ(strptime)
+fi
+
+
+if test "x$ac_cv_lib_door_door_create" = "xyes"; then
+	AC_CHECK_HEADERS(pthread.h)
+	AC_CHECK_LIB(pthread, pthread_create)
+fi
+
+AC_MSG_CHECKING(whether to enable Sun STREAMS support)
+if test "x$ac_cv_header_stropts_h" = "xyes" -a \
+        "x$ac_cv_header_sys_strlog_h" = "xyes" -a \
+        "x$enable_sun_streams" != "xno" -a \
+        "x$blb_cv_c_i_conslog" != "xno" -o \
+        "x$enable_sun_streams" = "xyes"; then
+	AC_DEFINE(HAVE_SUN_STREAMS, 1, [have STREAMS support])
+	enable_sun_streams=yes
+	AC_MSG_RESULT(yes)
+else
+	AC_MSG_RESULT(no)
+fi
+
+AC_MSG_CHECKING(whether to enable Sun door support)
+if test "x$enable_sun_streams" = "xyes" -a "x$ac_cv_header_door_h" = "xyes" -a "x$ac_cv_header_pthread_h" = "xyes" -a "x$enable_sun_door" != "xno" -o "x$enable_sun_door" = "xyes"; then
+	AC_DEFINE(HAVE_SUN_DOOR, 1, [have Solaris Streams support])
+	enable_sun_door=yes
+	AC_MSG_RESULT(yes)
+else
+	enable_sun_door=no
+	AC_MSG_RESULT(no)
+fi
+
+
+AC_MSG_CHECKING(whether to enable TCP wrapper support)
+if test "x$enable_tcp_wrapper" = "xyes"; then
+	if test "x$ac_cv_header_tcpd_h" = "xyes" -a "x$blb_cv_c_lwrap" != "x"; then
+		AC_DEFINE(ENABLE_TCP_WRAPPER, 1, [have TCP wrapper lib])
+		enable_tcp_wrapper=yes
+		AC_MSG_RESULT(yes)
+	else
+		LIBWRAP_LIBS=""
+		AC_MSG_RESULT(no)
+		enable_tcp_wrapper=no
+	fi
+else
+	LIBWRAP_LIBS=""
+	AC_MSG_RESULT(no)
+fi
+
+AC_MSG_CHECKING(whether to enable spoof_source support)
+if test "x$enable_spoof_source" = "xyes"; then
+	if test "x$with_libnet" = "x"; then
+		LIBNET_CONFIG=`which libnet-config`
+	else
+		LIBNET_CONFIG=$with_libnet/libnet-config
+	fi
+	if test -x $LIBNET_CONFIG; then
+		AC_DEFINE(ENABLE_SPOOF_SOURCE, 1, [enable spoof source support])
+		CFLAGS="$CFLAGS `$LIBNET_CONFIG --cflags`"
+		CPPFLAGS="$CPPFLAGS `$LIBNET_CONFIG --defines`"
+		LIBNET_LIBS="`$LIBNET_CONFIG --libs`"
+		AC_MSG_RESULT(yes)
+	else
+		LIBNET_LIBS=
+		AC_ERROR(libnet-config not found)
+	fi
+else
+	AC_MSG_RESULT(no)
+fi
+
+if test "$enable_full_static" = "yes" -a "$enable_full_dynamic" = "yes"; then
+	AC_ERROR(You cannot use --enable-full-static and --enable-full-dynamic at the same time)
+fi
+
+AC_MSG_CHECKING(how to enable static linking for certain libraries)
+ldversion=`ld -V 2>&1 | head -1 `
+ostype=`uname -s`
+if echo $ldversion | egrep "GNU|Solaris" > /dev/null; then
+	LD_START_STATIC="-Wl,-Bstatic"
+	LD_END_STATIC="-Wl,-Bdynamic"
+	AC_MSG_RESULT(GNU or Solaris)
+elif echo $ostype = "HP-UX" > /dev/null; then
+	LD_START_STATIC="-Wl,-a,archive"
+	LD_END_STATIC="-Wl,-a,shared_archive"
+	AC_MSG_RESULT(HP-UX)
+elif test "$ostype" = "AIX"; then
+	LD_START_STATIC="-Wl,-bstatic"
+	LD_END_STATIC="-Wl,-bdynamic"
+	AC_MSG_RESULT(AIX)
+else
+	LD_START_STATIC=""
+	LD_END_STATIC=""
+	enable_full_dynamic="yes"
+	enable_full_static="no"
+	AC_MSG_RESULT([no clues, linking everything dynamically, please send appropriate ld arguments to syslog-ng@lists.balabit.hu])
+fi
+
+AC_MSG_CHECKING(libol version >= $LIBOL_REQ_MAJOR.$LIBOL_REQ_MINOR.$LIBOL_REQ_PATCH)
+
+if test "$with_libol" = ""; then
+	if test ! -x "`which libol-config`" ; then
+		bundled_libol_dir="`ls -1d $srcdir/libol-* 2>/dev/null`"
+		if test -n "$bundled_libol_dir"; then 
+			test -d $bundled_libol_dir || mkdir $bundled_libol_dir 
+			(cd $bundled_libol_dir; ./configure && make)
+			with_libol=$bundled_libol_dir
+		else
+			AC_ERROR(Bundled libol not found)
+		fi
+	else
+		LIBOL_VERSION=`libol-config --version`
+		LIBOL_CFLAGS=`libol-config --cflags`
+		LIBOL_LIBS=`libol-config --static-libs`
+		MAKE_CLASS="make_class"
+	fi
+fi
+
+if test "$with_libol" != ""; then
+	if test ! -x $with_libol/libol-config; then
+		AC_ERROR(libol-config not found in the specified location)
+	fi
+	LIBOL_VERSION=`$with_libol/libol-config --version`
+	LIBOL_CFLAGS=`$with_libol/libol-config --local-cflags`
+	LIBOL_LIBS=`$with_libol/libol-config --local-static-libs`
+	LIBOL_DIR="$with_libol"
+	MAKE_CLASS="$with_libol/utils/make_class"
+fi
+
+
+LIBOL_VERSION=[`echo $LIBOL_VERSION | cut -d '+' -f 1`]
+LIBOL_MAJOR=[`echo $LIBOL_VERSION | cut -d '.' -f 1`]
+LIBOL_MINOR=[`echo $LIBOL_VERSION | cut -d '.' -f 2`]
+LIBOL_PATCH=[`echo $LIBOL_VERSION | cut -d '.' -f 3`]
+
+if test "$LIBOL_MAJOR" != "$LIBOL_REQ_MAJOR" -o \
+	"$LIBOL_MINOR" != "$LIBOL_REQ_MINOR" -o \
+	"$LIBOL_PATCH" -lt "$LIBOL_REQ_PATCH"; then
+	AC_MSG_RESULT(no)
+	AC_MSG_ERROR([Required libol version not found, make sure that your libol version is in the $LIBOL_REQ_MAJOR.$LIBOL_REQ_MINOR.x branch])
+fi
+AC_MSG_RESULT(ok)
+
+if test "$enable_debug" = "yes" ; then
+	CFLAGS="-W -Wno-unused -g -DYYDEBUG -Wall $LIBOL_CFLAGS -D_GNU_SOURCE"
+	YFLAGS="-v -d"
+	AC_DEFINE(WITH_DEBUG, 1, [enable debugging code])
+else
+	CFLAGS="$CFLAGS -Wall $LIBOL_CFLAGS -D_GNU_SOURCE"
+	YFLAGS="-d"
+fi
+
+if test "$enable_full_static" = "yes"; then
+	LIBS="-static $LIBS $LEXLIB $LIBWRAP_LIBS $LIBNET_LIBS $LIBOL_LIBS"
+elif test "$enable_full_dynamic" = "yes"; then
+	LIBS="$LIBS $LEXLIB $LIBWRAP_LIBS $LIBNET_LIBS $LIBOL_LIBS"
+else
+	LIBS="$LIBS $LD_START_STATIC $LIBOL_LIBS $LEXLIB $LIBWRAP_LIBS $LIBNET_LIBS   $LD_END_STATIC"
+fi
+
+if test "x`uname -s`" = "xLinux";then
+    DATE=`date -R`
+else
+    DATE=`date +"%a, %d %b %Y %H:%M:%S %Z"`
+fi
+
+AC_SUBST(SNAPSHOT_VERSION)
+AC_SUBST(RELEASE_TAG)
+AC_SUBST(DATE)
+
+AC_SUBST(YFLAGS)
+AC_SUBST(LIBOL_DIR)
+AC_SUBST(LIBOL_VERSION)
+
+AC_SUBST(MAKE_CLASS)
+AC_DEFINE_UNQUOTED(PATH_SYSCONFDIR, "`eval echo $sysconfdir`", [configuration file directory])
+
+AC_OUTPUT(
+	dist.conf
+	Makefile 
+	src/Makefile 
+	src/tests/Makefile
+	doc/Makefile
+	doc/sgml/Makefile
+	contrib/Makefile
+	debian/changelog
+	syslog-ng.spec
+	syslog-ng.spec.bb)
+

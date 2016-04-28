@@ -1,0 +1,39 @@
+# =============================================================================
+# aei_wxx6000_host.modules
+# Copyright (C) 2015 Ken HU
+# =============================================================================
+# Define modules path, relationship, etc.
+#  * Configuration of modules information .
+#  * Dependency relationship of modules.
+
+# =============================================================================
+# -----------------------------------------
+# Path for all the components
+
+# Module with empty library
+# --------------
+MODULE_WITHOUT_SOURCE :=
+
+# ----------------------------------------------
+# List of all components and path with makefile
+iMODULE_GROUP1 := aei_img_sign
+iMODULE_GROUP2 :=
+
+#========= Modules not used passed for the compilation
+ALL_MODULES_LIST := $(iMODULE_GROUP1)
+ALL_MODULES_LIST += $(iMODULE_GROUP2)
+ALL_MODULES_LIST += $(iMODULE_GROUP3)
+
+# -----------------------------------------
+# Paths of all lib modules
+
+###################################################################################
+# WARNING : the path variable is composed with MODULE_PATH_"module_name in lower case"#
+###################################################################################
+MODULE_PATH_aei_img_sign := $(PROJECT_ROOT)/aei_private/hosttools/aeiImageSign
+
+# -----------------------------------------
+# Dependency relationship of all lib modules
+#MODULE_DIRECT_DEP_aei_img_sign =  #App direct deps are define in it Makefile
+MODULE_DEP_aei_img_sign=$(sort $(MODULE_DIRECT_DEP_aei_img_sign) \
+                          $(foreach m,$(MODULE_DIRECT_DEP_aei_img_sign),$(MODULE_DEP_$(m))))

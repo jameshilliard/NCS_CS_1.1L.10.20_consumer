@@ -1,0 +1,18 @@
+# =============================================================================
+# aei_wxx6000_host.prj
+# Copyright (C) 2015 Ken HU
+# =============================================================================
+# Project description file.
+
+# =============================================================================
+PROJECT_NAME=aei_wxx6000_host
+
+TARGET_APP_SUFFIX :=
+
+include $(MAKEFILE_ROOT)/aei_wxx6000_host.modules
+
+#
+OBJ_NEED_REBUILD_BY += $(MAKEFILE_ROOT)/aei_wxx6000_host.prj
+
+#define which toolchain to use
+include $(MAKEFILE_ROOT)/toolchains.mk

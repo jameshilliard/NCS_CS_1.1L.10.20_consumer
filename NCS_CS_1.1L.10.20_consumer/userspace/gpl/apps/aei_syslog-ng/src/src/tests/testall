@@ -1,0 +1,6 @@
+#!/bin/sh
+export SYSLOG_NG=../syslog-ng
+export LOGGER=logger
+for file in test.*; do 
+	./$file
+done

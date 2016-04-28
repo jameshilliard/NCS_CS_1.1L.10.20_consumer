@@ -1,0 +1,490 @@
+
+
+1. Introduction to syslog-ng
+----------------------------
+
+Since the beginnings of Unix many things got improved and enhanced except 
+for at least one area: system logging.
+
+System logging and auditing is a very important, daily task of a system 
+administrator, but unlike other administration tools, features of syslogd did 
+not follow demands. Messages are sorted to different files based on the 
+facility/priority pair, and only 12+8 (12 real and 8 local) predefined 
+facilities exist. Since it's not exactly defined which programs use which 
+facility code, a big chaos evolved.
+
+One problem is that there are facilities which are far too general (daemon), 
+and it is difficult to find the interesting bits from the enourmous amount of 
+messages. A second problem is that there are very few programs which allow 
+setting their facility to log under. It's at best a compile time parameter. So
+using facilities as a means of filtering is not the best solution.
+
+One of the design principles of syslog-ng was to make message filtering much 
+more finegrained. syslog-ng is able to filter messages based on the contents 
+of messages. This way only the messages we are really interested in
+get to a specific destination. Another design principle was to make 
+logforwarding between firewalled segments easier: long hostname format, which 
+makes it easy to find the originating and chain of forwarding hosts even if a 
+log message traverses several computers. And last but not least a clean and 
+powerful configuration file format.
+
+2. Message paths
+----------------
+
+In syslog-ng a message path (or message route) consist of one or more
+sources, one or more filtering rules and one or more destinations (sinks). 
+A message is entered to syslog-ng in one of its sources, if that message
+matches the filtering rules it goes out using one of the destinations.
+
+2.1. Sources
+------------
+
+A source is a collection of source drivers, which collect messages using a
+given method. For instance there's a source driver for AF_UNIX, SOCK_STREAM
+style sockets, which is used by the Linux syslog() call. 
+
+To declare a source, you'll need to use the source statement with the following
+syntax:
+
+source <identifier> { source-driver params; source-driver params; ... };
+
+
+The identifier has to uniquely identify this given source and of course may
+not clash with any of the reserved words (in case you had a nameclash, simply
+enclose the identifier in quotation marks)
+
+You can control exactly which drivers are used to gather log messages, thus 
+you'll have to know how your system and its native syslogd communicate. 
+Here's a introduction to the inner workings of syslogd on some of the 
+platforms I tested:
+
+Linux (all versions)		  A SOCK_STREAM unix socket named /dev/log
+
+BSDi				  A SOCK_DGRAM unix socket named /var/run/log
+
+Solaris (2.5 or below)		  An SVR4 style STREAMS interface named 
+				  /dev/log
+
+Solaris (2.6 or above)		  Uses a new multithreaded Solaris specific 
+				  interface named door. The door filename
+				  is /etc/.syslog_door
+
+For example the following source statement would work on Linux:
+
+source src { unix-stream /dev/log; internal; udp 0.0.0.0,514; };
+
+Available source drivers in syslog-ng are:
+
+2.1.1. unix-stream
+
+Syntax:
+	unix-stream <filename>;
+
+Reads messages from the given AF_UNIX & SOCK_STREAM socket. This is used to 
+get local messages under Linux
+
+Example:
+	unix-stream /dev/log;
+
+
+2.1.2. unix-dgram
+
+Syntax:
+	unix-dgram <filename>;
+
+Reads messages from the given AF_UNIX & SOCK_DGRAM socket. This is used to 
+get local messages under BSDs and derivatives
+
+Example:
+	unix-dgram /dev/log;
+
+2.1.3. sun-door
+
+Syntax:
+	sun-door <filename>;
+
+Uses Solaris doors to get messages, which is used on Solaris 2.6 and above.
+
+Example:
+	sun-door /etc/.syslog_door;
+
+2.1.4. sun-stream
+
+Syntax:
+	sun-stream <filename>;
+
+Uses Solaris STREAMS to get messages, which is used on Solaris 2.5.1 or below.
+
+NOTE: This is not supported as of version syslog-ng 1.1.22.
+
+Example:
+	sun-stream /dev/log;
+
+2.1.5. file
+
+Syntax:
+	file <filename>;
+
+Reads messages from a simple file. Kernel messages come from a special file. 
+(BSD: /dev/klog, Linux: /proc/kmsg)
+
+Example:
+	file /proc/kmsg;
+
+2.1.6. tcp
+
+Syntax:
+	tcp <ipaddr>,<port>;
+
+Binds to the given interface and port, and accepts TCP connections to get 
+messages from the network. If you want to bind to all interfaces use 0.0.0.0
+in place of the IP address.
+
+Only syslog-ng supports message forwarding on tcp channels.
+
+Example:
+	tcp 0.0.0.0,514;
+
+2.1.7. udp
+
+Syntax:
+	udp <ipaddr>,<port>;
+
+Binds to the given interface and port, and accepts UDP datagrams containing 
+messages. Old syslogds use the UDP port 514 to forward network messages.
+
+Example:
+	udp 0.0.0.0,514;
+
+2.1.8. internal
+
+Syntax:
+	internal;
+
+All internal messages in syslog-ng show up in this driver. You need to 
+reference it exactly once.
+
+Example:
+	internal;
+
+2.2. Destinations
+-----------------
+
+A destination is a message sink, where log is sent if filtering rules allow.
+Similarly to sources, destinations may include several drivers which define
+how messages are dispatched. The syntax of a destination statement is:
+
+
+destination <identifier> { destination-driver params; 
+			   destination-driver params; ... };
+
+The following destination drivers are available in syslog-ng:
+
+2.2.1. unix-stream
+
+Syntax:
+	unix-stream <filename>
+
+Sends messages to the given AF_UNIX & SOCK_STREAM socket
+
+Example:
+	unix-stream /dev/log;
+
+2.2.2. unix-dgram
+
+Syntax:
+	unix-dgram <filename>;
+
+Sends messages to the given AF_UNIX & SOCK_DGRAM socket.
+
+Example:
+	unix-dgram /dev/log;
+
+
+2.2.3. file
+
+Syntax:
+	file <filename> [sync(<lines>)];
+
+Appends messages to the given file using the given sync value if given. If no
+sync option is given, the global sync option is used instead.
+
+Syncvalue is the number of lines syslog-ng will buffer before writing to the 
+file, which means that a file with sync(1) will be flushed after two lines
+of output.
+
+Example:
+	file /var/log/messages sync(0);
+
+2.2.4. udp
+
+Syntax:
+	udp <ipaddr>,<port>;
+
+Sends messages to the given host & port using UDP datagrams.
+
+Example:
+	udp 193.6.40.37,514;
+
+2.2.5. tcp
+
+Syntax:
+	tcp <ipaddr>,<port>;
+
+Connects to the given host & port using TCP, and sends messages. If the 
+connection dies, it is reattempted every 60 seconds.
+
+Example:
+	tcp 193.6.40.37,514;
+
+2.2.6. usertty
+
+Syntax:
+	usertty <username>;
+
+Sends messages to the given user if he is logged in.
+
+Example:
+	usertty bazsi;
+
+2.3. Filters
+------------
+
+Filters perform log routing inside syslog-ng. You can write a boolean 
+expression using internal functions, which has to evaluate to true for the
+message to pass.
+
+Filters have also a uniquely identifying name, so you can refer to filters
+in your log statements. (See chapter 2.4.) Syntax for a filter statement:
+
+filter <identifier> { expression; };
+
+An expression may contain the operators "and", "or" and "not", and one of the
+following functions:
+
+2.3.1. facility()
+
+Selects messages with the given facilities. A facility can be one of the 
+predefined facility names: auth, authpriv, cron, daemon, ftp, kern, lpr, 
+mail, news, security, syslog, user,  uucp, local0-local7. You can list 
+several facilities by separating them with commas.
+
+Example: 
+	 facility(mail,news)
+
+2.3.2. level()
+
+Selects messages based on the priority level. Levels can be one of the 
+predefined priority levels: emerg, alert, crit, err, warning, notice, info, 
+debug. You can list several levels by separating them with commas, or using 
+the range operator "..".
+
+Example: 
+	 level(notice..debug)
+
+2.3.3. program()
+
+Selects messages based on the program field. The parameter may be an extended 
+regular expression.
+
+Example:
+	program("(sendmail)|(smail)")
+
+2.3.4. host()
+
+Selects messages based on the host field. Just like with program() the 
+argument can be an extended regular expression.
+
+Example:
+	host("balabit");
+
+2.3.5. match()
+
+Selects messages based on their content. The argument can be an extended 
+regexp, and the match is attempted against the string after the hostname.
+
+Example:
+	match("connect from");
+
+2.4. Log statements
+-------------------
+
+Now you have sources, destinations and filters. To connect these together
+you need the log statement:
+
+log { source s1; source s2; ... 
+      filter f1; filter f2; ... 
+      destination d1; destination d2; ... };
+
+Messages coming from any of the listed sources, and matching against all the 
+listed filters (which effectively ANDs them) are sent to all of the listed
+destinations.
+
+3. Options
+----------
+
+Last bit of the config file I have not discussed yet is the options statement:
+
+options { option1; option2; ... };
+
+The following options are available:
+
+3.1. long_hostnames
+-------------------
+
+This is an on/off option, and controls whether syslog-ng style long hostname
+generation is enabled or not. syslog-ng keeps track all the hostnames a given
+message was forwarded. This way you can find the real source of a message.
+
+Example:
+	long_hostnames(on);
+
+Default:
+	on
+
+3.2. sync
+---------
+
+This option controls the number of lines a destination file may have in buffer,
+thus a value of 0 means, that the file is not buffered.
+
+Example:
+	sync(10);
+
+Default:
+	0
+
+3.3. mark
+---------
+
+This option sets the time interval in seconds after which a -- MARK -- message
+is sent to inactive destinations.
+
+NOTE: This option is not working as of version 1.1.22
+
+Example:
+	mark(600);
+
+Default:
+	1200
+
+4. Example configuration
+------------------------
+
+options { long_hostnames(on); sync(0); };
+
+source src { unix-stream /dev/log; internal; };
+source net { udp 0.0.0.0,514; };
+
+destination authlog { file /var/log/auth.log; };
+destination syslog { file /var/log/syslog; };
+destination cron { file /var/log/cron.log; };
+destination daemon { file /var/log/daemon.log; };
+destination kern { file /var/log/kern.log; };
+destination lpr { file /var/log/lpr.log; };
+destination user { file /var/log/user.log; };
+destination uucp { file /var/log/uucp.log; };
+destination ppp { file /var/log/ppp.log; };
+destination mail { file /var/log/mail.log; };
+
+destination mailinfo { file /var/log/mail.info; };
+destination mailwarn { file /var/log/mail.warn; };
+destination mailerr { file /var/log/mail.err; };
+
+destination newscrit { file /var/log/news/news.crit; };
+destination newserr { file /var/log/news/news.err; };
+destination newsnotice { file /var/log/news/news.notice; };
+
+destination debug { file /var/log/debug; };
+destination messages { file /var/log/messages; };
+destination console { file /dev/tty11; };
+
+# destination loghost { udp 10.0.0.1,999; };
+
+
+filter f_auth { facility(auth); };
+filter f_authpriv { facility(auth, authpriv); };
+filter f_syslog { not facility(authpriv, mail); };
+filter f_cron { facility(cron); };
+filter f_daemon { facility(daemon); };
+filter f_kern { facility(kern); };
+filter f_lpr { facility(lpr); };
+filter f_mail { facility(mail); };
+filter f_user { facility(user); };
+filter f_uucp { facility(cron); };
+filter f_ppp { facility(ppp); };
+filter f_news { facility(news); };
+filter f_debug { not facility(auth, authpriv, news, mail); };
+filter f_messages { level(info..warn) 
+	and not facility(auth, authpriv, mail, news); };
+filter f_emergency { level(emerg); };
+
+filter f_info { level(info); };
+filter f_notice { level(notice); };
+filter f_warn { level(warn); };
+filter f_crit { level(crit); };
+filter f_err { level(err); };
+
+log { 	source src; 
+	filter f_authpriv; 
+	destination authlog; };
+log {	source src;
+	filter f_syslog;
+	destination syslog; };
+log {	source src;
+	filter f_cron;
+	destination cron; };
+log {	source src;
+	filter f_daemon;
+	destination daemon; };
+log {	source src;
+	filter f_kern;
+	destination kern; };
+log {	source src;
+	filter f_lpr;
+	destination lpr; };
+log {	source src;
+	filter f_mail;
+	destination mail; };
+log {	source src;
+	filter f_user;
+	destination user; };
+log {	source src;
+	filter f_uucp;
+	destination uucp; };
+log {	source src;
+	filter f_mail;
+	filter f_info;
+	destination mailinfo; };
+log {	source src;
+	filter f_mail;
+	filter f_warn;
+	destination mailwarn; };
+log {	source src;
+	filter f_mail;
+	filter f_err;
+	destination mailerr; };
+log {	source src;
+	filter f_news;
+	filter f_crit;
+	destination newscrit; };
+log {	source src;
+	filter f_news;
+	filter f_err;
+	destination newserr; };
+log {	source src;
+	filter f_news;
+	filter f_notice;
+	destination newsnotice; };
+log {	source src;
+	filter f_debug;
+	destination debug; };
+log {	source src;
+	filter f_messages;
+	destination messages; };
+log {	source src;
+        filter f_emergency;
+	destination console; };
+log {	source src;
+	filter f_ppp;
+	destination ppp; };

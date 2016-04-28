@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Advanced Setup - Firmware Upgrade</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/adv_upgrade.js"></script>
+
+
+</head>
+
+<body>
+	<div id="wrapper">    
+
+<? include(top_nav.inc) ?>
+
+<? include(left_adv.inc) ?>
+
+  
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1><span id="upgrade_title" style="font-weight:bold;font-size:16px;">Firmware Upgrade</span></h1>
+
+				<form id="form">				
+				
+				<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="250"><strong><span id="up_cur_ver" style="font-weight:bold;font-size:12px;">Current Firmware Version</span>:</strong></td>
+						<td><span id="cur_ver"></span></td>
+					</tr>
+				</table>	
+					<!--<tr>
+						<td><strong>Current Firmware Date:</strong></td>
+						<td></td>
+					</tr>-->
+				<table cellpadding="0" cellspacing="2" border="0">	
+					<tr>
+						<td colspan="2"><strong><span id="up_select" style="font-weight:bold;font-size:12px;">Firmware upgrade: please select a file to upgrade the firmware</span>:</strong></td>
+					</tr>
+					<tr>
+                        <td><span id="uploadImageDiv"><input size="30" id="filename" name="filename" type="file"/></span></td>
+					</tr>
+				</table>
+				<p></p>
+                <table cellpadding="0" cellspacing="2" border="0" width="80%" text-align="left">
+                    <tr>
+                            <th width="20%" align="left">&nbsp;&nbsp;<span id="update_span">Status:</span></th>
+                            <td><span id="percent"></span></td>
+                    </tr>
+                </table> 
+               </form>
+
+
+                <div style="display:none;">
+                    <iframe name="screct_frame"></iframe>
+                    <form method="post" ENCTYPE="multipart/form-data" id="upload_form" action="adv_upgrade.cgi" target="screct_frame">
+                        <input type="hidden" id="apply_page" name="apply_page" value="adv_upgrade.html"/>
+                        <input type="hidden" id="waiting_page" name="waiting_page" value="thankyou.html">            
+                        <input type="hidden" name="confirm_page" id="confirm_page" value="wcb_confirm.html">
+                        <input type="hidden" id="isconfirm" name="isconfirm" value="1">   
+                        <input size="30" name="filename" type="file"/>
+                    </form>
+                </div>
+
+				<br><br>
+                <table cellpadding="0" cellspacing="2" border="0">
+                 <tr>
+                    <td width="200px"></td>
+                    <td colspan="2">
+                        <div id="upgrade_btn"><a class="button2" href="#" id="update"><span id="upgrade_btn_span">Start to Upgrade</span></a></div>
+                    </td>
+                 </tr>
+                </table>
+
+				<br><br>
+	        	<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+<? include(wcb_footer.inc) ?>
+        
+	</div>
+</body>
+</html>

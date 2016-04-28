@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<title id="titel_devSts">Main</title>
+
+
+<? include(include_header.inc) ?>
+<link href="css/main_20121119.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" language="javascript">
+document.onkeydown = function(e){
+
+	var keycode;
+	
+	if(navigator.appName == "Microsoft Internet Explorer")
+	{
+		keycode = event.keyCode;
+	}
+	else
+	{
+		keycode = e.which;
+	}
+
+	switch (keycode)
+	{
+		case 13: 	// Enter
+			login_submit();
+			break;
+		default:
+			break;
+	}
+}	
+</script>
+
+<script type="text/javascript" src="js/special/main.js"></script>
+
+</head>
+<body>
+	<div id="wrapper">    
+
+
+    <form method="post" name="login_form" id="login_form" action="main.cgi">
+    <input type="hidden" name="cur_lang_stat" id="cur_lang_stat" value="0" />
+    <input type="hidden" name="change_lang" id="change_lang" value="0" />
+    
+    
+<div id="logo">
+
+    <table border=0 cellSpacing=0 cellPadding=4 width="98%">
+      <tr>
+       <td id="main_logo" width="56%">
+    	<script language="Javascript">
+    			document.write('<img src="images/logo.jpg" />');
+    	</script>		
+       </td>
+             <td> 
+                  <table id="login_table" style="display:none">
+					<tr class=ODD>
+						<td class=GRID_3D_NO_RIGHT width="50%"><strong><span id="login_username_span">User Name</span></strong>:</td>
+						<td class=GRID_3D_NO_LEFT width="50%">
+							<INPUT style="WIDTH: 150px" maxLength=64 id="login_username" name="login_username" value=""/>
+						</td>
+					</tr>
+					<tr class=EVEN>
+						<td class=GRID_3D_NO_RIGHT width="50%"><strong><span id="login_password_span">Password</span></strong>:</td>
+						<td class=GRID_3D_NO_LEFT width="50%">
+							<INPUT style="WIDTH: 150px;" maxLength=31 type=password id="login_password" name="login_password" value=""/>
+						</td>
+					</tr>
+					<tr>
+					<td width="50%"><strong><span id="lang_select_span">language</span></strong>:
+						<select id="lang_select" name="lang_select">
+							<option value="0">Auto-Detect</option>
+							<option value="1">English</option>
+							<option value="2">French</option>
+						</select>
+					</td>												
+						<td width="50%">
+							<table>
+								<tr>
+									<td><a href="###" class="button" id="login_btn"><span id="login_button_span">Login</span></a></td>									
+									<td><a href="forgot_password.html" style="color:red;text-decoration:underline;" ><span id="forgot_pass_span">Forgot Password</span>?</a>
+									</td>
+								</tr>
+							</table>
+						</td>								
+					</tr>					
+					</table>
+				</td>	
+	   </tr>
+    </table>
+</div>
+<div id="top_nav">
+
+	<div id="user_div" style="display:block">
+		<ul id="userToolbar" class="on">
+		    <li class="first-child">
+					<strong><span id="lang2_select_span">language</span></strong>:
+						<select id="lang2_select" name="lang2_select">
+							<option value="0">Auto-Detect</option>
+							<option value="1">English</option>
+							<option value="2">French</option>
+						</select>
+		    </li>
+			<li><span id="top_hi_span">Hi</span> <span id="top_username"></span></li>
+			<li><a href="logout.cgi"><span id="top_logout_span">Logout</span></a></li>
+			<li id="top_chanpass_li"><a href="adv_password.html"><span id="top_chan_span">Change Password</span></a></li>
+		</ul>
+	</div>
+
+	<div id="top_nav_header"></div>
+	<div id="top_nav_content">
+		<ul id="navigation">
+			<script  language="javascript">
+				getCurLanguage();
+				var isWCB = getModelType(model_number);
+				if(cur_lang=="2")
+				{
+					document.write('<li class="fr_Status"><a id="top_status" href="main.html"></a></li>');
+					document.write('<li class="fr_WirelessSetup" id="top_wireless_li"><a id="top_wireless" href="wl_network.html"></a></li>');
+					if (isWCB == 1) 	document.write('<li class="fr_MocaSetup"><a id="top_moca" href="moca_setup.html"></a></li>');
+					document.write('<li class="fr_AdvancedSetup"><a id="top_advanced" href="adv_manage.html"></a></li>');
+				}
+				else
+				{
+					document.write('<li class="Status"><a id="top_status" href="main.html"></a></li>');
+					document.write('<li class="WirelessSetup" id="top_wireless_li"><a id="top_wireless" href="wl_network.html"></a></li>');
+					if (isWCB == 1) 	document.write('<li class="MocaSetup"><a id="top_moca" href="moca_setup.html"></a></li>');
+					document.write('<li class="AdvancedSetup"><a id="top_advanced" href="adv_manage.html"></a></li>');
+				}
+
+				var icon_count = 3;
+				if (isWCB == 1) 	icon_count = 4;
+								
+				//910:menu total length; 90:icon body width;  30: icon padding left  31: icon padding right  130: icon width
+                var left_width = Math.floor((910 - 90*icon_count) / (icon_count+1));
+                var marginleft = left_width - 30;
+                var icon_width = left_width - 30 - 31 + 130;
+                //console.log("left_width = " + left_width + ", marginleft = " + marginleft + ", icon_width = " + icon_width);
+                document.getElementById("navigation").style.marginLeft = left_width+"px";
+
+				var list_li = getId("navigation").getElementsByTagName('li');
+				var li_len = list_li.length;
+				for (var i=0; i<li_len; i++){
+					list_li[i].style.width = icon_width+"px";
+				}
+			</script>
+		</ul>
+	</div>
+	<div id="top_nav_footer"></div>
+</div>	
+
+
+
+		
+		<div id="content_left">
+			<div id="content_left_header"></div>
+			<div id="content_left_contentarea">
+
+				<table width="80%" border="0" cellpadding="0" cellspacing="0" class="status_style" id="wl_title_table">
+		            <tr align="center">
+		                <td style="text-align:center"><strong><span id="wl_status_span" style="font-weight:bold;font-size:12px;">Wireless Status</span></strong></td>
+		            </tr>		           
+		        </table>
+		        
+				<table width="80%" border="0" cellpadding="0" cellspacing="0" class="status_style" id="wl2g_table">					
+					<tr>
+						<td colspan="2"><strong><span id="wl_band24_span" style="font-weight:bold;font-size:12px;">Wireless Band</span>: 2.4GHz (<span id="band2_span"></span>)<strong></td>							
+					</tr>	          			                
+	                <tr>
+	                    <td width="160"><span id="wl_radio24_span" style="font-size:9px;">SSID Enable</span>:</td>
+	                    <td width="120"><span id='id2_apenb'>Enabled</span></td>
+	                </tr>
+	                <tr>
+	                    <td width="160"><span id="wl_ssid24_span" style="font-size:9px;">Wireless SSID</span>:</td>
+	                    <td style="word-break:break-all;width:120px"><span id='id2_ssid'></span></td>
+	                </tr>
+	                <tr>
+	                    <td><span id="wl_secu24_span" style="font-size:9px;">Wireless Security</span>:</td>
+	                    <td><span id='id2_apsecmode'></span></td>
+	                </tr>
+	                <tr>
+	                    <td><span id="wl_chan24_span" style="font-size:9px;">Wireless Channel</span>:</td>
+	                    <td><span id='id2_apchannel'>6</span></td>
+	                </tr>
+	                <tr>
+	                    <td><span id="wl_mac24_span" style="font-size:9px;">Wireless MAC</span>:</td>
+	                    <td><span id='id2_macaddr'></span></td>
+	                </tr>
+	                <tr>
+	                    <td><span id="wl_asso24_span" style="font-size:9px;">Associated Clients</span>:</td>
+	                    <td><span id='id2_clients'></span></td>
+	                </tr>
+				</table>
+
+				<table width="80%" border="0" cellpadding="0" cellspacing="0" class="status_style" id="wl5g_table">	
+	                <tr>
+						<td colspan="2"><strong><span id="wl_band5_span" style="font-weight:bold;font-size:12px;">Wireless Band</span>: 5GHz (<span id="band5_span"></span>)<strong></td>							
+					</tr>	          			                
+	                <tr>
+	                    <td width="160"><span id="wl_radio5_span" style="font-size:9px;">SSID Enable</span>:</td>
+	                    <td width="120"><span id='id5_apenb'>Enabled</span></td>
+	                </tr>	  
+	                <tr>
+	                    <td width="160"><span id="wl_ssid5_span" style="font-size:9px;">Wireless SSID</span>:</td>
+	                    <td style="word-break:break-all;width:120px"><span id='id5_ssid'></span></td>
+	                </tr>
+	                <tr>
+	                    <td><span id="wl_secu5_span" style="font-size:9px;">Wireless Security</span>:</td>
+	                    <td><span id='id5_apsecmode'></span></td>
+	                </tr>
+	                <tr>
+	                    <td><span id="wl_chan5_span" style="font-size:9px;">Wireless Channel</span>:</td>
+	                    <td><span id='id5_apchannel'>6</span></td>
+	                </tr>
+	                <tr>
+	                    <td><span id="wl_mac5_span" style="font-size:9px;">Wireless MAC</span>:</td>
+	                    <td><span id='id5_macaddr'></span></td>
+	                </tr>
+	                <tr>
+	                    <td><span id="wl_asso5_span" style="font-size:9px;">Associated Clients</span>:</td>
+	                    <td><span id='id5_clients'></span></td>
+	                </tr>
+	            </table>	  
+        
+<!--
+				<table width="80%" border="0" cellpadding="0" cellspacing="0" class="status_style" id="moca_right_head">
+		            <tr align="center">
+		                <td style="text-align:center"><strong><span id="moca_status_span" style="font-weight:bold;font-size:12px;">MoCA Coax Status</span></strong></td>
+		            </tr>	          
+		        </table>
+            
+		    	<table width="80%" border="0" cellpadding="0" cellspacing="0" class="status_style" id="moca_right_body">	            	
+	                <tr>
+	                    <td width="160"><span id="moca_chan_span1" style="font-size:9px;">MoCA Channel</span>:</td>
+	                    <td width="120"><span id='id_right_mocachannel'></span></td>
+	                </tr>
+	                <tr>
+	                    <td><span id="moca_pri_span1" style="font-size:9px;">MoCA Privacy</span>:</td>
+	                    <td><span id='id_right_mocaprivacy'></span></td>
+	                </tr>   
+	                <tr>
+	                    <td><span id="moca_mac_span1" style="font-size:9px;">MoCA MAC</span>:</td>
+	                    <td><span></span></td>
+	                 </tr>
+	            </table>
+-->    	            
+	        </div>
+	        <div id="content_left_footer"></div>    
+		</div>
+
+		<div id="content_right">
+			<div id="content_right_header"></div>
+			<div id="content_right_contentarea">
+			
+				<table width="80%" border="0" cellpadding="0" cellspacing="0" class="status_style">
+		            <tr align="center">
+	                    <th><strong><span id="net_station_span" style="font-weight:bold;font-size:12px;">Network Stations</span></strong></th>	                    
+	                </tr>
+	        	</table>    
+	        
+				<span id="clients_span">
+					
+				</span>
+			</div>
+	        <div id="content_right_footer"></div>     
+		</div>
+
+		<div id="content_right">
+			<div id="content_right_header"></div>
+			<div id="content_right_contentarea">
+	             
+				<table width="80%" border="0" cellpadding="0" cellspacing="0" class="status_style">
+		             <tr align="center">
+		                 <th><strong><span id="produc_info_span" style="font-weight:bold;font-size:12px;">Product Information</span></strong></th>
+		             </tr>		           
+		        </table>
+	        
+				<table width="80%" border="0" cellpadding="0" cellspacing="0" class="status_style">				
+	                 <tr>
+	                    <td><span id="model_num_span" style="font-size:9px;">Model Number</span>:</td>
+	                    <td><span id="model_number"></span></td>
+	                 </tr>   
+	                 <tr id="tr_fccid">
+	                    <td><span id="span_fccid" style="font-size:9px;">FCC ID</span>:</td>
+	                    <td><span id="id_fccid_value"></span></td>
+	                 </tr>
+	                 <tr>
+	                    <td><span id="firmware_ver_span" style="font-size:9px;">Firmware Version</span>:</td>
+	                    <td><span id="id_firmware_value"></span></td>
+	                 </tr>
+	                 <tr>
+	                    <td><span id="sys_time_span" style="font-size:9px;">System Time</span>:</td>
+	                    <td><span id="id_sys_time"></span></td>
+	                 </tr>
+	                 <tr>
+	                    <td><span id="ip_addr_span" style="font-size:9px;">IP Address</span>:</td>
+	                    <td><span id="id_ipaddress"></span></td>
+	                 </tr>
+	                 <tr>
+	                    <td><span id="sub_mask_span" style="font-size:9px;">Subnet Mask</span>:</td>
+	                    <td><span id="id_subnet"></span></td>
+	                 </tr>
+	                 <tr>
+	                    <td><span id="default_gate_span" style="font-size:9px;">Default Gateway</span>:</td>
+	                    <td><span id="id_gateway"></span></td>
+	                 </tr>
+	                 <!--<tr>
+	                    <td>Ethernet MAC:</td>
+	                    <td><span><% actValue("status", "ethmac"); %></span></td>
+	                 </tr>-->
+	             </table>
+
+			<!--
+	             <table width="80%" border="0" cellpadding="0" cellspacing="0" class="status_style">
+		             <tr align="center">
+		                 <th><strong>IPv6 Address</strong></th>
+		             </tr>		           
+		        </table>
+
+				<span id="ipv6_span"></span>	
+			-->
+	             
+			</div>
+	        <div id="content_right_footer"></div>     
+		</div>
+		
+        <div class="clear_left"></div>
+<? include(wcb_footer.inc) ?>
+
+</form>
+	</div>
+</body>
+</html>

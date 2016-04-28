@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>HNAP Debug</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/hnap_log.js"></script>
+
+</head>
+
+<body>
+<div id="wrapper">    
+
+<? include(top_nav.inc) ?>
+
+<? include(left_adv.inc) ?>
+
+            
+      <div id="content_right">
+            <div id="content_right_header"></div>
+            <div id="content_right_contentarea">
+                  <h1><span id="hnaplog_title" style='font-weight:bold;font-size:16px;'>HNAP Log Setup</span></h1>
+
+                  <form id="hnaplog_form" method="post" action="hnap_log.cgi">
+                        <input type="hidden" name="command" id="id_command" value="apply" />
+                        <input type="hidden" name="adv_autoconfig" id="adv_autoconfig" />                  
+                        <input type="hidden" id="waiting_page" name="waiting_page" value="thankyou.html">            
+                        <input type="hidden" name="confirm_page" id="confirm_page" value="wcb_confirm.html">
+                        <input type="hidden" id="isconfirm" name="isconfirm" value="1">   
+                        <input type="hidden" id="apply_page" name="apply_page" value="hnap_log.html"/>  
+
+                        <input type="hidden" id="hnaplog_action" name="hnaplog_action" value="">   
+                      
+                        <table cellpadding="0" cellspacing="2" border="0">
+                              <tr>
+                                    <td align="center">
+                                          <a class="button" href="###" style="margin-right:20px;"><span id="btn_enable">Enable</span></a>
+                                          <a class="button" href="###" style="margin-right:20px;"><span id="btn_clear">Clear</span></a>
+                                          <a class="button" href="###"><span id="btn_saveas">Save As</span></a>
+                                    </td>
+                              </tr>
+                        </table>
+
+
+                        <div style="overflow:auto;width:650px;margin-left:15px;">
+                            <table id="hnaplog_list" width="98%" border="0" cellpadding="0" cellspacing="0" style="margin:1px;">
+                                    
+                              </table>
+                        </div>
+
+                  </form>
+
+                              
+                  <div class="clear_left"></div>
+            </div>
+            <div id="content_right_footer"></div>
+      </div>
+      <div class="clear_left"></div>
+  <? include(wcb_footer.inc) ?>
+
+</div>
+</body>
+</html>

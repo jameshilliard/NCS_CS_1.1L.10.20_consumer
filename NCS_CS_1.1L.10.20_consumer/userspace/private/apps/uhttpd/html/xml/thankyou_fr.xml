@@ -1,0 +1,14 @@
+<pages>
+	<page> 
+<!-- 0-5 -->	
+		<t>Merci!</t>
+		<t>Veuillez attendre pendant que nous appliquons les nouveaux réglages à votre appareil.</t>
+		<t>Après la réussite de l'application des nouveaux réglages, nous vous ramènerons à la page de sélection.</t>
+        <t>L'appareil retourne aux valeurs par défaut.</t>
+        <t>Veuillez attendre </t>
+        <t> secondes ...</t>
+
+<!-- 0-5 -->	
+		<a>Username is invalid</a>
+	</page>
+</pages>

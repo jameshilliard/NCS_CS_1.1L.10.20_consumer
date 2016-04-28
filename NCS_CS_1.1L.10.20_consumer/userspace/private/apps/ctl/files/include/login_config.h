@@ -1,0 +1,100 @@
+#ifndef LONGIN_CONFIG_H
+#define LONGIN_CONFIG_H
+
+
+#define _EXPAND_M(x) x
+#define EXPAND_M(x) _EXPAND_M(x)
+
+#define AEI_LOGIN_SRC_INVALID 0
+#define AEI_LOGIN_SRC_FIXED_DEFAULT 1
+#define AEI_LOGIN_SRC_TR69 2
+
+#define VERSION3 0
+#define VERSION4 1
+
+/**
+ * If some macro not defined, apply default value here.
+ * Note if QTN marco not defined, apply main (bcrm) side corresponding macro
+ * (if defined) with higher priority than last default value.
+ * */
+#if !defined (AEI_QTN_CONSOLE_LOGIN_NAME_SRC)
+#if defined (AEI_CONSOLE_LOGIN_NAME_SRC)
+#define AEI_QTN_CONSOLE_LOGIN_NAME_SRC AEI_CONSOLE_LOGIN_NAME_SRC
+#else
+#define AEI_QTN_CONSOLE_LOGIN_NAME_SRC AEI_LOGIN_SRC_FIXED_DEFAULT
+#endif
+#endif
+
+#if !defined (AEI_QTN_CONSOLE_LOGIN_PASSWD_SRC)
+#if defined (AEI_CONSOLE_LOGIN_PASSWD_SRC)
+#define AEI_QTN_CONSOLE_LOGIN_PASSWD_SRC AEI_CONSOLE_LOGIN_PASSWD_SRC
+#else
+#define AEI_QTN_CONSOLE_LOGIN_PASSWD_SRC AEI_LOGIN_SRC_FIXED_DEFAULT
+#endif
+#endif
+
+#if !defined (AEI_QTN_CONSOLE_LOGIN_NAME_DFLT)
+#if defined (AEI_CONSOLE_LOGIN_NAME_DFLT)
+#define AEI_QTN_CONSOLE_LOGIN_NAME_DFLT AEI_CONSOLE_LOGIN_NAME_DFLT
+#else
+#define AEI_QTN_CONSOLE_LOGIN_NAME_DFLT "root"
+#endif
+#endif
+
+#if !defined (AEI_QTN_CONSOLE_LOGIN_PASSWD_DFLT)
+#if defined (AEI_CONSOLE_LOGIN_PASSWD_DFLT)
+#define AEI_QTN_CONSOLE_LOGIN_PASSWD_DFLT AEI_CONSOLE_LOGIN_PASSWD_DFLT
+#else
+#define AEI_QTN_CONSOLE_LOGIN_PASSWD_DFLT "admin"
+#endif
+#endif
+
+
+#if !defined (AEI_QTN_TELNET_NAME_SRC)
+#if defined (AEI_CONSOLE_LOGIN_NAME_SRC)
+#define AEI_QTN_TELNET_NAME_SRC AEI_CONSOLE_LOGIN_NAME_SRC
+#else
+#define AEI_QTN_TELNET_NAME_SRC AEI_LOGIN_SRC_FIXED_DEFAULT
+#endif
+#endif
+
+#if !defined (AEI_QTN_TELNET_PASSWD_SRC)
+#if defined (AEI_CONSOLE_LOGIN_PASSWD_SRC)
+#define AEI_QTN_TELNET_PASSWD_SRC AEI_CONSOLE_LOGIN_PASSWD_SRC
+#else
+#define AEI_QTN_TELNET_PASSWD_SRC AEI_LOGIN_SRC_FIXED_DEFAULT
+#endif
+#endif
+
+#if !defined (AEI_QTN_TELNET_NAME_DFLT)
+#if defined (AEI_CONSOLE_LOGIN_NAME_DFLT)
+#define AEI_QTN_TELNET_NAME_DFLT AEI_CONSOLE_LOGIN_NAME_DFLT
+#else
+#define AEI_QTN_TELNET_NAME_DFLT "root"
+#endif
+#endif
+
+#if !defined (AEI_QTN_TELNET_PASSWD_DFLT)
+#if defined (AEI_CONSOLE_LOGIN_PASSWD_DFLT)
+#define AEI_QTN_TELNET_PASSWD_DFLT AEI_CONSOLE_LOGIN_PASSWD_DFLT
+#else
+#define AEI_QTN_TELNET_PASSWD_DFLT "admin"
+#endif
+#endif
+
+#if !defined (AEI_CONSOLE_LOGIN_NAME_SRC)
+#define AEI_CONSOLE_LOGIN_NAME_SRC AEI_LOGIN_SRC_FIXED_DEFAULT
+#endif
+#if !defined (AEI_CONSOLE_LOGIN_NAME_DFLT)
+#define AEI_CONSOLE_LOGIN_NAME_DFLT "root"
+#endif
+
+#if !defined (AEI_CONSOLE_LOGIN_PASSWD_SRC)
+#define AEI_CONSOLE_LOGIN_PASSWD_SRC AEI_LOGIN_SRC_FIXED_DEFAULT
+#endif
+#if !defined (AEI_CONSOLE_LOGIN_PASSWD_DFLT)
+#define AEI_CONSOLE_LOGIN_PASSWD_DFLT "admin"
+#endif
+
+#endif
+

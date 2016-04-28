@@ -1,0 +1,78 @@
+﻿
+Title:		Installing Syslog-ng step-by-step
+Synopsis:	This document describes the installation of syslog-ng 1.6.10
+		to the Solaris operating system, including Solaris 8
+Version:	1.2
+Date:		04/06/2006
+
+INSTALLING SYSLOG-NG ON SOLARIS To successfully install syslog-ng, complete
+the following simple procedure. Lines starting with '#' are commands that have
+to be executed from a command line console.  NOTE: Steps 4 and 7 are slightly
+different on Solaris 8 systems, see the the NOTES at the respective steps for
+details.
+
+1.Download or copy the syslog-ng_1.6.10_sparc.pkg.gz package to your computer
+  running Solaris.
+
+2.Unpack and install the package by issuing the following commands from the
+  command line:
+  # gunzip syslog-ng_1.6.10_sparc.pkg.gz 
+  # pkgadd -d syslog-ng_1.6.10_sparc.pkg 
+
+3.Rename the syslog-ng.conf.sample file (located under
+  /opt/syslog-ng/etc/syslog-ng) to syslog-ng.conf and modify it to suit your
+  needs. For details on how to configure syslog-ng, see the Syslog-ng
+  Reference Guide.
+  # mv /opt/syslog-ng/etc/syslog-ng/syslog-ng.conf.sample
+  # /opt/syslog-ng/etc/syslog-ng/syslog-ng.conf
+
+4.Copy the startup script into the /etc/init.d folder and set its privileges.
+  # cp /etc/init.d/syslog /etc/init.d/syslog.orig
+  # cp /opt/syslog-ng/doc/syslog-ng.init.d /etc/init.d/syslog 
+  # chmod 744/etc/init.d/syslog && chown root:sys /etc/init.d/syslog
+
+NOTE: Under Solaris 8, issue the following commands as well:
+  # rm /etc/rc2.d/S74syslog 
+  # ln -s /etc/init.d/syslog /etc/rc2.d/S74syslog 
+  # rm /etc/rc0.d/K40syslog /etc/rc1.d/K40syslog /etc/rcS.d/K40syslog 
+  # ln -s /etc/init.d/syslog /etc/rc0.d/K40syslog 
+  # ln -s /etc/init.d/syslog /etc/rc1.d/K40syslog
+  # ln -s /etc/init.d/syslog /etc/rcS.d/K40syslog
+
+5.Verify the validity of the configuration file.
+  # /opt/syslog-ng/sbin/syslog-ng -v -s -f
+  # /opt/syslog-ng/etc/syslog-ng/syslog-ng.conf
+
+6.Stop the original syslog daemon.
+  # /etc/init.d/syslog.orig stop
+
+7.Modify the /etc/logadm.conf file and replace all kill -HUP `cat
+  /var/run/syslog.pid` commands with kill -HUP `cat /var/run/syslog-ng.pid`.
+  This can be accomplished for example using the vi text editor:
+  # cp /etc/logadm.conf /etc/logadm.conf.orig vi /etc/logadm.conf
+  Type ':' and issue the following command from vi:
+  g</var/run/syslog.pid<s</var/run/syslog.pid</var/run/syslog-ng.pid<g
+
+  NOTE: There is no logadm utility under Solaris 8, therefore newsyslog has to
+  be modified: Modify the /usr/lib/newsyslog file and replace all 
+    kill -HUP `cat /etc/syslog.pid` 
+  commands with 
+    kill -HUP `cat /var/run/syslog-ng.pid`.
+  This  can be accomplished for example using the vi text editor:
+  # cp /usr/lib/newsyslog /usr/lib/newsyslog.orig 
+  # vi /usr/lib/newsyslog
+  Type ':' and issue the following command from vi:
+  g</etc/syslog.pid<s</var/run/syslog.pid</var/run/syslog-ng.pid<g
+
+8.Start syslog-ng.
+  # /etc/init.d/syslog start
+
+9.Verify that the /var/run/syslog-ng.pid file exists.
+
+10.Verify that syslog-ng is running.
+  # ps -Af | grep -v grep | grep syslog-ng
+
+11.Send a test message and verify that it has successfully arrived into
+   /var/log/messages.
+  # logger -p daemon.crit syslog-ng test 
+  # tail /var/log/messages

@@ -1,0 +1,244 @@
+--- ../../../../../userspace/private/apps/ctl/files/libs/private/framework/tr69_build/cfg.xml	2015-07-02 16:33:45.105964115 +0800
++++ cfg.xml	2015-07-02 16:39:31.181974001 +0800
+@@ -49,12 +49,12 @@
+     <Parameter name="X_ACTIONTEC_COM_ArpEntry" acl="ReadWrite" nosave="1" type="string" maxLength="64" notification="0" hideParameterFromAcs="true"></Parameter>
+   </Object>
+   <Object name="ManagementServer" data_size="200">
+-    <Parameter name="EnableCWMP" acl="ReadWrite" nosave="0" type="boolean" notification="0">1</Parameter>
+-    <Parameter name="URL" acl="ReadWrite" nosave="0" forceupdate="1" type="string" maxLength="256" notification="0">http://xatechdmwii.xdev.motive.com/cwmpWeb/CPEMgt</Parameter>
++    <Parameter name="EnableCWMP" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>
++    <Parameter name="URL" acl="ReadWrite" nosave="0" forceupdate="1" type="string" maxLength="256" notification="0"></Parameter>
+     <Parameter name="X_ACTIONTEC_COM_LastConnectedURL" acl="ReadWrite" nosave="0" type="string" maxLength="256" notification="0" hideParameterFromAcs="true"></Parameter>
+-    <Parameter name="Username" acl="ReadWrite" nosave="0" forceupdate="1" type="string" maxLength="256" notification="0">admin</Parameter>
++    <Parameter name="Username" acl="ReadWrite" nosave="0" forceupdate="1" type="string" maxLength="256" notification="0"></Parameter>
+     <Parameter name="X_ACTIONTEC_COM_Username_Flag" acl="ReadWrite" nosave="0" type="boolean" notification="0" hideParameterFromAcs="true">0</Parameter>
+-    <Parameter name="Password" acl="ReadWrite" nosave="0" forceupdate="1" type="string" maxLength="256" notification="0">newVOLUser1</Parameter>
++    <Parameter name="Password" acl="ReadWrite" nosave="0" forceupdate="1" type="string" maxLength="256" notification="0"></Parameter>
+     <Parameter name="X_ACTIONTEC_COM_CPE_DIGEST" acl="ReadWrite" nosave="0" type="boolean" notification="0" hideParameterFromAcs="true">1</Parameter>
+     <Parameter name="PeriodicInformEnable" acl="ReadWrite" nosave="0" type="boolean" notification="0">1</Parameter>
+     <Parameter name="PeriodicInformInterval" acl="ReadWrite" nosave="0" forceupdate="2" type="unsignedInt" minValue="1" maxValue="2147483647" notification="0">150</Parameter>
+@@ -66,8 +66,8 @@
+     <Parameter name="X_ACTIONTEC_COM_UUID" acl="ReadOnly" nosave="0" type="string" maxLength="256" notification="0" hideParameterFromAcs="true"></Parameter>
+     <Parameter name="ConnectionRequestURL" acl="ReadOnly" nosave="0" type="string" maxLength="256" notification="2"></Parameter>
+     <Parameter name="X_ACTIONTEC_COM_SetConnReqURL" acl="ReadOnly" nosave="0" type="boolean" notification="0" hideParameterFromAcs="true">1</Parameter>
+-    <Parameter name="ConnectionRequestUsername" acl="ReadWrite" nosave="0" forceupdate="1" type="string" maxLength="256" notification="0">admin</Parameter>
+-    <Parameter name="ConnectionRequestPassword" acl="ReadWrite" nosave="0" forceupdate="1" type="string" maxLength="256" notification="0">newVOLUser1</Parameter>
++    <Parameter name="ConnectionRequestUsername" acl="ReadWrite" nosave="0" forceupdate="1" type="string" maxLength="256" notification="0"></Parameter>
++    <Parameter name="ConnectionRequestPassword" acl="ReadWrite" nosave="0" forceupdate="1" type="string" maxLength="256" notification="0"></Parameter>
+     <Parameter name="UpgradesManaged" acl="ReadWrite" nosave="0" type="boolean" notification="0"></Parameter>
+     <Parameter name="KickURL" acl="ReadOnly" nosave="0" type="string" maxLength="256" notification="0"></Parameter>
+     <Parameter name="DownloadProgressURL" acl="ReadOnly" nosave="0" type="string" maxLength="256" notification="0"></Parameter>
+@@ -411,7 +411,7 @@
+         <Parameter name="BSSID" acl="ReadOnly" nosave="0" type="string" maxLength="17" notification="0"></Parameter>
+         <Parameter name="MACAddress" acl="ReadOnly" nosave="0" type="string" maxLength="17" notification="0"></Parameter>
+         <Parameter name="SSID" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0"></Parameter>
+-        <Parameter name="X_EXPOSE" acl="ReadOnly" nosave="0" type="unsignedInt" notification="0" hideParameterFromAcs="true">0</Parameter>
++        <Parameter name="X_EXPOSE" acl="ReadOnly" nosave="0" type="unsignedInt" notification="0" hideParameterFromAcs="true">1</Parameter>
+         <Parameter name="X_ACTIONTEC_COM_SSIDReload" acl="ReadWrite" nosave="1" type="boolean" notification="0" hideParameterFromAcs="true">0</Parameter>
+         <Object name="Stats" data_size="16">
+           <Parameter name="BytesSent" acl="ReadOnly" nosave="1" type="unsignedInt" notification="0">0</Parameter>
+@@ -429,7 +429,7 @@
+         <Parameter name="BSSID" acl="ReadOnly" nosave="0" type="string" maxLength="17" notification="0"></Parameter>
+         <Parameter name="MACAddress" acl="ReadOnly" nosave="0" type="string" maxLength="17" notification="0"></Parameter>
+         <Parameter name="SSID" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0"></Parameter>
+-        <Parameter name="X_EXPOSE" acl="ReadOnly" nosave="0" type="unsignedInt" notification="0" hideParameterFromAcs="true">0</Parameter>
++        <Parameter name="X_EXPOSE" acl="ReadOnly" nosave="0" type="unsignedInt" notification="0" hideParameterFromAcs="true">1</Parameter>
+         <Parameter name="X_ACTIONTEC_COM_SSIDReload" acl="ReadWrite" nosave="1" type="boolean" notification="0" hideParameterFromAcs="true">0</Parameter>
+         <Object name="Stats" data_size="16">
+           <Parameter name="BytesSent" acl="ReadOnly" nosave="1" type="unsignedInt" notification="0">0</Parameter>
+@@ -447,7 +447,7 @@
+         <Parameter name="BSSID" acl="ReadOnly" nosave="0" type="string" maxLength="17" notification="0"></Parameter>
+         <Parameter name="MACAddress" acl="ReadOnly" nosave="0" type="string" maxLength="17" notification="0"></Parameter>
+         <Parameter name="SSID" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0"></Parameter>
+-        <Parameter name="X_EXPOSE" acl="ReadOnly" nosave="0" type="unsignedInt" notification="0" hideParameterFromAcs="true">0</Parameter>
++        <Parameter name="X_EXPOSE" acl="ReadOnly" nosave="0" type="unsignedInt" notification="0" hideParameterFromAcs="true">1</Parameter>
+         <Parameter name="X_ACTIONTEC_COM_SSIDReload" acl="ReadWrite" nosave="1" type="boolean" notification="0" hideParameterFromAcs="true">0</Parameter>
+         <Object name="Stats" data_size="16">
+           <Parameter name="BytesSent" acl="ReadOnly" nosave="1" type="unsignedInt" notification="0">0</Parameter>
+@@ -483,7 +483,7 @@
+         <Parameter name="BSSID" acl="ReadOnly" nosave="0" type="string" maxLength="17" notification="0"></Parameter>
+         <Parameter name="MACAddress" acl="ReadOnly" nosave="0" type="string" maxLength="17" notification="0"></Parameter>
+         <Parameter name="SSID" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0"></Parameter>
+-        <Parameter name="X_EXPOSE" acl="ReadOnly" nosave="0" type="unsignedInt" notification="0" hideParameterFromAcs="true">0</Parameter>
++        <Parameter name="X_EXPOSE" acl="ReadOnly" nosave="0" type="unsignedInt" notification="0" hideParameterFromAcs="true">1</Parameter>
+         <Parameter name="X_ACTIONTEC_COM_SSIDReload" acl="ReadWrite" nosave="1" type="boolean" notification="0" hideParameterFromAcs="true">0</Parameter>
+         <Object name="Stats" data_size="16">
+           <Parameter name="BytesSent" acl="ReadOnly" nosave="1" type="unsignedInt" notification="0">0</Parameter>
+@@ -501,7 +501,7 @@
+         <Parameter name="BSSID" acl="ReadOnly" nosave="0" type="string" maxLength="17" notification="0"></Parameter>
+         <Parameter name="MACAddress" acl="ReadOnly" nosave="0" type="string" maxLength="17" notification="0"></Parameter>
+         <Parameter name="SSID" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0"></Parameter>
+-        <Parameter name="X_EXPOSE" acl="ReadOnly" nosave="0" type="unsignedInt" notification="0" hideParameterFromAcs="true">0</Parameter>
++        <Parameter name="X_EXPOSE" acl="ReadOnly" nosave="0" type="unsignedInt" notification="0" hideParameterFromAcs="true">1</Parameter>
+         <Parameter name="X_ACTIONTEC_COM_SSIDReload" acl="ReadWrite" nosave="1" type="boolean" notification="0" hideParameterFromAcs="true">0</Parameter>
+         <Object name="Stats" data_size="16">
+           <Parameter name="BytesSent" acl="ReadOnly" nosave="1" type="unsignedInt" notification="0">0</Parameter>
+@@ -519,7 +519,7 @@
+         <Parameter name="BSSID" acl="ReadOnly" nosave="0" type="string" maxLength="17" notification="0"></Parameter>
+         <Parameter name="MACAddress" acl="ReadOnly" nosave="0" type="string" maxLength="17" notification="0"></Parameter>
+         <Parameter name="SSID" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0"></Parameter>
+-        <Parameter name="X_EXPOSE" acl="ReadOnly" nosave="0" type="unsignedInt" notification="0" hideParameterFromAcs="true">0</Parameter>
++        <Parameter name="X_EXPOSE" acl="ReadOnly" nosave="0" type="unsignedInt" notification="0" hideParameterFromAcs="true">1</Parameter>
+         <Parameter name="X_ACTIONTEC_COM_SSIDReload" acl="ReadWrite" nosave="1" type="boolean" notification="0" hideParameterFromAcs="true">0</Parameter>
+         <Object name="Stats" data_size="16">
+           <Parameter name="BytesSent" acl="ReadOnly" nosave="1" type="unsignedInt" notification="0">0</Parameter>
+@@ -551,7 +551,7 @@
+         </Object>
+         <Object name="Security" data_size="52">
+           <Parameter name="ModesSupported" acl="ReadOnly" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+-          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">WPA-WPA2-Personal</Parameter>
++          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">WPA2-Personal</Parameter>
+           <Parameter name="WEPKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="PreSharedKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="KeyPassphrase" acl="ReadWrite" nosave="0" type="string" maxLength="63" notification="0"></Parameter>
+@@ -561,8 +561,8 @@
+           <Parameter name="RadiusSecret" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="X_ACTIONTEC_COM_RadiusEnabled" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>
+           <Parameter name="X_ACTIONTEC_COM_WEPAuthenticationMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">Auto</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
+         </Object>
+         <Object name="WPS" data_size="40">
+           <Parameter name="Enable" acl="ReadWrite" nosave="0" type="boolean" notification="0">1</Parameter>
+@@ -718,7 +718,7 @@
+         </Object>
+         <Object name="Security" data_size="52">
+           <Parameter name="ModesSupported" acl="ReadOnly" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+-          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">WPA-WPA2-Personal</Parameter>
++          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">WPA2-Personal</Parameter>
+           <Parameter name="WEPKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="PreSharedKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="KeyPassphrase" acl="ReadWrite" nosave="0" type="string" maxLength="63" notification="0"></Parameter>
+@@ -728,8 +728,8 @@
+           <Parameter name="RadiusSecret" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="X_ACTIONTEC_COM_RadiusEnabled" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>
+           <Parameter name="X_ACTIONTEC_COM_WEPAuthenticationMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">Auto</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
+         </Object>
+         <Object name="WPS" data_size="40">
+           <Parameter name="Enable" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>
+@@ -885,7 +885,7 @@
+         </Object>
+         <Object name="Security" data_size="52">
+           <Parameter name="ModesSupported" acl="ReadOnly" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+-          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">None</Parameter>
++          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">WPA2-Personal</Parameter>
+           <Parameter name="WEPKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="PreSharedKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="KeyPassphrase" acl="ReadWrite" nosave="0" type="string" maxLength="63" notification="0"></Parameter>
+@@ -895,8 +895,8 @@
+           <Parameter name="RadiusSecret" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="X_ACTIONTEC_COM_RadiusEnabled" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>
+           <Parameter name="X_ACTIONTEC_COM_WEPAuthenticationMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">Auto</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
+         </Object>
+         <Object name="WPS" data_size="40">
+           <Parameter name="Enable" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>
+@@ -1052,7 +1052,7 @@
+         </Object>
+         <Object name="Security" data_size="52">
+           <Parameter name="ModesSupported" acl="ReadOnly" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+-          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">WPA-WPA2-Personal</Parameter>
++          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">WPA2-Personal</Parameter>
+           <Parameter name="WEPKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="PreSharedKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="KeyPassphrase" acl="ReadWrite" nosave="0" type="string" maxLength="63" notification="0"></Parameter>
+@@ -1062,8 +1062,8 @@
+           <Parameter name="RadiusSecret" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="X_ACTIONTEC_COM_RadiusEnabled" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>
+           <Parameter name="X_ACTIONTEC_COM_WEPAuthenticationMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">Auto</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
+         </Object>
+         <Object name="WPS" data_size="40">
+           <Parameter name="Enable" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>
+@@ -1219,7 +1219,7 @@
+         </Object>
+         <Object name="Security" data_size="52">
+           <Parameter name="ModesSupported" acl="ReadOnly" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+-          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">WPA-WPA2-Personal</Parameter>
++          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">WPA2-Personal</Parameter>
+           <Parameter name="WEPKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="PreSharedKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="KeyPassphrase" acl="ReadWrite" nosave="0" type="string" maxLength="63" notification="0"></Parameter>
+@@ -1229,8 +1229,8 @@
+           <Parameter name="RadiusSecret" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="X_ACTIONTEC_COM_RadiusEnabled" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>
+           <Parameter name="X_ACTIONTEC_COM_WEPAuthenticationMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">Auto</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
+         </Object>
+         <Object name="WPS" data_size="40">
+           <Parameter name="Enable" acl="ReadWrite" nosave="0" type="boolean" notification="0">1</Parameter>
+@@ -1386,7 +1386,7 @@
+         </Object>
+         <Object name="Security" data_size="52">
+           <Parameter name="ModesSupported" acl="ReadOnly" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+-          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">WPA-WPA2-Personal</Parameter>
++          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">WPA2-Personal</Parameter>
+           <Parameter name="WEPKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="PreSharedKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="KeyPassphrase" acl="ReadWrite" nosave="0" type="string" maxLength="63" notification="0"></Parameter>
+@@ -1396,8 +1396,8 @@
+           <Parameter name="RadiusSecret" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="X_ACTIONTEC_COM_RadiusEnabled" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>
+           <Parameter name="X_ACTIONTEC_COM_WEPAuthenticationMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">Auto</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
+         </Object>
+         <Object name="WPS" data_size="40">
+           <Parameter name="Enable" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>
+@@ -1553,7 +1553,7 @@
+         </Object>
+         <Object name="Security" data_size="52">
+           <Parameter name="ModesSupported" acl="ReadOnly" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+-          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">None</Parameter>
++          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">WPA2-Personal</Parameter>
+           <Parameter name="WEPKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="PreSharedKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="KeyPassphrase" acl="ReadWrite" nosave="0" type="string" maxLength="63" notification="0"></Parameter>
+@@ -1563,8 +1563,8 @@
+           <Parameter name="RadiusSecret" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="X_ACTIONTEC_COM_RadiusEnabled" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>
+           <Parameter name="X_ACTIONTEC_COM_WEPAuthenticationMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">Auto</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
+         </Object>
+         <Object name="WPS" data_size="40">
+           <Parameter name="Enable" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>
+@@ -1720,7 +1720,7 @@
+         </Object>
+         <Object name="Security" data_size="52">
+           <Parameter name="ModesSupported" acl="ReadOnly" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+-          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">WPA-WPA2-Personal</Parameter>
++          <Parameter name="ModeEnabled" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0">WPA2-Personal</Parameter>
+           <Parameter name="WEPKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="PreSharedKey" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="KeyPassphrase" acl="ReadWrite" nosave="0" type="string" maxLength="63" notification="0"></Parameter>
+@@ -1730,8 +1730,8 @@
+           <Parameter name="RadiusSecret" acl="ReadWrite" nosave="0" type="string" maxLength="64" notification="0"></Parameter>
+           <Parameter name="X_ACTIONTEC_COM_RadiusEnabled" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>
+           <Parameter name="X_ACTIONTEC_COM_WEPAuthenticationMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">Auto</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
+-          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">TKIPandAESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPAEncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
++          <Parameter name="X_ACTIONTEC_COM_WPA2EncryptionMode" acl="ReadWrite" nosave="0" type="string" maxLength="32" notification="0">AESEncryption</Parameter>
+         </Object>
+         <Object name="WPS" data_size="40">
+           <Parameter name="Enable" acl="ReadWrite" nosave="0" type="boolean" notification="0">0</Parameter>

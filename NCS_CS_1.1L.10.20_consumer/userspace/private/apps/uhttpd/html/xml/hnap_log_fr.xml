@@ -1,0 +1,11 @@
+<pages>
+	<page> 
+<!-- 0-5 -->	
+		<t>HNAP Log Setup</t>
+		<t>Enable</t>
+		<t>Disable</t>	
+		<t>Clear</t>
+		<t>Save As</t>
+
+	</page>
+</pages>

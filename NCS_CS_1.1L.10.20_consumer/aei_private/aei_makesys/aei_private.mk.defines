@@ -1,0 +1,14 @@
+#***********************************************************************
+#
+#  Copyright (c) 2015  AEI Corporation
+#  All Rights Reserved
+#  Author: Ken Hu (khu@actiontec.com)
+#
+#***********************************************************************/
+
+# Include AEI definitionas for making non-GPL/Private parts
+
+export AEI_MK_DO_IMG_SIGN=y
+ifeq ($(strip $(AEI_MK_DO_IMG_SIGN)),y)
+include $(AEI_MKSYS_ROOT)/aei_wxx6000_host.modules
+endif

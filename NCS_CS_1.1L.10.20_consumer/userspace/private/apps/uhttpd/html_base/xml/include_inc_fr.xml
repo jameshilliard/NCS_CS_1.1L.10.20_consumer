@@ -1,0 +1,31 @@
+<pages>
+	<text> 
+		<copyright>Droit d’auteur © 2015 Actiontec Inc. Tous droits réservés.</copyright>
+        <logout>Fermer</logout>
+        <wirelesstitle>Sans fil - Réglages</wirelesstitle>
+        <wlnetworklist>Réseau sans fil - Liste</wlnetworklist>
+        <wlwac>Contrôle de l'accès au réseau sans fil</wlwac>
+        
+        <factorydefault>Valeur par défaut</factorydefault>
+        <firmwarerestore>Restaurer micrologiciel</firmwarerestore>
+
+        <localssh>SSH local</localssh>
+        <languagesetting>Paramètres de langues</languagesetting>
+        <enabled>Activé</enabled>
+        <disabled>Désactivé</disabled>
+        <connected>Connecté</connected>
+
+        <via>Par</via>
+        <on>Allumé</on>
+        <off>Éteint</off>
+        <automatic>Automatique</automatic>
+        <configured>Configuré</configured>
+
+        <unconfigured>Déconfiguré</unconfigured>
+        <wpawpa2mixed>WPA/WPA2 mixte</wpawpa2mixed>
+        <changepassword>Modifier le mot de passe</changepassword>
+	</text>
+
+	<alert>
+	</alert>
+</pages>

@@ -1,0 +1,34 @@
+#!/bin/sh 
+rm d?
+
+$SYSLOG_NG -f syslog-ng.conf.logflags -p syslog-ng.pid 2>/dev/null
+
+#mindketto csak a final-ba (d1)
+$LOGGER -u input "msg: final"
+$LOGGER -u input "msg: match final"
+
+# d2, d3
+$LOGGER -u input "msg: match"
+
+# d4
+$LOGGER -u input "msg: ez csak a fallbackbe megy."
+
+sleep 2
+pid=`cat syslog-ng.pid`
+kill -TERM $pid 2>/dev/null
+sleep 2
+kill -TERM $pid 2>/dev/null
+rm syslog-ng.pid
+
+result=`wc -l d?`
+#rm d?
+if [ "$result" != \
+"      2 d1
+      1 d2
+      1 d4
+      4 total" ]; then
+	echo "logflags test failed"
+	exit 1
+fi
+echo "logflags test passed"
+exit 0

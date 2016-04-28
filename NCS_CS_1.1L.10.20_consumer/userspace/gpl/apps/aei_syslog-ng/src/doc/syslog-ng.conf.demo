@@ -1,0 +1,35 @@
+#
+# Syslog-ng example configuration file showing all the existing/future 
+# features.
+#
+# Copyright (c) 1999 Balazs Scheidler
+# $Id: syslog-ng.conf.demo,v 1.2 1999/11/15 12:30:41 bazsi Exp $
+#
+# Note that some of the keywords do _nothing_, this includes:
+#  mac, authentication, encryption, compress
+#
+
+options { sync(0); time_reopen(10); log_fifo_size(100); };
+
+source src { 
+	unix-stream("/dev/log");
+	udp();
+	tcp(ip("127.0.0.1") port(1000) mac(allow) authentication(required) encrypt(allow));
+	tcp();
+#	sun-streams("/dev/log" door("/etc/.syslog_door"));
+	internal();
+};
+
+destination everything { 
+	udp("127.0.0.1" port(999));
+	tcp("127.0.0.1" port(999) authentication(on) mac(on) encrypt(on) log_fifo_size(1000));
+	pipe("/dev/xconsole");
+	file("/home/bazsi/logfile" compress(on) sync(0) log_fifo_size(10));
+};
+
+filter f_host1 {
+	host("host1");
+};
+
+log { source(src); destination(everything); };
+

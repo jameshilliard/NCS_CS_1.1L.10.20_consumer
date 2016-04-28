@@ -1,0 +1,130 @@
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(src/abstract_io.c)
+
+AM_INIT_AUTOMAKE(libol, "0.3.18", 1)
+if test -n "$SNAPSHOT_VERSION"; then
+        VERSION=$VERSION+$SNAPSHOT_VERSION
+fi
+
+AM_CONFIG_HEADER(src/olconfig.h)
+
+# We want an absolute path to the source-dir.
+case "$srcdir" in
+    /*)
+        ;;
+    *)
+        oldsrcdir="$srcdir"
+        srcdir="`cd \"$srcdir\"; pwd`"
+        ;;
+esac
+
+AC_ARG_ENABLE(debug,
+  [--enable-debug    enable debug information],,
+  [enable_debug=no])
+  
+if test x$enable_debug = xyes ; then
+  AC_DEFINE(DEBUG_ALLOC, 1,[Whether to enable allocation debugging])
+fi
+
+AM_SANITY_CHECK
+
+dnl Checks for programs.
+AC_PROG_CC
+AC_PROG_MAKE_SET
+AC_PATH_PROG(SCSH, scsh, /usr/bin/scsh, $PATH)
+AM_PROG_LIBTOOL
+
+dnl Checks for libraries.
+
+dnl Checks for header files.
+CPPFLAGS="$CPPFLAGS -D_GNU_SOURCE -D_XOPEN_SOURCE_EXTENDED"
+AC_HEADER_STDC
+AC_CHECK_HEADERS(fcntl.h sys/time.h syslog.h unistd.h)
+AC_CHECK_HEADERS(poll.h sys/poll.h sys/socket.h alloca.h)
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_TYPE_SIZE_T
+AC_HEADER_TIME
+AC_CHECK_SIZEOF(short, 2)
+AC_CHECK_SIZEOF(int, 4)
+AC_CHECK_SIZEOF(long, 4)
+
+AC_CACHE_CHECK(for socklen_t,
+	       blb_cv_c_type_socklen_t,
+[AC_EGREP_CPP(socklen_t, [
+#include <sys/types.h>
+#include <sys/socket.h>
+#if STDC_HEADERS
+#include <stdlib.h>
+#include <stddef.h>
+#endif
+
+#if HAVE_SYS_SOCKET_H
+#include <sys/socket.h>
+#endif
+],blb_cv_c_type_socklen_t=yes,blb_cv_c_type_socklen_t=no)])
+
+if test "x$blb_cv_c_type_socklen_t" = "xyes"; then
+	AC_DEFINE(HAVE_SOCKLEN_T, 1, [whether you have socklen_t type])
+fi
+
+dnl Check for gcc's __attribute__ construction
+AC_CACHE_CHECK(for __attribute__,
+               lsh_cv_c_attribute,
+[ AC_TRY_COMPILE([
+#include <stdlib.h>
+],
+[
+static void foo(void) __attribute__ ((noreturn));
+
+static void __attribute__ ((noreturn))
+foo(void)
+{
+  exit(1);
+}
+],
+lsh_cv_c_attribute=yes,
+lsh_cv_c_attribute=no)])
+
+if test "$lsh_cv_c_attribute" = "yes"; then
+  AC_DEFINE(HAVE_ATTRIBUTE, 1, [whether the compiler supports the attribute keyword])
+fi
+
+
+dnl Checks for library functions.
+AC_FUNC_ALLOCA
+AC_CHECK_LIB(xnet, inet_addr)
+AC_CHECK_LIB(nsl, gethostbyname)
+AC_CHECK_LIB(socket, setsockopt)
+AC_CHECK_FUNCS(select strerror syslog poll)
+
+if test "x$ac_cv_func_poll" != "xyes"; then
+	AC_LIBOBJ(jpoll)
+fi
+
+if test $enable_debug = "yes"; then
+	CFLAGS="-Wall -g"
+else
+	CFLAGS="$CFLAGS -Wall -O2"
+fi
+
+MAKE_CLASS="$srcdir/utils/make_class"
+AC_SUBST(MAKE_CLASS)
+AC_SUBST(SCSH)
+
+if test "x$SCSH" = "x"; then
+	AC_MSG_WARN([
+NOTE: scsh was not found, which is used to generate the GC code based on .c
+and .h files. 
+
+If you only want to compile libol/syslog-ng then you can safely ignore this
+warning, if you also want to modify/patch the source files, you will not be
+able to regenerate these .x files. If the change you make does not affect
+the class definitions (C comments, started with the word CLASS), you can
+work this around by "touch"-ing the file to satisfy the make dependency.
+])
+fi
+
+AC_OUTPUT(libol.spec Makefile src/Makefile utils/Makefile libol-config,chmod +x libol-config)
+

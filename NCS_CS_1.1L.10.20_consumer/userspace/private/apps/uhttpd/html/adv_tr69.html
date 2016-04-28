@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Advanced TR-069</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/adv_tr69.js"></script>
+
+</head>
+
+<body>
+	<div id="wrapper">    
+
+<? include(top_nav.inc) ?>
+
+<? include(left_adv.inc) ?>
+
+  
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1><span id="tr69_title" style="font-weight:bold;font-size:16px;">TR-069</h1>
+
+	        	<form id="tr69_form" method="post" action="adv_tr69.cgi">
+	        	<input type="hidden" name="command" id="id_command" value="apply" />
+				<input type="hidden" name="adv_autoconfig" id="adv_autoconfig" />
+		       
+                <input type="hidden" id="waiting_page" name="waiting_page" value="thankyou.html">            
+                <input type="hidden" name="confirm_page" id="confirm_page" value="wcb_confirm.html">
+                <input type="hidden" id="isconfirm" name="isconfirm" value="1">   
+                <input type="hidden" id="apply_page" name="apply_page" value="adv_tr69.html"/>  
+				<input type="hidden" id="advanced_tr69_reboot" name="advanced_tr69_reboot" value="0"/>  
+
+		       
+				<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="250">
+							<B><span id="sh_local">TR-069</span></B>:
+						</td>
+						<td>			
+							<input type="radio" id="advanced_tr69_enable" name="advanced_tr69_enable" value="1" size=30 maxlength=63 checked>
+							<span id="sh_enable">Enable</span>
+							<input type="radio" id="advanced_tr69_disable" name="advanced_tr69_enable" value="0" size=30 maxlength=63>
+							<span id="sh_disable">Disable</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<B><span id="tr69_acs_url">ACS URL</span></B>:
+						</td>
+						<td>
+							<input type="text" id="advanced_tr69_url" name="advanced_tr69_url" value="" size=30 maxlength=63>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<B><span id="tr69_username">Username</span></B>:
+						</td>
+						<td>
+							<input type="text" id="advanced_tr69_username" name="advanced_tr69_username" value="" size=30 maxlength=63>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<B><span id="tr69_passwd">Password</span></B>:
+						</td>
+						<td>
+							<input type=password id="advanced_tr69_password" name="advanced_tr69_password" value="" size=30 maxlength=63>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<B><span id="tr_peri_info_enable">ACS_PeriodicInformEnable</span></B>:
+						</td>
+						<td>			
+							<input type="radio" id="advanced_tr69_informenable" name="advanced_tr69_informenable" value="1" size=30 maxlength=63 checked>
+							<span id="tr_enable">Enable</span>
+							<input type="radio" id="advanced_tr69_informdisable" name="advanced_tr69_informenable" value="0" size=30 maxlength=63>
+							<span id="tr_disable">Disable</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<B><span id="tr_peri_inf_interval">ACS_PeriodicInformInterval</span></B>:
+						</td>
+						<td>
+							<input type="text" id="advanced_tr69_informinterval" name="advanced_tr69_informinterval" value="" size=30 maxlength=63>
+						</td>
+					</tr>
+					<tr style="display:none;">
+						<td>
+							<B><span id="tr_backoff">ACS_BackoffInterval</span></B>:
+						</td>
+						<td>
+							<input type="text" id="advanced_tr69_backoff_interval" name="advanced_tr69_backoff_interval" value="" size=30 maxlength=63>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<B><span id="tr_inf_time">ACS_PeriodicInformTime</span></B>:
+						</td>
+						<td>
+							<input type="text" id="advanced_tr69_informtime" name="advanced_tr69_informtime" value="" size=30 maxlength=63 readonly>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<B><span id="tr_req_url">ACS_ConnectionRequestURL</span></B>:
+						</td>
+						<td>
+							<input disabled type="text" id="advanced_tr69_connection_url" name="advanced_tr69_connection_url" value="" size=30 maxlength=63>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<B><span id="tr_rq_username">ACS_ConnectionRequestUsername</span></B>:
+						</td>
+						<td>
+							<input type="text" id="advanced_tr69_connection_username" name="advanced_tr69_connection_username" value="" size=30 maxlength=63>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<B><span id="tr_rq_passwd">ACS_ConnectionRequestPassword</span></B>:
+						</td>
+						<td>
+							<input type="password" id="advanced_tr69_connection_password" name="advanced_tr69_connection_password" value="" size=30 maxlength=63>
+						</td>
+					</tr>
+				</table>
+				</form>
+
+				<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="220">&nbsp;</td>
+						<td>
+							<div><a class="button" href="###" id="diy_apply_btn"><span id="apply_btn_span">Apply</span></a></div>
+						</td>
+					</tr>
+				</table>
+				
+	        	<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+<? include(wcb_footer.inc) ?>
+        
+	</div>
+</body>
+</html>
+

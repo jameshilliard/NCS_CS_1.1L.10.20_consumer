@@ -1,0 +1,10 @@
+INSTALL
+README
+doc/syslog-ng.conf.demo
+doc/syslog-ng.conf.sample
+doc/syslog-ng.old.txt
+doc/stresstest.sh
+doc/syslog-ng.conf.solaris
+doc/sgml
+debian/FAQ.unofficial.html
+debian/expanded-syslog-ng.conf

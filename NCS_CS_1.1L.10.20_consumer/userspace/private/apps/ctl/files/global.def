@@ -1,0 +1,22 @@
+
+CROSS=/opt/toolchains/crosstools-mips-gcc-4.6-linux-3.4-uclibc-0.9.32-binutils-2.21/usr/bin/
+#J_CC=/opt/toolchains/crosstools-mips-gcc-4.6-linux-3.4-uclibc-0.9.32-binutils-2.21/usr/bin/mips-linux-gcc
+#J_AR=/opt/toolchains/crosstools-mips-gcc-4.6-linux-3.4-uclibc-0.9.32-binutils-2.21/usr/bin/mips-linux-ar
+#############For WiFi###############
+export CONFIG_WIFI=y
+export CONFIG_WIFI_TR181=y
+export CONFIG_WIFI_DRIVER_BROADCOM=y
+export CONFIG_WIFI_DRIVER_QUANTENNA=y
+####################################
+#############For MoCA###############
+export CONFIG_MOCA=y
+export CONFIG_MOCA_DRIVER_BROADCOM=y
+####################################
+INSTALL=/home/hudson/jobs/WXB6000.NCS_CS.WXX6000_GPL/workspace/bcmcpe2/userspace/private/apps/ctl/files/target/wecb
+CFLAGS+= -Wall -D_LINUX -g 
+IFLAGS+= -I./ -I/home/hudson/jobs/WXB6000.NCS_CS.WXX6000_GPL/workspace/bcmcpe2/userspace/private/apps/ctl/files/include -I/home/hudson/jobs/WXB6000.NCS_CS.WXX6000_GPL/workspace/bcmcpe2/userspace/private/apps/ctl/files/include/libxml2
+CFLAGS+= -I/home/hudson/jobs/WXB6000.NCS_CS.WXX6000_GPL/workspace/bcmcpe2/userspace/public/include/         -I/home/hudson/jobs/WXB6000.NCS_CS.WXX6000_GPL/workspace/bcmcpe2/userspace/public/include/linux/         -I/home/hudson/jobs/WXB6000.NCS_CS.WXX6000_GPL/workspace/bcmcpe2/userspace/private/include/         -I/home/hudson/jobs/WXB6000.NCS_CS.WXX6000_GPL/workspace/bcmcpe2/userspace/private/include/linux/         -I/home/hudson/jobs/WXB6000.NCS_CS.WXX6000_GPL/workspace/bcmcpe2/shared/opensource/include/bcm963xx/         -I/home/hudson/jobs/WXB6000.NCS_CS.WXX6000_GPL/workspace/bcmcpe2/bcmdrivers/opensource/include/bcm963xx/
+LFLAGS+= -L/home/hudson/jobs/WXB6000.NCS_CS.WXX6000_GPL/workspace/bcmcpe2/userspace/private/apps/ctl/files/target/wecb/lib -lpthread
+TARGET_PLATFORM=WECB
+CTL_DIR=/home/hudson/jobs/WXB6000.NCS_CS.WXX6000_GPL/workspace/bcmcpe2/userspace/private/apps/ctl/files
+TARGET_DIR=/home/hudson/jobs/WXB6000.NCS_CS.WXX6000_GPL/workspace/bcmcpe2/userspace/private/apps/ctl/files/target/wecb/

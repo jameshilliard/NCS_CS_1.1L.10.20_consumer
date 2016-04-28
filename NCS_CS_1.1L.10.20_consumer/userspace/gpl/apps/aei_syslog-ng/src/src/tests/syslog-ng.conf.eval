@@ -1,0 +1,27 @@
+
+source src { unix-stream("input"); };
+
+destination d1 { file("d1"); };
+destination d2 { file("d2"); };
+destination d3 { file("d3"); };
+destination d4 { file("d4"); };
+destination d5 { file("d5"); };
+destination d6 { file("d6"); };
+destination d7 { file("d7"); };
+
+filter f1 { facility(local0); };
+filter f2 { facility(local1) and level(debug); };
+filter f3 { facility(local2) and not level(debug); };
+filter f4 { not (facility(local3) and level(debug)); };
+filter f5 { facility(local4) or level(info); };
+filter f6 { facility(local4) or not level(info); };
+filter f7 { not (facility(local4) or level(info)); };
+
+log { source(src); filter(f1); destination(d1); };
+log { source(src); filter(f2); destination(d2); };
+log { source(src); filter(f3); destination(d3); };
+log { source(src); filter(f4); destination(d4); };
+log { source(src); filter(f5); destination(d5); };
+log { source(src); filter(f6); destination(d6); };
+log { source(src); filter(f7); destination(d7); };
+

@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>WPS</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/wl_wfps.js"></script>
+
+</head>
+
+<body>
+	<div id="wrapper">   
+	
+	
+<? include(top_nav.inc) ?>
+
+<? include(left_wl.inc) ?>
+		
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1>WPS</h1>
+
+				<form id="wfps_form" method="POST" action="wl_wfps.cgi">
+		 	    <input type="hidden" name="wireless_index_vlan" id="wireless_index_vlan" value="">
+		 	    
+                <input type="hidden" id="waiting_page" name="waiting_page" value="thankyou.html">            
+                <input type="hidden" name="confirm_page" id="confirm_page" value="wcb_confirm.html">
+                <input type="hidden" id="isconfirm" name="isconfirm" value="1">   
+                <input type="hidden" id="apply_page" name="apply_page" value="wl_wfps.html"/>  
+                
+                <input type="hidden" id="wireless_wps_enable_type" name="wireless_wps_enable_type" value="">   
+                <input type="hidden" id="wireless_wps_pin" name="wireless_wps_pin" value=""/>  		 	    
+                <input type="hidden" id="submit_button_name" name="submit_button_name" value=""/>  		 	    
+
+
+	        	<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="250"><label><span id="wl_fre_span">Multiple SSID</span>:</label></td>
+                        <td>
+                            <select name="wireless_index_ssid" id="wireless_index_ssid">
+                                <option value="1">SSID1-5G</option>
+                                <option value="2">SSID2-5G</option>
+                                <option value="3">SSID3-5G</option>
+                                <option value="4">SSID4-5G</option>
+                                <option value="5">SSID5-2.4G</option>
+                                <option value="6">SSID6-2.4G</option>
+                                <option value="7">SSID7-2.4G</option>
+                                <option value="8">SSID8-2.4G</option>
+                            </select>
+                        </td>
+					</tr>					
+				</table>
+		 	    
+				<table cellpadding="0" cellspacing="2" border="0">					
+					<tr>
+						<td width="250"><label>WPS:</label></td>
+						<td>
+							<input name="wl_wpsen" id="id_wpson" type="radio" value="1" checked="checked"/>
+             	 			<label for="id_wpson"><span id="wfps_enable">Enable</span></label>
+                            <input name="wl_wpsen" id="id_wpsoff" type="radio" value="0" /> 
+				 			<label for="id_wpsoff"><span id="wfps_disable">Disable</span></label>
+						</td>
+					</tr>					
+					<tr>
+						<td><label for="id_security"><span id="wfps_security">Security</span>:</label></td>
+						<td><span id="id_security"></span></td>
+					</tr>
+					<tr>
+						<td><label for="id_encryption"><span id="wfps_encrypt">Encryption</span>:</label></td>
+						<td><span id="id_encryption"></span></td>
+					</tr>													
+				</table>
+
+				<table cellpadding="0" cellspacing="2" border="0" id="wpsstatus_table_certificated" style="display:none;">
+					<tr>
+						<td width="250"><label><span id="wfps_status">WPS Status</span>:</label></td>
+						<td>
+							<input name="wl_wpsconfig" id="id_wpsconfigon" type="radio" value="1" checked="checked"/>
+             	 			<label for="id_wpsconfigon"><span id="wfps_sta_con">Configured</span></label>
+             	 			<input name="wl_wpsconfig" id="id_wpsconfigoff" type="radio" value="0" /> 
+				 			<label for="id_wpsconfigoff"><span id="wfps_stat_unconf">UnConfigured</span></label>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<div><a class="button" href="#" id="reset_unconfigured_btn"><span id="wfps_reset_conf_btn">Reset to UnConfigured</span></a></div>
+						</td>
+					</tr>					
+				</table>				
+
+				<table cellpadding="0" cellspacing="2" border="0" id="wpsstatus_table">
+					<tr>
+						<td width="250"><label for="id_wpsstatus"><span id="wfps_stat2">WPS Status</span>:</label></td>
+						<td>
+							<span id="id_wpsstatus"></span>
+						</td>						
+					</tr>					
+				</table>
+<!--				
+				<table cellpadding="0" cellspacing="2" border="0" id="pinshow_table" style="display:none;">
+					<tr>
+						<td width="250"><label for="id_appinshow"><span id="wfps_appin">AP PIN</span>:</label></td>
+						<td><span id="id_appinshow"></span></td>
+					</tr>
+				</table>
+-->				
+
+				<table cellpadding="0" cellspacing="2" border="0" id="generatepin_table" style="display:none;">
+					<tr>
+						<td width="250"><label for="id_appin"><span id="wfps_appin2">AP PIN</span>:</label></td>
+						<td>
+							<input name="wl_appin" id="id_appin" type="text" size="12" maxlength="32" style="height: 16px"/>
+						</td>						
+						<td>							
+							<div><a class="button" href="###" id="generate_btn"><span id="wfps_genpin_btn">GeneratePIN</span></a></div>
+						</td>
+						<td colspan="2" style="display:none;">
+							<div><a class="button" href="###" id="enable_pin"><span id="enable_pin_span">Disable</span></a></div>
+						</td>
+					</tr>
+				</table>
+				
+				<table cellpadding="0" cellspacing="2" border="0">						
+					<tr style="display:none;">
+						<td colspan="3"><label for="id_enrpin"><strong><span id="wfps_enr_conf" style='font-weight:bold;font-size:12px;'>Enrollee Configuration</span>:<strong></label></td>
+					</tr>
+					<tr style="display:none;">
+						<td width="250"><label for="id_enrpin"><span id="wfps_enr_pin">Enrollee's PIN</span>:</label></td>
+						<td>
+							<input name="wl_enrpin" id="id_enrpin" type="text" size="25" maxlength="32" style="height: 16px"/>
+						</td>
+						<td>
+							<div><a class="button" href="###" id="startpin_btn"><span id="wfps_start_pin_btn">StartPINMethod</span></a></div>
+						</td>
+					</tr>
+					<tr>
+						<td width="250"><label for="id_softpush"><span id="wfps_soft_push">Soft Push Button</span>:</label></td>
+						<td colspan="2">
+							<div><a class="button" href="###" id="startpbc_btn"><span id="wfps_startpbc_btn">StartPBC</span></a></div>
+						</td>
+					</tr>
+				</table>				
+				</form>
+
+				<table cellpadding="0" cellspacing="2" border="0">
+						<td width="220">&nbsp;</td>
+						<td>
+							<div><a class="button" href="###" id="diy_apply_btn"><span id="apply_btn_span">Apply</span></a></div>
+						</td>
+				</table>
+
+				<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+<? include(wcb_footer.inc) ?>
+
+	</div>
+</body>
+</html>
+

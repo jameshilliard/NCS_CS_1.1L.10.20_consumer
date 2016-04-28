@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Advanced Local SSH</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/adv_localssh.js"></script>
+
+</head>
+
+<body>
+	<div id="wrapper">    
+
+<? include(top_nav.inc) ?>
+
+<? include(left_adv.inc) ?>
+
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1><span id="ssh_title" style="font-weight:bold;font-size:16px;">Local SSH</span></h1>
+
+				<form id="ssh_form" method="post" action="adv_localssh.cgi">
+	        	<input type="hidden" name="command" id="id_command" value="apply" />
+				<input type="hidden" name="adv_autoconfig" id="adv_autoconfig" />
+		       
+                <input type="hidden" id="waiting_page" name="waiting_page" value="thankyou.html">            
+                <input type="hidden" name="confirm_page" id="confirm_page" value="wcb_confirm.html">
+                <input type="hidden" id="isconfirm" name="isconfirm" value="1">   
+                <input type="hidden" id="apply_page" name="apply_page" value="adv_localssh.html"/>  
+
+                <input type="hidden" name="advanced_ssh_timeout" id="advanced_ssh_timeout" value="" />
+		       
+				<table cellpadding="0" cellspacing="2" border="0">
+
+					<tr>
+						<td width="250">
+							<B><span id="sh_local">Local SSH</span></B>:
+						</td>
+						<td>			
+							<input type="radio" id="advanced_ssh_enable" name="advanced_ssh_enable" value="1" size=30 maxlength=63 checked>
+							<span id="sh_enable">Enable</span>
+							<input type="radio" id="advanced_ssh_disable" name="advanced_ssh_enable" value="0" size=30 maxlength=63>
+							<span id="sh_disable">Disable</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<B><span id="sh_username">Username</span></B>:
+						</td>
+						<td>
+							<input type="text" id="advanced_ssh_username" name="advanced_ssh_username" value="" size=30 maxlength=63>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<B><span id="sh_passwd">Password</span></B>:
+						</td>
+						<td>
+							<input type=password id="advanced_ssh_password" name="advanced_ssh_password" value="" size=30 maxlength=63>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<B><span id="sh_port">SSH Port</pan></B>:
+						</td>
+						<td>
+							<input type="text" id="advanced_ssh_port" name="advanced_ssh_port" value="" size=30 maxlength=63>
+						</td>
+					</tr>
+				</table>
+
+				<table cellpadding="0" cellspacing="2" border="0">	
+					<tr>
+						<td width="250"><B><span id="sh_idle">Idle Disconnect After</span>:</B></td>
+
+						<td>
+								<select name="sel_ssh_timeout" id="sel_ssh_timeout" >
+										<option value="1800">30 Minutes</option>
+										<option value="43200">12 Hours</option>
+										<option value="86400">1 Day</option>
+										<option value="604800">7 Days</option>
+										<option value="custom">Custom</option>
+						               </select>
+						 </td>
+						 <td id="custom_td" style="display:none;">
+									<input type="text" id="custom_ssh_timeout" name="custom_ssh_timeout" value="" size=9 maxlength=9><span id="seconds_span">Seconds</span>
+						</td>
+				      </tr>
+				</table>
+				</form>
+
+				<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="220">&nbsp;</td>
+						<td>
+							<div><a class="button" href="###" id="diy_apply_btn"><span id="apply_btn_span">Apply</span></a></div>
+						</td>
+					</tr>
+				</table>
+				
+	        	<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+<? include(wcb_footer.inc) ?>
+
+</div>
+</body>
+</html>
+

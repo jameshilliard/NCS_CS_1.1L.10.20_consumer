@@ -1,0 +1,423 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MoCA Coax Status</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/moca_status.js"></script>
+
+</head>
+
+<body>
+	<div id="wrapper">    
+
+<? include(top_nav.inc) ?>
+
+<? include(left_moca.inc) ?>
+	
+
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1><span id="moca_status_title" style='font-weight:bold;font-size:16px;'>MoCA Coax Status</span></h1>
+
+				<p align="left">
+					<span id="stat_note1">NOTE:Only advanced technical users should use this feature, all rates are Mbps.</span>
+					<br>
+					<span id="status_note2">* next to Adapter or Device represents the Network Coordinator</span>
+				</p>
+
+			    <table width="88%" border="0" cellpadding="1" cellspacing="0">			    
+				    <tr bgcolor="#e0e5f1">
+				     <td class="GRID_NO_RIGHT" width="50%"><b><span id="stat_channel">Channel</span></b>:</td>
+				     <td class="GRID_NO_LEFT" width="50%"><span id='id_mocachannel'></span></td>
+				    </tr>
+				    <tr bgcolor="#f1f3f9">
+				     <td class="GRID_NO_RIGHT" width="50%"><b><span id="stat_privacy">Privacy</span></b>:</td>
+				     <td class="GRID_NO_LEFT" width="50%"><span id='id_mocaprivacy'></span></td>
+				    </tr>
+				    <tr bgcolor="#e0e5f1">
+				     <td class="GRID_NO_RIGHT" width="50%"><b><span id="stat_passwd">Password</span></b>:</td>
+				     <td class="GRID_NO_LEFT" width="50%"><span id='id_mocapassword'></span></td>
+				    </tr>			    
+			    </table>
+
+				<br>
+			   <div style="overflow:auto;width:650px">
+			    <table id="stat_list_table"  width="2200" border="0" cellpadding="4" cellspacing="0">
+					<tr bgcolor="#e0e5f1">
+						<td align="left" valign="top" width="120">Connection Speed</td>
+						<td align="left" valign="top" width="120" id="adapter_name">Adapter</td>
+						<td align="left" valign="top" width="120" id="d1_name">Device 1</td>
+						<td align="left" valign="top" width="120" id="d2_name">Device 2</td>
+						<td align="left" valign="top" width="120" id="d3_name">Device 3</td>
+						<td align="left" valign="top" width="120" id="d4_name">Device 4</td>
+						<td align="left" valign="top" width="120" id="d5_name">Device 5</td>
+						<td align="left" valign="top" width="120" id="d6_name">Device 6</td>
+						<td align="left" valign="top" width="120" id="d7_name">Device 7</td>
+						<td align="left" valign="top" width="120" id="d8_name">Device 8</td>
+						<td align="left" valign="top" width="120" id="d9_name">Device 9</td>
+						<td align="left" valign="top" width="120" id="d10_name">Device 10</td>
+						<td align="left" valign="top" width="120" id="d11_name">Device 11</td>
+						<td align="left" valign="top" width="120" id="d12_name">Device 12</td>
+						<td align="left" valign="top" width="120" id="d13_name">Device 13</td>
+						<td align="left" valign="top" width="120" id="d14_name">Device 14</td>
+						<td align="left" valign="top" width="120" id="d15_name">Device 15</td>
+					</tr>
+
+					<tr bgcolor="#f1f3f9">
+                        <td align="left" valign="top"><span id="status_mac">MAC Address</span></td>
+                        <td align="left" valign="top" id="adapter_mac">N/A</td>
+                        <td align="left" valign="top" id="d1_mac">N/A</td>
+                        <td align="left" valign="top" id="d2_mac">N/A</td>
+                        <td align="left" valign="top" id="d3_mac">N/A</td>
+                        <td align="left" valign="top" id="d4_mac">N/A</td>
+                        <td align="left" valign="top" id="d5_mac">N/A</td>
+                        <td align="left" valign="top" id="d6_mac">N/A</td>
+                        <td align="left" valign="top" id="d7_mac">N/A</td>
+                        <td align="left" valign="top" id="d8_mac">N/A</td>
+                        <td align="left" valign="top" id="d9_mac">N/A</td>
+                        <td align="left" valign="top" id="d10_mac">N/A</td>
+                        <td align="left" valign="top" id="d11_mac">N/A</td>
+                        <td align="left" valign="top" id="d12_mac">N/A</td>
+                        <td align="left" valign="top" id="d13_mac">N/A</td>
+                        <td align="left" valign="top" id="d14_mac">N/A</td>
+                        <td align="left" valign="top" id="d15_mac">N/A</td>
+                    </tr>
+					<tr bgcolor="#e0e5f1">
+                        <td class="GRID" align="left" valign="top"><span id="status_ip">IP Address</span></td>
+                        <td align="left" valign="top" id="adapter_ip">N/A</td>
+                        <td align="left" valign="top" id="d1_ip">N/A</td>
+                        <td align="left" valign="top" id="d2_ip">N/A</td>
+                        <td align="left" valign="top" id="d3_ip">N/A</td>
+                        <td align="left" valign="top" id="d4_ip">N/A</td>
+                        <td align="left" valign="top" id="d5_ip">N/A</td>
+                        <td align="left" valign="top" id="d6_ip">N/A</td>
+                        <td align="left" valign="top" id="d7_ip">N/A</td>
+                        <td align="left" valign="top" id="d8_ip">N/A</td>
+                        <td align="left" valign="top" id="d9_ip">N/A</td>
+                        <td align="left" valign="top" id="d10_ip">N/A</td>
+                        <td align="left" valign="top" id="d11_ip">N/A</td>
+                        <td align="left" valign="top" id="d12_ip">N/A</td>
+                        <td align="left" valign="top" id="d13_ip">N/A</td>
+                        <td align="left" valign="top" id="d14_ip">N/A</td>
+                        <td align="left" valign="top" id="d15_ip">N/A</td>
+					</tr>
+					<tr bgcolor="#f1f3f9">
+						<td class="GRID" align="left" valign="top">Adapter</td>
+                        <td align="left" valign="top" id="adapter_adapter">N/A</td>
+                        <td align="left" valign="top" id="adapter_d1">N/A</td>
+                        <td align="left" valign="top" id="adapter_d2">N/A</td>
+                        <td align="left" valign="top" id="adapter_d3">N/A</td>
+                        <td align="left" valign="top" id="adapter_d4">N/A</td>
+                        <td align="left" valign="top" id="adapter_d5">N/A</td>
+                        <td align="left" valign="top" id="adapter_d6">N/A</td>
+                        <td align="left" valign="top" id="adapter_d7">N/A</td>
+                        <td align="left" valign="top" id="adapter_d8">N/A</td>
+                        <td align="left" valign="top" id="adapter_d9">N/A</td>
+                        <td align="left" valign="top" id="adapter_d10">N/A</td>
+                        <td align="left" valign="top" id="adapter_d11">N/A</td>
+                        <td align="left" valign="top" id="adapter_d12">N/A</td>
+                        <td align="left" valign="top" id="adapter_d13">N/A</td>
+                        <td align="left" valign="top" id="adapter_d14">N/A</td>
+                        <td align="left" valign="top" id="adapter_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#e0e5f1">
+                        <td class="GRID" align="left" valign="top">Device 1</td>
+                        <td align="left" valign="top" id="d1_adapter">N/A</td>
+                        <td align="left" valign="top" id="d1_d1">N/A</td>
+                        <td align="left" valign="top" id="d1_d2">N/A</td>
+                        <td align="left" valign="top" id="d1_d3">N/A</td>
+                        <td align="left" valign="top" id="d1_d4">N/A</td>
+                        <td align="left" valign="top" id="d1_d5">N/A</td>
+                        <td align="left" valign="top" id="d1_d6">N/A</td>
+                        <td align="left" valign="top" id="d1_d7">N/A</td>
+                        <td align="left" valign="top" id="d1_d8">N/A</td>
+                        <td align="left" valign="top" id="d1_d9">N/A</td>
+                        <td align="left" valign="top" id="d1_d10">N/A</td>
+                        <td align="left" valign="top" id="d1_d11">N/A</td>
+                        <td align="left" valign="top" id="d1_d12">N/A</td>
+                        <td align="left" valign="top" id="d1_d13">N/A</td>
+                        <td align="left" valign="top" id="d1_d14">N/A</td>
+                        <td align="left" valign="top" id="d1_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#f1f3f9">
+                        <td class="GRID" align="left" valign="top">Device 2</td>
+                        <td align="left" valign="top" id="d2_adapter">N/A</td>
+                        <td align="left" valign="top" id="d2_d1">N/A</td>
+                        <td align="left" valign="top" id="d2_d2">N/A</td>
+                        <td align="left" valign="top" id="d2_d3">N/A</td>
+                        <td align="left" valign="top" id="d2_d4">N/A</td>
+                        <td align="left" valign="top" id="d2_d5">N/A</td>
+                        <td align="left" valign="top" id="d2_d6">N/A</td>
+                        <td align="left" valign="top" id="d2_d7">N/A</td>
+                        <td align="left" valign="top" id="d2_d8">N/A</td>
+                        <td align="left" valign="top" id="d2_d9">N/A</td>
+                        <td align="left" valign="top" id="d2_d10">N/A</td>
+                        <td align="left" valign="top" id="d2_d11">N/A</td>
+                        <td align="left" valign="top" id="d2_d12">N/A</td>
+                        <td align="left" valign="top" id="d2_d13">N/A</td>
+                        <td align="left" valign="top" id="d2_d14">N/A</td>
+                        <td align="left" valign="top" id="d2_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#e0e5f1">
+                        <td class="GRID" align="left" valign="top">Device 3</td>
+                        <td align="left" valign="top" id="d3_adapter">N/A</td>
+                        <td align="left" valign="top" id="d3_d1">N/A</td>
+                        <td align="left" valign="top" id="d3_d2">N/A</td>
+                        <td align="left" valign="top" id="d3_d3">N/A</td>
+                        <td align="left" valign="top" id="d3_d4">N/A</td>
+                        <td align="left" valign="top" id="d3_d5">N/A</td>
+                        <td align="left" valign="top" id="d3_d6">N/A</td>
+                        <td align="left" valign="top" id="d3_d7">N/A</td>
+                        <td align="left" valign="top" id="d3_d8">N/A</td>
+                        <td align="left" valign="top" id="d3_d9">N/A</td>
+                        <td align="left" valign="top" id="d3_d10">N/A</td>
+                        <td align="left" valign="top" id="d3_d11">N/A</td>
+                        <td align="left" valign="top" id="d3_d12">N/A</td>
+                        <td align="left" valign="top" id="d3_d13">N/A</td>
+                        <td align="left" valign="top" id="d3_d14">N/A</td>
+                        <td align="left" valign="top" id="d3_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#f1f3f9">
+                        <td class="GRID" align="left" valign="top">Device 4</td>
+                        <td align="left" valign="top" id="d4_adapter">N/A</td>
+                        <td align="left" valign="top" id="d4_d1">N/A</td>
+                        <td align="left" valign="top" id="d4_d2">N/A</td>
+                        <td align="left" valign="top" id="d4_d3">N/A</td>
+                        <td align="left" valign="top" id="d4_d4">N/A</td>
+                        <td align="left" valign="top" id="d4_d5">N/A</td>
+                        <td align="left" valign="top" id="d4_d6">N/A</td>
+                        <td align="left" valign="top" id="d4_d7">N/A</td>
+                        <td align="left" valign="top" id="d4_d8">N/A</td>
+                        <td align="left" valign="top" id="d4_d9">N/A</td>
+                        <td align="left" valign="top" id="d4_d10">N/A</td>
+                        <td align="left" valign="top" id="d4_d11">N/A</td>
+                        <td align="left" valign="top" id="d4_d12">N/A</td>
+                        <td align="left" valign="top" id="d4_d13">N/A</td>
+                        <td align="left" valign="top" id="d4_d14">N/A</td>
+                        <td align="left" valign="top" id="d4_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#e0e5f1">
+                        <td class="GRID" align="left" valign="top">Device 5</td>
+                        <td align="left" valign="top" id="d5_adapter">N/A</td>
+                        <td align="left" valign="top" id="d5_d1">N/A</td>
+                        <td align="left" valign="top" id="d5_d2">N/A</td>
+                        <td align="left" valign="top" id="d5_d3">N/A</td>
+                        <td align="left" valign="top" id="d5_d4">N/A</td>
+                        <td align="left" valign="top" id="d5_d5">N/A</td>
+                        <td align="left" valign="top" id="d5_d6">N/A</td>
+                        <td align="left" valign="top" id="d5_d7">N/A</td>
+                        <td align="left" valign="top" id="d5_d8">N/A</td>
+                        <td align="left" valign="top" id="d5_d9">N/A</td>
+                        <td align="left" valign="top" id="d5_d10">N/A</td>
+                        <td align="left" valign="top" id="d5_d11">N/A</td>
+                        <td align="left" valign="top" id="d5_d12">N/A</td>
+                        <td align="left" valign="top" id="d5_d13">N/A</td>
+                        <td align="left" valign="top" id="d5_d14">N/A</td>
+                        <td align="left" valign="top" id="d5_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#f1f3f9">
+                        <td class="GRID" align="left" valign="top">Device 6</td>
+                        <td align="left" valign="top" id="d6_adapter">N/A</td>
+                        <td align="left" valign="top" id="d6_d1">N/A</td>
+                        <td align="left" valign="top" id="d6_d2">N/A</td>
+                        <td align="left" valign="top" id="d6_d3">N/A</td>
+                        <td align="left" valign="top" id="d6_d4">N/A</td>
+                        <td align="left" valign="top" id="d6_d5">N/A</td>
+                        <td align="left" valign="top" id="d6_d6">N/A</td>
+                        <td align="left" valign="top" id="d6_d7">N/A</td>
+                        <td align="left" valign="top" id="d6_d8">N/A</td>
+                        <td align="left" valign="top" id="d6_d9">N/A</td>
+                        <td align="left" valign="top" id="d6_d10">N/A</td>
+                        <td align="left" valign="top" id="d6_d11">N/A</td>
+                        <td align="left" valign="top" id="d6_d12">N/A</td>
+                        <td align="left" valign="top" id="d6_d13">N/A</td>
+                        <td align="left" valign="top" id="d6_d14">N/A</td>
+                        <td align="left" valign="top" id="d6_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#e0e5f1">
+                        <td class="GRID" align="left" valign="top">Device 7</td>
+                        <td align="left" valign="top" id="d7_adapter">N/A</td>
+                        <td align="left" valign="top" id="d7_d1">N/A</td>
+                        <td align="left" valign="top" id="d7_d2">N/A</td>
+                        <td align="left" valign="top" id="d7_d3">N/A</td>
+                        <td align="left" valign="top" id="d7_d4">N/A</td>
+                        <td align="left" valign="top" id="d7_d5">N/A</td>
+                        <td align="left" valign="top" id="d7_d6">N/A</td>
+                        <td align="left" valign="top" id="d7_d7">N/A</td>
+                        <td align="left" valign="top" id="d7_d8">N/A</td>
+                        <td align="left" valign="top" id="d7_d9">N/A</td>
+                        <td align="left" valign="top" id="d7_d10">N/A</td>
+                        <td align="left" valign="top" id="d7_d11">N/A</td>
+                        <td align="left" valign="top" id="d7_d12">N/A</td>
+                        <td align="left" valign="top" id="d7_d13">N/A</td>
+                        <td align="left" valign="top" id="d7_d14">N/A</td>
+                        <td align="left" valign="top" id="d7_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#f1f3f9">
+                        <td class="GRID" align="left" valign="top">Device 8</td>
+                        <td align="left" valign="top" id="d8_adapter">N/A</td>
+                        <td align="left" valign="top" id="d8_d1">N/A</td>
+                        <td align="left" valign="top" id="d8_d2">N/A</td>
+                        <td align="left" valign="top" id="d8_d3">N/A</td>
+                        <td align="left" valign="top" id="d8_d4">N/A</td>
+                        <td align="left" valign="top" id="d8_d5">N/A</td>
+                        <td align="left" valign="top" id="d8_d6">N/A</td>
+                        <td align="left" valign="top" id="d8_d7">N/A</td>
+                        <td align="left" valign="top" id="d8_d8">N/A</td>
+                        <td align="left" valign="top" id="d8_d9">N/A</td>
+                        <td align="left" valign="top" id="d8_d10">N/A</td>
+                        <td align="left" valign="top" id="d8_d11">N/A</td>
+                        <td align="left" valign="top" id="d8_d12">N/A</td>
+                        <td align="left" valign="top" id="d8_d13">N/A</td>
+                        <td align="left" valign="top" id="d8_d14">N/A</td>
+                        <td align="left" valign="top" id="d8_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#e0e5f1">
+                        <td class="GRID" align="left" valign="top">Device 9</td>
+                        <td align="left" valign="top" id="d9_adapter">N/A</td>
+                        <td align="left" valign="top" id="d9_d1">N/A</td>
+                        <td align="left" valign="top" id="d9_d2">N/A</td>
+                        <td align="left" valign="top" id="d9_d3">N/A</td>
+                        <td align="left" valign="top" id="d9_d4">N/A</td>
+                        <td align="left" valign="top" id="d9_d5">N/A</td>
+                        <td align="left" valign="top" id="d9_d6">N/A</td>
+                        <td align="left" valign="top" id="d9_d7">N/A</td>
+                        <td align="left" valign="top" id="d9_d8">N/A</td>
+                        <td align="left" valign="top" id="d9_d9">N/A</td>
+                        <td align="left" valign="top" id="d9_d10">N/A</td>
+                        <td align="left" valign="top" id="d9_d11">N/A</td>
+                        <td align="left" valign="top" id="d9_d12">N/A</td>
+                        <td align="left" valign="top" id="d9_d13">N/A</td>
+                        <td align="left" valign="top" id="d9_d14">N/A</td>
+                        <td align="left" valign="top" id="d9_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#f1f3f9">
+                        <td class="GRID" align="left" valign="top">Device 10</td>
+                        <td align="left" valign="top" id="d10_adapter">N/A</td>
+                        <td align="left" valign="top" id="d10_d1">N/A</td>
+                        <td align="left" valign="top" id="d10_d2">N/A</td>
+                        <td align="left" valign="top" id="d10_d3">N/A</td>
+                        <td align="left" valign="top" id="d10_d4">N/A</td>
+                        <td align="left" valign="top" id="d10_d5">N/A</td>
+                        <td align="left" valign="top" id="d10_d6">N/A</td>
+                        <td align="left" valign="top" id="d10_d7">N/A</td>
+                        <td align="left" valign="top" id="d10_d8">N/A</td>
+                        <td align="left" valign="top" id="d10_d9">N/A</td>
+                        <td align="left" valign="top" id="d10_d10">N/A</td>
+                        <td align="left" valign="top" id="d10_d11">N/A</td>
+                        <td align="left" valign="top" id="d10_d12">N/A</td>
+                        <td align="left" valign="top" id="d10_d13">N/A</td>
+                        <td align="left" valign="top" id="d10_d14">N/A</td>
+                        <td align="left" valign="top" id="d10_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#e0e5f1">
+                        <td class="GRID" align="left" valign="top">Device 11</td>
+                        <td align="left" valign="top" id="d11_adapter">N/A</td>
+                        <td align="left" valign="top" id="d11_d1">N/A</td>
+                        <td align="left" valign="top" id="d11_d2">N/A</td>
+                        <td align="left" valign="top" id="d11_d3">N/A</td>
+                        <td align="left" valign="top" id="d11_d4">N/A</td>
+                        <td align="left" valign="top" id="d11_d5">N/A</td>
+                        <td align="left" valign="top" id="d11_d6">N/A</td>
+                        <td align="left" valign="top" id="d11_d7">N/A</td>
+                        <td align="left" valign="top" id="d11_d8">N/A</td>
+                        <td align="left" valign="top" id="d11_d9">N/A</td>
+                        <td align="left" valign="top" id="d11_d10">N/A</td>
+                        <td align="left" valign="top" id="d11_d11">N/A</td>
+                        <td align="left" valign="top" id="d11_d12">N/A</td>
+                        <td align="left" valign="top" id="d11_d13">N/A</td>
+                        <td align="left" valign="top" id="d11_d14">N/A</td>
+                        <td align="left" valign="top" id="d11_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#f1f3f9">
+                        <td class="GRID" align="left" valign="top">Device 12</td>
+                        <td align="left" valign="top" id="d12_adapter">N/A</td>
+                        <td align="left" valign="top" id="d12_d1">N/A</td>
+                        <td align="left" valign="top" id="d12_d2">N/A</td>
+                        <td align="left" valign="top" id="d12_d3">N/A</td>
+                        <td align="left" valign="top" id="d12_d4">N/A</td>
+                        <td align="left" valign="top" id="d12_d5">N/A</td>
+                        <td align="left" valign="top" id="d12_d6">N/A</td>
+                        <td align="left" valign="top" id="d12_d7">N/A</td>
+                        <td align="left" valign="top" id="d12_d8">N/A</td>
+                        <td align="left" valign="top" id="d12_d9">N/A</td>
+                        <td align="left" valign="top" id="d12_d10">N/A</td>
+                        <td align="left" valign="top" id="d12_d11">N/A</td>
+                        <td align="left" valign="top" id="d12_d12">N/A</td>
+                        <td align="left" valign="top" id="d12_d13">N/A</td>
+                        <td align="left" valign="top" id="d12_d14">N/A</td>
+                        <td align="left" valign="top" id="d12_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#e0e5f1">
+                        <td class="GRID" align="left" valign="top">Device 13</td>
+                        <td align="left" valign="top" id="d13_adapter">N/A</td>
+                        <td align="left" valign="top" id="d13_d1">N/A</td>
+                        <td align="left" valign="top" id="d13_d2">N/A</td>
+                        <td align="left" valign="top" id="d13_d3">N/A</td>
+                        <td align="left" valign="top" id="d13_d4">N/A</td>
+                        <td align="left" valign="top" id="d13_d5">N/A</td>
+                        <td align="left" valign="top" id="d13_d6">N/A</td>
+                        <td align="left" valign="top" id="d13_d7">N/A</td>
+                        <td align="left" valign="top" id="d13_d8">N/A</td>
+                        <td align="left" valign="top" id="d13_d9">N/A</td>
+                        <td align="left" valign="top" id="d13_d10">N/A</td>
+                        <td align="left" valign="top" id="d13_d11">N/A</td>
+                        <td align="left" valign="top" id="d13_d12">N/A</td>
+                        <td align="left" valign="top" id="d13_d13">N/A</td>
+                        <td align="left" valign="top" id="d13_d14">N/A</td>
+                        <td align="left" valign="top" id="d13_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#f1f3f9">
+                        <td class="GRID" align="left" valign="top">Device 14</td>
+                        <td align="left" valign="top" id="d14_adapter">N/A</td>
+                        <td align="left" valign="top" id="d14_d1">N/A</td>
+                        <td align="left" valign="top" id="d14_d2">N/A</td>
+                        <td align="left" valign="top" id="d14_d3">N/A</td>
+                        <td align="left" valign="top" id="d14_d4">N/A</td>
+                        <td align="left" valign="top" id="d14_d5">N/A</td>
+                        <td align="left" valign="top" id="d14_d6">N/A</td>
+                        <td align="left" valign="top" id="d14_d7">N/A</td>
+                        <td align="left" valign="top" id="d14_d8">N/A</td>
+                        <td align="left" valign="top" id="d14_d9">N/A</td>
+                        <td align="left" valign="top" id="d14_d10">N/A</td>
+                        <td align="left" valign="top" id="d14_d11">N/A</td>
+                        <td align="left" valign="top" id="d14_d12">N/A</td>
+                        <td align="left" valign="top" id="d14_d13">N/A</td>
+                        <td align="left" valign="top" id="d14_d14">N/A</td>
+                        <td align="left" valign="top" id="d14_d15">N/A</td>
+					</tr>
+					<tr bgcolor="#e0e5f1">
+                        <td class="GRID" align="left" valign="top">Device 15</td>
+                        <td align="left" valign="top" id="d15_adapter">N/A</td>
+                        <td align="left" valign="top" id="d15_d1">N/A</td>
+                        <td align="left" valign="top" id="d15_d2">N/A</td>
+                        <td align="left" valign="top" id="d15_d3">N/A</td>
+                        <td align="left" valign="top" id="d15_d4">N/A</td>
+                        <td align="left" valign="top" id="d15_d5">N/A</td>
+                        <td align="left" valign="top" id="d15_d6">N/A</td>
+                        <td align="left" valign="top" id="d15_d7">N/A</td>
+                        <td align="left" valign="top" id="d15_d8">N/A</td>
+                        <td align="left" valign="top" id="d15_d9">N/A</td>
+                        <td align="left" valign="top" id="d15_d10">N/A</td>
+                        <td align="left" valign="top" id="d15_d11">N/A</td>
+                        <td align="left" valign="top" id="d15_d12">N/A</td>
+                        <td align="left" valign="top" id="d15_d13">N/A</td>
+                        <td align="left" valign="top" id="d15_d14">N/A</td>
+                        <td align="left" valign="top" id="d15_d15">N/A</td>
+					</tr>
+				   				
+			    </table>
+			</div>
+			    <br><br>
+	        	<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+<? include(wcb_footer.inc) ?>
+	</div>
+</body>
+</html>

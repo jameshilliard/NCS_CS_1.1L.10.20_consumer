@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Advanced Mail settings</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/adv_mailsettings.js"></script>
+
+</head>
+
+<body>
+	<div id="wrapper">    
+
+<? include(top_nav.inc) ?>
+
+<? include(left_adv.inc) ?>
+
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1><span id="mng_title" style='font-weight:bold;font-size:16px;'>Email Settings</span></h1>
+
+                <form id="mailsettings_form" method="post" action="adv_mailsettings.cgi">
+		        <input type="hidden" name="command" id="id_command" value="apply" />
+				<input type="hidden" name="adv_autoconfig" id="adv_autoconfig" />
+		       
+                <input type="hidden" id="waiting_page" name="waiting_page" value="thankyou.html">            
+                <input type="hidden" name="confirm_page" id="confirm_page" value="wcb_confirm.html">
+                <input type="hidden" id="isconfirm" name="isconfirm" value="1">   
+                <input type="hidden" id="apply_page" name="apply_page" value="adv_mailsettings.html"/>  
+                
+
+				<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="250"><label for="id_ip"><span id="span_smtp_server_name">Smtp Server Name</span>:</label></td>
+						<td>
+							<input name="adv_ip" id="id_ip" type="text" size="25" maxlength="32" style="height: 16px"/> 
+						</td>
+					</tr>
+					<tr>
+						<td><label for="id_subnet"><span id="mng_sub_mask">Smtp Server Port</span>:</label></td>
+						<td>
+							<input name="adv_subnet" id="id_subnet" type="text" size="25" maxlength="32" style="height: 16px"/> 
+						</td>
+					</tr>
+					<tr>
+						<td><label for="id_gateway"><span id="mng_def_gate">Connection sercurity</span>:</label></td>
+						<td>
+							<input name="adv_gateway" id="id_gateway" type="text" size="25" maxlength="32" style="height: 16px"/> 
+						</td>
+					</tr>
+						
+					<tr>
+						<td><label for="id_autoconfig"><span id="mng_at_conf">Authentication method</span>:</label></td>
+						<td>
+							<input id="id_autoconfig" type="checkbox" /> 
+						</td>
+					</tr>
+					<tr>
+						<td width="250"><label for="id_ip"><span id="mng_ip_addr">User name</span>:</label></td>
+						<td>
+							<input name="adv_ip" id="id_ip" type="text" size="25" maxlength="32" style="height: 16px"/> 
+						</td>
+					</tr>
+					<tr>
+						<td><label for="id_subnet"><span id="mng_sub_mask">Password</span>:</label></td>
+						<td>
+							<input name="adv_subnet" id="id_subnet" type="text" size="25" maxlength="32" style="height: 16px"/> 
+						</td>
+					</tr>
+					<tr>
+						<td><label for="id_gateway"><span id="mng_def_gate">Receive Email Address</span>:</label></td>
+						<td>
+							<input name="adv_gateway" id="id_gateway" type="text" size="25" maxlength="32" style="height: 16px"/> 
+						</td>
+					</tr>
+					
+					<tr>
+						<td><span id="mng_reboot">Reboot</span>:</td>
+						<td>
+							<div><a class="button" href="###" id="reboot_mng_btn"><span id="reboot_btn_span">Reboot</span></a></div>
+						</td>
+					</tr>
+				</table>
+				</form>
+
+				<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="220">&nbsp;</td>
+						<td>
+							<div><a class="button" href="###" id="diy_apply_btn"><span id="apply_btn_span">Apply</span></a></div>
+						</td>
+					</tr>
+				</table>
+				
+	        	<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+  <? include(wcb_footer.inc) ?>
+
+        </form>
+
+	</div>
+</body>
+</html>

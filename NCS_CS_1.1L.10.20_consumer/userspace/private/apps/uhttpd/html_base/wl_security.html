@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Wireless Security</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/wl_security.js"></script>
+
+</head>
+
+<body>
+	<div id="wrapper">    
+<? include(top_nav.inc) ?>
+
+<? include(left_wl.inc) ?>
+		
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1><span id="wl_secu_title" style='font-weight:bold;font-size:16px;'>Wireless Security</span></h1>
+
+                <form id="security_form" method="POST" action="wl_security.cgi">
+                <input type="hidden" name="command" value="apply" />
+		 	    <input type="hidden" name="mypage" value="/wl_security.html" />
+		 	    <input type="hidden" name="wireless_index_vlan" id="wireless_index_vlan" value="">
+		 	    <input type="hidden" name="wireless_key" id="wireless_key" value="">
+		 	    <input type="hidden" name="wireless_security_type" id="wireless_security_type" value="">
+		 	    <input type="hidden" name="wireless_radio_enable" id="wireless_radio_enable" value="">
+		 	    <input type="hidden" name="wireless_ssid_enable" id="wireless_ssid_enable" value="">
+		 	    
+                <input type="hidden" id="waiting_page" name="waiting_page" value="thankyou.html">            
+                <input type="hidden" name="confirm_page" id="confirm_page" value="wcb_confirm.html">
+                <input type="hidden" id="isconfirm" name="isconfirm" value="1">   
+                <input type="hidden" id="apply_page" name="apply_page" value="wl_security.html"/>  
+                
+		 	    
+	        	<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="240"><label><span id="wl_fre_span">Multiple SSID</span>:</label></td>
+                        <td>
+                            <select name="wireless_index_ssid" id="wireless_index_ssid">
+                                <option value="1">SSID1-5G</option>
+                                <option value="2">SSID2-5G</option>
+                                <option value="3">SSID3-5G</option>
+                                <option value="4">SSID4-5G</option>
+                                <option value="5">SSID5-2.4G</option>
+                                <option value="6">SSID6-2.4G</option>
+                                <option value="7">SSID7-2.4G</option>
+                                <option value="8">SSID8-2.4G</option>
+                            </select>
+                        </td>
+					</tr>					
+				</table>
+				
+				<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td colspan="3"><strong><span id="wl_secu_setting" style='font-weight:bold;font-size:12px;'>Security Settings</span>:<strong></td>							
+					</tr>
+				 	<tr>
+						<td align="top" width="80">
+					   		<input name="wl_secmode" id="id_secopen" checked="checked" value="0" type="radio" />
+					   		<label for="id_secopen"><span id="wl_secu_set_open">OPEN</span></label>
+					 	</td>
+					 	<td colspan="2"><hr><label for="id_secopen"><span id="wl_no_secu_app">No Security Applied</span></label></td>
+				 	</tr>
+					<tr>
+						<td></td>
+					</tr>
+
+					<tbody id="securitymode_wep">				 
+				 	<tr>
+					 	<td align="top">
+					 		<input name="wl_secmode" id="id_secwep" value="1" type="radio" />
+					 		<label for="id_secwep">WEP</label>
+					 	</td>
+					 	<td colspan="2"><hr><label for="id_secwep"><span id="wl_secu_sim_wep">Simple WEP Security (64 or 128 bit hardware key)</span></label></td>
+				 	</tr>				 
+					<tr>
+						<td></td>
+						<td><label>MODE:</label></td>
+						<td>
+							<input name="wep_auth_mode" id="id_wep0" value="0" type="radio" />
+							<label for="id_wep0"><span id="wl_secu_mode_open">Open</span></label>
+							<input name="wep_auth_mode" id="id_wep1" value="1" type="radio" />
+							<label for="id_wep1"><span id="wl_secu_mode_share">Shared</span></label>
+							<input name="wep_auth_mode" id="id_wep2" value="2" type="radio" checked/>
+							<label for="id_wep2">Auto</label>
+						</td>
+					</tr>
+					
+					<tr>
+						<td></td>
+						<td><label for="id_wepkey"><span id="wl_secu_key">Key</span>:</label></td>
+						<td align="left">
+						   <table cellpadding="0" cellspacing="0" border="0" style="margin-left:0;">
+						       <tr>
+						         <td>
+						  	         <input name="wl_wepkey" id="id_wepkey" size="20" maxlength="26" type="text" style="height: 16px"/>
+                                 </td>
+                                 <td>
+                                   <select name="wep_key_len" id="wep_key_len">
+                                       <option value="10"><span id="wireless__wepkey_length_span1">10 HEX Characters(40/64 bits)</span></option>
+                                       <option value="26"><span id="wireless__wepkey_length_span3">26 HEX Characters(128/104 bits)</span></option>
+                                   </select>		
+                                 </td>
+                               </tr>
+                             </table>
+						</td>
+					</tr>
+					</tbody>
+	<!--				
+					<tr>
+					 	<td></td>
+						<td><label for="id_wepkey2"><span id="wl_secu_key2">Key 2</span></label></td>
+						<td>
+						  	<input name="wl_wepkey2" id="id_wepkey2" size="30" maxlength="26" type="text" style="height: 16px"/>
+						 	<input name="wl_primarykey" id="id_primarykey2" value="1" type="radio" />
+						  	<label for="id_primarykey2"><span id="wl_secu_pri_key2">Primary Key</span></label>
+						</td>
+					 </tr>					 
+					 <tr>
+					 	<td></td>
+						<td><label for="id_wepkey3"><span id="wl_secu_key3">Key 3</span></label></td>
+						<td>
+						  	<input name="wl_wepkey3" id="id_wepkey3" size="30" maxlength="26" type="text" style="height: 16px"/>
+						  	<input name="wl_primarykey" id="id_primarykey3" value="2" type="radio" />
+						  	<label for="id_primarykey3"><span id="wl_secu_pri_key3">Primary Key</span></label>
+						</td>
+					 </tr>					 
+					 <tr>
+					 	<td></td>
+						<td><label for="id_wepkey4"><span id="wl_secu_key4">Key 4</span></label></td>
+						<td>
+						  	<input name="wl_wepkey4" id="id_wepkey4" size="30" maxlength="26" type="text" style="height: 16px"/>
+						  	<input name="wl_primarykey" id="id_primarykey4" value="3" type="radio" />
+						  	<label for="id_primarykey4"><span id="wl_secu_pri_key4">Primary Key</span></label>
+						</td>
+					 </tr>
+	-->
+					
+
+					 <tr>
+					  	<td align="top">
+					  		<input name="wl_secmode" id="id_secwpa" value="2" type="radio" checked/>
+					  		<label for="id_secwpa"><span id="span_secwpa2">WPA</span></label>
+					  	</td>
+					 	<td colspan="2"><hr><label for="id_secwpa"><span id="wl_secu_enhan_secu">Enhanced Security for Personal</span></label></td>
+					 </tr>				 
+					 <tr id="tr_mode">
+					 	<td></td>
+						<td><label>MODE:</label></td>
+						<td>
+						  <input name="wl_wpamode" id="id_wpamode0" value="0" type="radio"><label for="id_wpamode1">WPA&nbsp;</label>
+						  <input name="wl_wpamode" id="id_wpamode1" value="1" type="radio"><label for="id_wpamode2">WPA 2&nbsp;</label>
+						  <input name="wl_wpamode" id="id_wpamode2" value="2" type="radio" checked><label for="id_wpamode3">Auto&nbsp;</label>
+						</td>
+					 </tr>				 
+					 <tr id="tr_cypher">
+					 	<td></td>
+						<td><label><span id="wl_secu_cypher">CYPHER</span>:</label></td>
+						<td>
+						  <input name="wpa_encrypt_mode" id="id_cypher0" value="0" type="radio" ><label for="id_cypher1">TKIP</label>
+						  <input name="wpa_encrypt_mode" id="id_cypher1" value="1" type="radio" checked><label for="id_cypher2">AES</label>
+						  <input name="wpa_encrypt_mode" id="id_cypher2" value="2" type="radio"><label for="id_cypher3">Auto&nbsp;</label>
+						</td>
+					 </tr>
+
+					 <tr id="area_auth_mode" style="display:none;">
+					 	<td></td>
+						<td><label><span id="wl_secu_auth_mode">Authentication Mode</span>:</label></td>
+						<td>
+						  <input name="wl_authentication" id="id_auth1" value="1" type="radio"><label for="id_auth1"><span id="wl_secu_enterpri">Enterprise (RADIUS)</span></label>
+						  <input name="wl_authentication" id="id_auth2" value="2" type="radio" checked>
+						  <label for="id_auth2" ><span id="wl_secu_person">Personal Shared Key</span></label>						  
+						</td>
+					 </tr>
+
+					<tr id="psk_table">
+					 	<td></td>
+						<td width="100"><label for="id_psk"><span id="span_pskkey">PSK KEY</span>:</label></td>
+						<td> 
+							<input name="wl_psk" id="id_psk" onkeyup='checkPassword(this.value, "pwdindication");' size="24" maxlength="64" type="text" style="height: 16px"/>
+							&nbsp;<span id="pwdindication"></span>
+						</td>
+					</tr>
+				</table>
+
+
+				<table cellpadding="0" cellspacing="2" border="0" id="server_table" style="display:none;">
+					<tr>
+					 	<td width="80"></td>
+					 	<td><label for="id_serverip"><span id="secu_radio_ip">RADIUS Server IP Address</span></label></td>
+						<td> 
+							<input name="wl_serverip" id="id_serverip" size="20" maxlength="20" type="text" style="height: 16px"/>
+						</td>
+					</tr>
+					<tr>
+					 	<td></td>
+					 	<td><label for="id_serverport"><span id="secu_radio_port">RADIUS Server Port</span></label></td>
+						<td> 
+							<input name="wl_serverport" id="id_serverport" size="8" maxlength="8" type="text" style="height: 16px"/>
+						</td>
+					</tr>
+					<tr>
+					 	<td></td>
+					 	<td><label for="id_serverpassword"><span id="secu_radio_passwd">RADIUS Server Password</span></label></td>
+						<td> 
+							<input name="wl_serverpassword" id="id_serverpassword" size="40" maxlength="48" type="text" style="height: 16px"/>
+						</td>
+					</tr>
+				</table>
+
+				</form>
+
+				<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="220">&nbsp;</td>
+						<td>
+							<div><a class="button" href="###" id="diy_apply_btn"><span id="apply_btn_span">Apply</span></a></div>
+						</td>
+						<td>
+							<div style="display:none;"><a class="button" href="###" id="diy_back_btn"><span id="back_btn_span">Back</span></a></div>
+						</td>
+					</tr>
+				</table>
+				
+				<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+<? include(wcb_footer.inc) ?>
+        
+	</div>
+</body>
+</html>

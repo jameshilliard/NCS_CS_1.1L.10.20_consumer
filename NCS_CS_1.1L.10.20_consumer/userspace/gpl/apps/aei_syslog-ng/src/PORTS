@@ -1,0 +1,8 @@
+
+syslog-ng was ported to the following systems (all using gcc):
+
+FreeBSD (x86) 3.3
+Solaris (x86, SPARC) 2.5.1, 2.6, 2.7
+Linux (x86) glibc 2.0, 2.1
+ReliantUnix (unknown) 5.43
+HP-UX (unknown) unknown

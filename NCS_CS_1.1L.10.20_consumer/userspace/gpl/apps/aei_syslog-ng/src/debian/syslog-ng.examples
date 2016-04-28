@@ -1,0 +1,6 @@
+doc/syslog-ng.conf.demo
+doc/syslog-ng.conf.sample
+doc/syslog-ng.conf.solaris
+debian/syslog-ng.logrotate.example
+debian/syslog-ng.conf.example
+

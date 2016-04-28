@@ -1,0 +1,16 @@
+
+source src { unix-stream("input"); };
+
+destination d1 { file("d1"); };
+destination d2 { file("d2"); };
+destination d3 { file("d3"); };
+destination d4 { file("d4"); };
+
+filter f1 { match("match"); };
+filter f2 { match("final"); };
+
+log { source(src); filter(f1); destination(d1); flags(final); };
+log { source(src); filter(f2); destination(d2); };
+log { filter(f1); destination(d3); flags(catchall); };
+log { source(src); destination(d4); flags(fallback); };
+

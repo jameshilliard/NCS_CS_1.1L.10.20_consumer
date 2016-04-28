@@ -1,0 +1,52 @@
+
+syslog-ng includes a feature called spoof-source which makes it possible to
+spoof the original source address of forwarded syslog packets. This means
+that if syslog-ng receives a message from a router then syslog-ng is able to
+resend this message in the name of this router (from the same IP) even if
+this address is not local to the syslog-ng host.
+
+Compiling spoof-source
+======================
+
+Spoof-source is a compile time feature, it must be enabled when running
+configure, like this:
+
+	./configure --enable-spoof-source
+
+The implementation of spoof-source relies on libnet  to do portable packet
+mangling, thus it requires a copy of libnet (at least version 1.1) to be
+installed. The script named libnet-config is needed to discover various
+libnet settings, thus if libnet-config is not installed, the command line
+above changes to:
+
+	./configure --enable-spoof-source --with-libnet=<path/to/compiled libnet source>
+
+
+libnet is available as the part of most Linux distributions, but can also be
+installed from source, it is located at http://www.packetfactory.net/libnet/
+
+Using spoof-source
+==================
+
+Spoof-source is only supported by UDP destinations and can be enabled by a
+simple option named "spoof-source" like this:
+
+--- syslog-ng.conf ---
+
+source src { udp(); internal(); };
+
+destination dst_spoof { udp("10.0.0.2" spoof-source(yes)); };
+
+log { source(src); destination(dst); };
+
+--- end of syslog-ng.conf ---
+
+Limitations of spoof-source
+===========================
+
+- Spoof-source can only spoof source addresses for packets that were received
+  via some IPv4 network device (ie. either one of the tcp() or udp() drivers)
+
+- If creating a raw packet fails for some reason the udp() driver falls back
+  to simple socket transport, thus the original source address will not be spoofed.
+

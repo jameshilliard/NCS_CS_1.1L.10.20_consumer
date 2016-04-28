@@ -1,0 +1,31 @@
+<pages>
+	<text> 
+		<copyright>Copyright © 2015 Actiontec Inc. All Rights Reserved</copyright>
+        <logout>Logout</logout>
+        <wirelesstitle>Wireless Settings</wirelesstitle>
+        <wlnetworklist>Wireless Network List</wlnetworklist>
+        <wlwac>Wireless Access Control</wlwac>
+
+        <factorydefault>Factory Default</factorydefault>
+        <firmwarerestore>Firmware Restore</firmwarerestore>
+
+        <localssh>Local SSH</localssh>
+        <languagesetting>Language Settings</languagesetting>
+        <enabled>Enabled</enabled>
+        <disabled>Disabled</disabled>
+        <connected>Connected</connected>
+
+        <via>Via</via>
+        <on>On</on>
+        <off>Off</off>
+        <automatic>Automatic</automatic>
+        <configured>Configured</configured>
+
+        <unconfigured>unConfigured</unconfigured>
+        <wpawpa2mixed>WPA/WPA2 Mixed</wpawpa2mixed>
+        <changepassword>Change Password</changepassword>
+	</text>
+
+	<alert>
+	</alert>
+</pages>

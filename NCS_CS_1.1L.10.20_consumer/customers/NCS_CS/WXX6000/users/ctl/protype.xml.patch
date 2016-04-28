@@ -1,0 +1,264 @@
+--- ../../../../../userspace/private/apps/ctl/files/libs/private/framework/tr69_build/protype.xml	2015-07-02 16:33:32.237963754 +0800
++++ protype.xml	2015-07-02 16:24:14.749947817 +0800
+@@ -66,12 +66,12 @@
+     <Parameter type="string" specSource="Custom" profile="Baseline:1" writable="1" readable="1" nosave="1" default="" maxLength="64" notification="0" hideParameterFromAcs="true" name="X_ACTIONTEC_COM_ArpEntry"/>
+   </Object>
+   <Object name="ManagementServer" profile="tr69_func_ManagementServerObject.c">
+-    <Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="true" notification="0" name="EnableCWMP"/>
+-    <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" default="http://xatechdmwii.xdev.motive.com/cwmpWeb/CPEMgt" maxLength="256" notification="0" forceupdate="1" name="URL"/>
++    <Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="EnableCWMP"/>
++    <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" default="" maxLength="256" notification="0" forceupdate="1" name="URL"/>
+     <Parameter type="string" specSource="Custom" profile="Baseline:1" writable="1" readable="1" default="" maxLength="256" notification="0" hideParameterFromAcs="true"  name="X_ACTIONTEC_COM_LastConnectedURL"/>    
+-    <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" default="admin" maxLength="256" notification="0" forceupdate="1" name="Username"/>
++    <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" default="" maxLength="256" notification="0" forceupdate="1" name="Username"/>
+     <Parameter type="boolean" specSource="Custom" profile="Baseline:1" writable="1" readable="1" default="false" notification="0" hideParameterFromAcs="true" name="X_ACTIONTEC_COM_Username_Flag"/>
+-    <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" default="newVOLUser1" maxLength="256" notification="0" forceupdate="1" name="Password"/>
++    <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" default="" maxLength="256" notification="0" forceupdate="1" name="Password"/>
+     <Parameter type="boolean" specSource="Custom" profile="Unspecified" writable="1" readable="1" default="true" notification="0" hideParameterFromAcs="true" name="X_ACTIONTEC_COM_CPE_DIGEST"/>
+     <Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" default="true" notification="0" name="PeriodicInformEnable"/>
+     <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="1" readable="1" default="150" minValue="1" maxValue="4294967295" notification="0" forceupdate="2" name="PeriodicInformInterval"/>
+@@ -83,8 +83,8 @@
+     <Parameter type="string" specSource="Custom" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="256" notification="0" hideParameterFromAcs="true" name="X_ACTIONTEC_COM_UUID"/>
+     <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="256" notification="2" name="ConnectionRequestURL"/>
+     <Parameter type="boolean" specSource="Custom" profile="Baseline:1" writable="0" readable="1" nosave="0" default="true" notification="0" hideParameterFromAcs="true" name="X_ACTIONTEC_COM_SetConnReqURL"/>
+-    <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" default="admin" maxLength="256" notification="0" forceupdate="1" name="ConnectionRequestUsername"/>
+-    <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" default="newVOLUser1" maxLength="256" notification="0" forceupdate="1" name="ConnectionRequestPassword"/>
++    <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" default="" maxLength="256" notification="0" forceupdate="1" name="ConnectionRequestUsername"/>
++    <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" default="" maxLength="256" notification="0" forceupdate="1" name="ConnectionRequestPassword"/>
+     <Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" default="" notification="0" name="UpgradesManaged"/>
+     <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="256" notification="0" name="KickURL"/>
+     <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="256" notification="0" name="DownloadProgressURL"/>
+@@ -663,7 +663,7 @@
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="17" notification="0" name="BSSID"/>
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="17" notification="0" name="MACAddress"/>
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="32" notification="0" name="SSID"/>
+-        <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="0" notification="0" hideParameterFromAcs="true" name="X_EXPOSE"/>
++        <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="1" notification="0" hideParameterFromAcs="true" name="X_EXPOSE"/>
+ 	<Parameter type="boolean" specSource="Custom" profile="Baseline:1" writable="1" readable="1" nosave="1" default="false" notification="0" hideParameterFromAcs="true" name="X_ACTIONTEC_COM_SSIDReload"/>
+         <Object name="Stats" profile="tr69_func_WIFISSIDStatsObject.c">
+             <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="1" default="0" notification="0" name="BytesSent"/>
+@@ -681,7 +681,7 @@
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="17" notification="0" name="BSSID"/>
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="17" notification="0" name="MACAddress"/>
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="32" notification="0" name="SSID"/>
+-        <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="0" notification="0" hideParameterFromAcs="true" name="X_EXPOSE"/>
++        <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="1" notification="0" hideParameterFromAcs="true" name="X_EXPOSE"/>
+ 	<Parameter type="boolean" specSource="Custom" profile="Baseline:1" writable="1" readable="1" nosave="1" default="false" notification="0" hideParameterFromAcs="true" name="X_ACTIONTEC_COM_SSIDReload"/>
+         <Object name="Stats" profile="tr69_func_WIFISSIDStatsObject.c">
+             <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="1" default="0" notification="0" name="BytesSent"/>
+@@ -699,7 +699,7 @@
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="17" notification="0" name="BSSID"/>
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="17" notification="0" name="MACAddress"/>
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="32" notification="0" name="SSID"/>
+-        <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="0" notification="0" hideParameterFromAcs="true" name="X_EXPOSE"/>
++        <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="1" notification="0" hideParameterFromAcs="true" name="X_EXPOSE"/>
+ 	<Parameter type="boolean" specSource="Custom" profile="Baseline:1" writable="1" readable="1" nosave="1" default="false" notification="0" hideParameterFromAcs="true" name="X_ACTIONTEC_COM_SSIDReload"/>
+         <Object name="Stats" profile="tr69_func_WIFISSIDStatsObject.c">
+             <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="1" default="0" notification="0" name="BytesSent"/>
+@@ -735,7 +735,7 @@
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="17" notification="0" name="BSSID"/>
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="17" notification="0" name="MACAddress"/>
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="32" notification="0" name="SSID"/>
+-        <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="0" notification="0" hideParameterFromAcs="true" name="X_EXPOSE"/>
++        <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="1" notification="0" hideParameterFromAcs="true" name="X_EXPOSE"/>
+ 	<Parameter type="boolean" specSource="Custom" profile="Baseline:1" writable="1" readable="1" nosave="1" default="false" notification="0" hideParameterFromAcs="true" name="X_ACTIONTEC_COM_SSIDReload"/>
+         <Object name="Stats" profile="tr69_func_WIFISSIDStatsObject.c">
+             <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="1" default="0" notification="0" name="BytesSent"/>
+@@ -753,7 +753,7 @@
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="17" notification="0" name="BSSID"/>
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="17" notification="0" name="MACAddress"/>
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="32" notification="0" name="SSID"/>
+-        <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="0" notification="0" hideParameterFromAcs="true" name="X_EXPOSE"/>
++        <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="1" notification="0" hideParameterFromAcs="true" name="X_EXPOSE"/>
+ 	<Parameter type="boolean" specSource="Custom" profile="Baseline:1" writable="1" readable="1" nosave="1" default="false" notification="0" hideParameterFromAcs="true" name="X_ACTIONTEC_COM_SSIDReload"/>
+         <Object name="Stats" profile="tr69_func_WIFISSIDStatsObject.c">
+             <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="1" default="0" notification="0" name="BytesSent"/>
+@@ -771,7 +771,7 @@
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="17" notification="0" name="BSSID"/>
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="17" notification="0" name="MACAddress"/>
+   		<Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="32" notification="0" name="SSID"/>
+-        <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="0" notification="0" hideParameterFromAcs="true" name="X_EXPOSE"/>
++        <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="1" notification="0" hideParameterFromAcs="true" name="X_EXPOSE"/>
+ 	<Parameter type="boolean" specSource="Custom" profile="Baseline:1" writable="1" readable="1" nosave="1" default="false" notification="0" hideParameterFromAcs="true" name="X_ACTIONTEC_COM_SSIDReload"/>
+         <Object name="Stats" profile="tr69_func_WIFISSIDStatsObject.c">
+             <Parameter type="unsignedInt" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="1" default="0" notification="0" name="BytesSent"/>
+@@ -803,7 +803,7 @@
+   		</Object>
+   		<Object name="Security" profile="tr69_func_WIFIAccessPointSecurityObject.c">
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="64" notification="0" name="ModesSupported"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA-WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="WEPKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="PreSharedKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="63" notification="0" name="KeyPassphrase"/>
+@@ -813,8 +813,8 @@
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="RadiusSecret"/>
+   		  <Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="X_ACTIONTEC_COM_RadiusEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="Auto" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WEPAuthenticationMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
+   		</Object>
+    		<Object name="WPS" profile="tr69_func_WIFIAccessPointWpsObject.c">
+   		  	<Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="true" notification="0" name="Enable"/>
+@@ -988,7 +988,7 @@
+   		</Object>
+   		<Object name="Security" profile="tr69_func_WIFIAccessPointSecurityObject.c">
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="64" notification="0" name="ModesSupported"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA-WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="WEPKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="PreSharedKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="63" notification="0" name="KeyPassphrase"/>
+@@ -998,8 +998,8 @@
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="RadiusSecret"/>
+   		  <Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="X_ACTIONTEC_COM_RadiusEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="Auto" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WEPAuthenticationMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
+   		</Object>
+    		<Object name="WPS" profile="tr69_func_WIFIAccessPointWpsObject.c">
+   		  	<Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="true" notification="0" name="Enable"/>
+@@ -1173,7 +1173,7 @@
+   		</Object>
+   		<Object name="Security" profile="tr69_func_WIFIAccessPointSecurityObject.c">
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="64" notification="0" name="ModesSupported"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA-WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="WEPKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="PreSharedKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="63" notification="0" name="KeyPassphrase"/>
+@@ -1183,8 +1183,8 @@
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="RadiusSecret"/>
+   		  <Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="X_ACTIONTEC_COM_RadiusEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="Auto" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WEPAuthenticationMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
+   		</Object>
+    		<Object name="WPS" profile="tr69_func_WIFIAccessPointWpsObject.c">
+   		  	<Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="Enable"/>
+@@ -1358,7 +1358,7 @@
+   		</Object>
+   		<Object name="Security" profile="tr69_func_WIFIAccessPointSecurityObject.c">
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="64" notification="0" name="ModesSupported"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="None" maxLength="64" notification="0" name="ModeEnabled"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="WEPKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="PreSharedKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="63" notification="0" name="KeyPassphrase"/>
+@@ -1368,8 +1368,8 @@
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="RadiusSecret"/>
+   		  <Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="X_ACTIONTEC_COM_RadiusEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="Auto" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WEPAuthenticationMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
+   		</Object>
+    		<Object name="WPS" profile="tr69_func_WIFIAccessPointWpsObject.c">
+   		  	<Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="Enable"/>
+@@ -1543,7 +1543,7 @@
+   		</Object>
+   		<Object name="Security" profile="tr69_func_WIFIAccessPointSecurityObject.c">
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="64" notification="0" name="ModesSupported"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA-WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="WEPKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="PreSharedKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="63" notification="0" name="KeyPassphrase"/>
+@@ -1553,8 +1553,8 @@
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="RadiusSecret"/>
+   		  <Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="X_ACTIONTEC_COM_RadiusEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="Auto" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WEPAuthenticationMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
+   		</Object>
+    		<Object name="WPS" profile="tr69_func_WIFIAccessPointWpsObject.c">
+   		  	<Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="Enable"/>
+@@ -1728,7 +1728,7 @@
+   		</Object>
+   		<Object name="Security" profile="tr69_func_WIFIAccessPointSecurityObject.c">
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="64" notification="0" name="ModesSupported"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA-WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="WEPKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="PreSharedKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="63" notification="0" name="KeyPassphrase"/>
+@@ -1738,8 +1738,8 @@
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="RadiusSecret"/>
+   		  <Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="X_ACTIONTEC_COM_RadiusEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="Auto" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WEPAuthenticationMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
+   		</Object>
+    		<Object name="WPS" profile="tr69_func_WIFIAccessPointWpsObject.c">
+   		  	<Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="true" notification="0" name="Enable"/>
+@@ -1913,7 +1913,7 @@
+   		</Object>
+   		<Object name="Security" profile="tr69_func_WIFIAccessPointSecurityObject.c">
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="64" notification="0" name="ModesSupported"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA-WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="WEPKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="PreSharedKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="63" notification="0" name="KeyPassphrase"/>
+@@ -1923,8 +1923,8 @@
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="RadiusSecret"/>
+   		  <Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="X_ACTIONTEC_COM_RadiusEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="Auto" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WEPAuthenticationMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
+   		</Object>
+    		<Object name="WPS" profile="tr69_func_WIFIAccessPointWpsObject.c">
+   		  	<Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="Enable"/>
+@@ -2098,7 +2098,7 @@
+   		</Object>
+   		<Object name="Security" profile="tr69_func_WIFIAccessPointSecurityObject.c">
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="64" notification="0" name="ModesSupported"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="None" maxLength="64" notification="0" name="ModeEnabled"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="WEPKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="PreSharedKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="63" notification="0" name="KeyPassphrase"/>
+@@ -2108,8 +2108,8 @@
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="RadiusSecret"/>
+   		  <Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="X_ACTIONTEC_COM_RadiusEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="Auto" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WEPAuthenticationMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
+   		</Object>
+    		<Object name="WPS" profile="tr69_func_WIFIAccessPointWpsObject.c">
+   		  	<Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="Enable"/>
+@@ -2283,7 +2283,7 @@
+   		</Object>
+   		<Object name="Security" profile="tr69_func_WIFIAccessPointSecurityObject.c">
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="0" readable="1" nosave="0" default="" maxLength="64" notification="0" name="ModesSupported"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA-WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="WPA2-Personal" maxLength="64" notification="0" name="ModeEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="WEPKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="PreSharedKey"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="63" notification="0" name="KeyPassphrase"/>
+@@ -2293,8 +2293,8 @@
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="" maxLength="64" notification="0" name="RadiusSecret"/>
+   		  <Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="X_ACTIONTEC_COM_RadiusEnabled"/>
+   		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="Auto" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WEPAuthenticationMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
+-  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="TKIPandAESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPAEncryptionMode"/>
++  		  <Parameter type="string" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="AESEncryption" maxLength="32" notification="0" name="X_ACTIONTEC_COM_WPA2EncryptionMode"/>
+   		</Object>
+    		<Object name="WPS" profile="tr69_func_WIFIAccessPointWpsObject.c">
+   		  	<Parameter type="boolean" specSource="TR181" profile="Baseline:1" writable="1" readable="1" nosave="0" default="false" notification="0" name="Enable"/>

@@ -1,0 +1,15 @@
+<pages>
+	<page> 
+<!-- 0-5 -->	
+		<t>Syslog Settings</t>
+		<t>Enable Logging To Syslog Server</t>
+		<t>Activé</t>
+		<t>Désactivé</t>
+		<t>Syslog Server IP Address</t>
+		<t>Apply</t>
+
+<!-- 0-5 -->	
+		<a>Syslog Server Address is null</a>
+		<a>Syslog Server Address is invalid</a>
+	</page>
+</pages>

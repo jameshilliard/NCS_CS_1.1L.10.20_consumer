@@ -1,0 +1,79 @@
+
+This is syslog-ng. Welcome.
+===========================
+
+What is syslog-ng?
+==================
+Syslog-ng tries to fill the gaps original syslogd's were lacking:
+	* powerful configurability
+	* filtering based on message content
+	* message integrity, message encryption (not yet implemented in 1.4.x)
+	* portability
+	* better network forwarding
+
+Version numbering is similar to that of Linux kernels, odd numbers denote
+unstable or development versions, even numbers denote stable, production use
+releases. 1.0.x code was based on Darren Reed's nsyslog, and it was
+completely rewritten during 1.1.x - 1.3.x. 
+
+1.6.x is the current stable version of syslog-ng.
+
+Copyright
+=========
+Syslog-ng and the corresponding documentation is 
+
+Copyright (c) 1999 Balázs Scheidler
+Copyright (c) 1999-2000 BalaBit IT Ltd.
+
+You can use and redistribute this program under the terms of the GNU Public
+License version 2 or later, as published by the Free Software Foundation.
+
+See the enclosed file COPYING for more information.
+
+Getting syslog-ng
+=================
+The official homepage of syslog-ng is:
+
+	http://www.balabit.hu/products/syslog-ng/
+
+Installing syslog-ng
+====================
+
+For installation instructions please refer to the file INSTALL.
+
+Documentation
+=============
+
+See the files under the /doc directory.
+
+Hacking on syslog-ng
+====================
+
+Syslog-ng uses a nonblocking I/O, and OO library called libol. Libol uses
+a preprocessor to generate object definitions and information for the gc
+to collect garbage. Object definitions are structs and some small functions,
+and are placed in a file named something.c.x or something.h.x. These .x
+files are then included in the C source files.
+
+This preprocessor is written in Scheme, and requires scsh to run, but is not
+required to simply compile syslog-ng, since all needed .x files are included
+in the distribution. If you change a source file though, the .x file needs
+to be regenerated.
+
+By default all generated files are included in the distribution
+so scsh is only required if you want to change something in the source
+files.
+
+If the change you apply, doesn't change object definitions you don't
+need to rerun make_class, simply update the date of the .x file using touch:
+
+touch something.c.x
+
+Support
+=======
+
+You can report problems via email to the syslog-ng mailing list at
+syslog-ng@lists.balabit.hu.
+
+Support contracts, custom development is available, please write for
+details.

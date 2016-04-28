@@ -1,0 +1,10 @@
+all: uhttpd
+
+CFLAGS = -g -Wall -DHAVE_CGI -DAEI_REVJ -D__X86__
+
+LDFLAGS += -lcrypt
+
+uhttpd: uhttpd.o cgi_main.o cgi_mynetwork.o uhttpd-cgi.o uhttpd-file.o uhttpd-utils.o parsetag.o
+
+clean:
+	rm -rf *.o uhttpd

@@ -1,0 +1,1396 @@
+
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+  <HEAD>
+
+<title>
+
+    Syslog-ng faq
+    
+</title>
+
+  </HEAD>
+
+<BODY BGCOLOR="white">
+
+<center>
+
+<table width="85%" border="0">
+ <tr>
+  <td>
+
+
+<center>
+
+
+
+
+  
+
+
+<p>
+</p>
+
+<table width="95%" bgcolor="#000000" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td>
+
+<table width="100%" bgcolor="#000000" cellpadding="0" cellspacing="1" border="0">
+<tr>
+ <td>
+
+<table width="100%" bgcolor="#000000" cellpadding="4" cellspacing="0" border="0">
+<tr>
+
+    <th bgcolor="#CCCCCC"> 
+
+<h3>Syslog-ng FAQ
+
+    </th>
+   <tr>
+ <td bgcolor="#FFFFFF">
+
+
+
+
+
+		<P>
+		Every mailing list should have a list of frequently asked questions,
+		and the answers usually given to those questions. Here's one for
+		syslog-ng.
+		</P>
+		<P>
+		This is Nate Campi's syslog-ng FAQ, found at <a href="http://www.campin.net/syslog-ng/faq.html">http://www.campin.net/syslog-ng/faq.html</a>, headers and footers removed.
+		<P>
+		<B>Disclaimer:</B> 
+		Use this information at your own risk, I
+		cannot be held responsible for how you use this information and any 
+		consequences that may result. However, every effort has been made to ensure the
+		technical accuracy of this document.
+		</P>
+		<P>
+		Most questions are taken from actual posts to the syslog-ng mailing list.
+		Truly horrible grammar and spelling were cleaned up, but most questions are 
+		identical to the original post.
+		</P>
+		<P>
+		Feel free to email submissions to nate at campin dot
+		net.
+		</P>
+
+
+
+</td>
+</tr>
+</table>
+
+
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+<p>
+</p>
+
+
+
+
+  
+<p>
+
+<table width="95%" bgcolor="#000000" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td>
+
+<table width="100%" bgcolor="#000000" cellpadding="0" cellspacing="1" border="0">
+<tr>
+ <td>
+
+<table width="100%" bgcolor="#000000" cellpadding="2" cellspacing="0" border="0">
+<tr>
+
+    <th bgcolor="#CCCCCC"> 
+    <h3><a name="links">Important Syslog-ng and syslog-related links</a>
+    </th>
+   <tr>
+ <td bgcolor="#FFFFFF">
+
+<font size="2">
+
+     <UL>
+
+
+
+
+     <LI>
+           <a href="http://www.balabit.hu/en/downloads/syslog-ng/">Syslog-ng homepage</a>
+      </LI>
+     <LI>
+           <a href="http://lists.balabit.hu/mailman/listinfo/syslog-ng">Syslog-ng mailing list signup</a>
+      </LI>
+     <LI>
+           <a href="http://vermeer.org/syslog/">Centralized syslog-ng to mysql database</a>
+      </LI>
+     <LI>
+           <a href="http://www.umialumni.com/~ben/SYSLOG-DOC.html">syslog(-ng) to postgreSQL database howto</a>
+      </LI>
+     <LI>
+           <a href="http://www.campin.net/syslog-ng.conf">Sample syslog-ng conf file</a>
+      </LI>
+     <LI>
+           <a href="http://www.campin.net/syslog-ng/solaris-conf.txt">Sample Solaris 8 syslog-ng conf file (for syslog-ng 1.5.x)</a>
+      </LI>
+     <LI>
+           <a href="http://www.campin.net/syslog-ng/expanded-syslog-ng.conf">An expanded sample syslog-ng conf file</a>
+      </LI>
+     <LI>
+           <a href="http://www.campin.net/newlogcheck.html">Centralized Syslog Loghost using syslog-ng</a>
+      </LI>
+     <LI>
+           <a href="http://www.loganalysis.org">Log Analysis Resources (LogAnalysis mailing list)</a>
+      </LI>
+     <LI>
+           <a href="http://www.oreilly.com/catalog/bssrvrlnx/chapter/index.html">Building Secure Servers with Linux, 'Chapter 10: System Log Management and Monitoring'</a>
+      </LI>
+     <LI>
+           <a href="http://www.faqs.org/rfcs/rfc3164.html">RFC3164, The BSD syslog Protocol</a>
+      </LI>
+
+</font>
+
+</p>
+
+
+</center>
+
+
+</td>
+</tr>
+</table>
+
+
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+
+
+
+
+
+
+
+  
+<p>
+
+<table width="95%" bgcolor="#000000" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td>
+
+<table width="100%" bgcolor="#000000" cellpadding="0" cellspacing="1" border="0">
+<tr>
+ <td>
+
+<table width="100%" bgcolor="#000000" cellpadding="2" cellspacing="0" border="0">
+<tr>
+
+    <th bgcolor="#CCCCCC"> 
+    <h3><a name="contents">Contents</a>
+    </th>
+   <tr>
+ <td bgcolor="#FFFFFF">
+
+<font size="2">
+
+     <UL>
+
+
+
+
+     <LI>
+           <a href="#libol">What is libol?</a>
+      </LI>
+     <LI>
+           <a href="#scheme">Compile errors after modifying source code</a>
+      </LI>
+     <LI>
+           <a href="#replace">Replace syslogd with syslog-ng</a>
+      </LI>
+     <LI>
+           <a href="#interoperability">syslogd and syslog-ng interoperability</a>
+      </LI>
+     <LI>
+           <a href="#klogd">Replace Linux klogd</a>
+      </LI>
+     <LI>
+           <a href="#external_program">External programs die right away</a>
+      </LI>
+     <LI>
+           <a href="#chroot">Logging for chroot environment</a>
+      </LI>
+     <LI>
+           <a href="#postfix">Postfix stops logging when syslog-ng is restarted</a>
+      </LI>
+     <LI>
+           <a href="#bad_filenames">Creates filenames like "Error" and "SCSI"</a>
+      </LI>
+     <LI>
+           <a href="#dns">DNS and fully qualified domain names</a>
+      </LI>
+     <LI>
+           <a href="#hostname">Hostname options</a>
+      </LI>
+     <LI>
+           <a href="#compression">Log archives take up too much space</a>
+      </LI>
+     <LI>
+           <a href="#perms">File permissions and ownership</a>
+      </LI>
+     <LI>
+           <a href="#message_length">Long message are cut in half</a>
+      </LI>
+     <LI>
+           <a href="#clocks">I want files to be created with the time/date they are received</a>
+      </LI>
+     <LI>
+           <a href="#sync">Write messages to disk the instant they are received</a>
+      </LI>
+     <LI>
+           <a href="#non_root">Run syslog-ng chrooted and as a non-root user</a>
+      </LI>
+     <LI>
+           <a href="#template">Rewrite logs in a specific format</a>
+      </LI>
+     <LI>
+           <a href="#max_conn">syslog-ng only allows 10 connections to a TCP source</a>
+      </LI>
+     <LI>
+           <a href="#capture_output">Log output from programs started by syslog-ng</a>
+      </LI>
+     <LI>
+           <a href="#reporting">Log reporting/monitoring</a>
+      </LI>
+     <LI>
+           <a href="#database">Input logs into a database</a>
+      </LI>
+     <LI>
+           <a href="#how_fast">How fast is it?</a>
+      </LI>
+     <LI>
+           <a href="#catchall">How can I catch messages not already filtered?</a>
+      </LI>
+     <LI>
+           <a href="#hup">Connections die when syslog-ng sent HUP signal</a>
+      </LI>
+     <LI>
+           <a href="#stunnel">Using stunnel, all hosts are 'localhost'</a>
+      </LI>
+
+</font>
+
+</p>
+
+
+</center>
+
+
+</td>
+</tr>
+</table>
+
+
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+
+
+
+
+
+
+
+
+  
+
+
+<p>
+</p>
+
+<table width="95%" bgcolor="#000000" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td>
+
+<table width="100%" bgcolor="#000000" cellpadding="0" cellspacing="1" border="0">
+<tr>
+ <td>
+
+<table width="100%" bgcolor="#000000" cellpadding="4" cellspacing="0" border="0">
+<tr>
+
+    <th bgcolor="#CCCCCC"> 
+
+<h3>Geting started 
+
+    </th>
+   <tr>
+ <td bgcolor="#FFFFFF">
+
+
+
+
+
+		<UL>
+
+		<a name="libol">
+		<LI>
+ 		<P>
+ 		<b>
+		What's with this libol stuff, and which one do I need?
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+		<P>
+		libol is a library written by the author of syslog-ng, Balazs Scheidler,
+		which is used in syslog-ng. A built copy of libol needs to be present on 
+		a system when syslog-ng is built. 
+		<P>
+		</P>
+		libol does *not* need to be installed, however.
+		A built copy can be left in a typical build directory like /usr/src, and given as
+		a parameter to syslog-ng's configure script. Run './configure --help' in the syslog-ng
+		source directory for more information.
+		</P>
+		<P>
+		The current 1.4.x (stable) branch uses libol 0.2.x, and the current
+		1.5.x (development) branch uses libol  libol 0.3.x.
+		</P>
+
+		</i>
+ 		</P>
+		</LI>
+
+		<a name="scheme">
+
+		<LI>
+ 		<P>
+ 		<b>
+
+
+		Thanks for the patch, I just patched it, and I can't recompile libol.
+		I did a make clean after I patched it, then tried:
+ 		</P>
+		</b>
+<pre>
+ $ make
+ Making all in utils
+ make[1]: Entering directory `/home/src/libol-0.2.17/utils'
+ make[1]: Nothing to be done for `all'.
+ make[1]: Leaving directory `/home/src/libol-0.2.17/utils'
+ Making all in src
+ make[1]: Entering directory `/home/src/libol-0.2.17/src'
+ /usr/src/libol-0.2.17/utils/make_class <io.c >io.c.xt
+ /bin/sh: /usr/src/libol-0.2.17/utils/make_class: No such file or directory
+ make[1]: *** [io.c.x] Error 127
+ make[1]: Leaving directory `/home/src/libol-0.2.17/src'
+ make: *** [all-recursive] Error 1
+</pre>
+
+		<b>
+ 		<P>
+		 I'm not sure what this means. Should I try the patch again? I just did a
+ 		</b>
+		<br>
+		 <pre>$ patch -ORIG_FILE -DIFF_FILE</pre>
+ 		</P>
+
+ 		</P>
+
+		<P>
+		<i>
+
+		<P>
+
+		This comes from a missing scheme interpreter, 
+		touch io.c.x or install scsh.
+
+		</P>
+		<P>
+		For much more on libol and scheme in syslog-ng, read 
+		<a href="http://lists.balabit.hu/pipermail/syslog-ng/2000-August/000795.html">
+		this post by Bazsi</a>
+
+		</P>
+
+		</i>
+ 		</P>
+		</LI>
+
+
+		<a name="replace">
+		<LI>
+ 		<P>
+ 		<b>
+
+		If I replace my syslog daemon with syslog-ng, what side effects can it have?
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+		<P>
+		Glad you asked, the most common side effect is being happy with a superior syslog
+		daemon. 
+		<P>
+		</P>
+
+Another common result is that system logfiles grow to huge sizes. This
+isn't syslog-ng's fault, but a side effect of syslog-ng logging to
+different logfiles than your old syslog daemon. Change your log rotation
+program's config files to rotate the new log names/locations or change
+syslog-ng's config file to make it log to the same files as your old
+syslog daemon.
+
+		</P>
+
+		</i>
+ 		</P>
+		</LI>
+
+		</UL>
+		
+
+		</UL>
+		
+
+
+
+</td>
+</tr>
+</table>
+
+
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+<p>
+</p>
+
+
+
+
+
+
+  
+
+
+<p>
+</p>
+
+<table width="95%" bgcolor="#000000" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td>
+
+<table width="100%" bgcolor="#000000" cellpadding="0" cellspacing="1" border="0">
+<tr>
+ <td>
+
+<table width="100%" bgcolor="#000000" cellpadding="4" cellspacing="0" border="0">
+<tr>
+
+    <th bgcolor="#CCCCCC"> 
+
+<h3>Running it
+
+    </th>
+   <tr>
+ <td bgcolor="#FFFFFF">
+
+
+
+
+
+
+		<UL>
+
+
+		<a name="interoperability">
+		<LI>
+ 		<P>
+ 		<b>
+
+I'm new to syslog-ng. Is there a way for syslog-ng and syslogd to
+co-exist?  Our servers are managed by another group, and they don't
+support syslog-ng.  Can you pipe all syslogd messages to syslog-ng?
+
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+ Yes, syslog-ng can accept messages from stock syslogd using the udp()
+ source.
+
+		</i>
+ 		</P>
+		</LI>
+
+
+		<a name="klogd">
+
+		<LI>
+ 		<P>
+ 		<b>
+
+		I want to replace syslogd *and* klogd on my Linux box with syslog-ng.
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+		Use a source line like this in your conf file to read kernel messages, too.
+
+		</i>
+		<pre>source src { pipe("/proc/kmsg"); unix-stream("/dev/log"); internal(); };</pre>
+
+ 		</P>
+ 		<P>
+
+		<b>Note</b>: do not run klogd and syslog-ng fetching local kernel messages at the
+		same time. It may cause syslog-ng to block which makes all logging local
+		daemons unusable. 
+
+ 		</P>
+
+
+		</LI>
+
+		<a name="external_program">
+		<LI>
+ 		<P>
+ 		<b>
+
+
+I have been trying syslog-ng and extremely happy with the power of
+using it.  I have one question, when using the program option under
+destination drivers, my PERL script gets launched when I start syslog-ng,
+but executes once and then dies.  I am using this script to page any time I
+see an log entry, but it only runs the first time it runs.
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+		You can read log messages on your stdin, so instead of fetching a single
+		line and exiting keep reading your input like this:
+</i>
+<pre>
+#!/usr/bin/perl
+while (<>) {
+        # send to pager
+}
+</pre>
+
+
+		</i>
+ 		</P>
+		</LI>
+
+
+		<a name="chroot">
+		<a name="postfix">
+		<LI>
+ 		<P>
+ 		<b>
+
+		Is it possible to create sockets with syslog-ng similar to how you can do so
+		with syslogd? The reason for this being that I'm running some applications
+		chrooted, and need to open a /dev/log socket that is in that chroot-jail.
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+		Of course you can. Just add a source:
+
+		</i>
+<pre>
+source local { unix-stream("/dev/log"); internal(); };
+source jail1 { unix-stream("/jail/dns/dev/log"); };
+source jail2 { unix-stream("/jail/www/dev/log"); };
+</pre>
+		<i>
+
+		You can do this by using a single source:
+
+		</i>
+		<pre>source local { 
+	unix-stream("/dev/log"); 
+	internal(); 
+	unix-stream("/jail/dns/dev/log"); 
+};</pre>
+
+
+ 		</P>
+ 		<P>
+		Note that <b>postfix</b> appears to need a log socket in it's chroot jail, or it's logging
+		will stop when you reload syslog-ng:
+
+		<pre>source postfix { unix-stream("/var/spool/postfix/dev/log" keep-alive(yes)); };</pre>
+ 
+
+
+ 		</P>
+		</LI>
+
+
+		<a name="bad_filenames">
+
+		<LI>
+ 		<P>
+ 		<b>
+
+		Directories with names like "Error", "SCSI", "", are showing up in the 
+		directory that holds the syslogs for the different hosts that we monitor.
+ 		<P>
+ 		</P>
+		Has anyone seen these random directories?  Any suggestions on how to deal with them?
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+		From the description it's apparent that logs are being stored in your filesystem with a macro
+		similar to this:
+ 		</P>
+
+		</i>
+		<pre>destination std { file( "/var/log/$HOST/$FACILITY"); };</pre>
+		<i>
+
+ 		<P>
+		...so that you have directories created with the value of $HOST. This is bad. The host entry
+		in syslog messages is often set to a bad value, especially with messages originating from the UNIX
+		kernel, like SCSI error messages.
+ 		</P>
+ 		<P>
+
+	The best fix for this is to *never* create files or
+	directories based on unfiltered input from the network (You'd do well to
+	remember that in general). Set the option keep_hostname to (no), and
+	syslog-ng will always replace the hostname field (possibly using DNS, so
+	make sure your local caching DNS is setup correctly). 
+
+ 		</P>
+ 		<P>
+	
+	The author of this FAQ didn't have garbled $HOST macros go away
+	until he modified all clients to run syslog-ng and transfer over TCP
+	(and of course he uses DNS to convert all the hostnames to FQDN, he
+	doesn't trust what the clients send). Both steps might not be required,
+	syslog-ng over UDP might be sufficient, though there's little reason
+	*not* to use TCP. Modern TCP/IP stacks are tuned to handle lots of web
+	connections, so even a central host for hundreds of machines can use
+	TCP without issues from the use of TCP alone. There will be I/O
+	problems with trying to commit that many hosts' logs to disk
+	much sooner under most circumstances.
+
+ 		</P>
+		</i>
+		</LI>
+
+		<a name="dns">
+
+		<LI>
+ 		<P>
+ 		<b>
+
+		DNS:
+		I want to use fully qualified domain names in my logs, I have many different
+		hosts named ns1, or www, and don't want the logs mixed up. Also, 
+		I have a question concerning the use_dns option. Is this a global option
+		only, or is there some way to change this per source or destination?
+
+ 		</b>
+ 		</P>
+
+		<i>
+
+ 		<P>
+
+		First of all, make sure that you have a reliable DNS cache nearby. Nearby
+		may be on the same host or network segment, or even at your upstream provider. 
+		Just make sure that you can reach it reliably.  syslog-ng blocks on DNS lookups, 
+		so you can stop all logging if you start getting DNS timeouts.
+		</P>
+
+ 		<P>
+		Internal syslog-ng DNS caching has recently been worked on, and reportedly
+		works well. This appears to be a good alternative to running a local caching
+		DNS server ('dns_cache(yes);').
+ 		</P>
+ 		<P>
+
+		Currently the use_dns option is global and cannot be specified on a per-source
+		basis.
+
+ 		</P>
+ 		<P>
+		<b>See also:</b> the section on hostname options directly below.
+ 		</P>
+
+		</i>
+		</LI>
+
+
+		<a name="hostname">
+
+		<LI>
+ 		<P>
+ 		<b>
+
+		What is with all the "hostname" options?
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+ 		<P>
+
+		When syslog-ng receives a message it tries to rewrite the hostname it
+		contains unless keep_hostname is true. If the hostname is to be rewritten
+		(e.g. keep_hostname is false), it checks whether chain_hostnames (or
+		long_hostname which is an alias for chain_hostnames) is true. If
+		chain_hostnames is true, the name of the host syslog-ng received the message
+		from is appended to the hostname, otherwise it's replaced.
+ 		</P>
+ 		<P>
+		So if you have a message which has hostname "server", and which resolves to
+		"server2", the following happens:
+ 		</P>
+ 		<P>
+		
+		</i>
+<table border="2" cellpadding="2">
+ <tr>
+  <td>&nbsp;</td>
+  <td>keep_hostname(yes)</td>
+  <td>keep_hostname(no)</td>
+ </tr>
+ <tr>
+  <td>chain_hostname(yes)</td>
+  <td>server</td>
+  <td>server/server2</td>
+ </tr>
+ <tr>
+  <td>chain_hostname(no)</td>
+  <td>server</td>
+  <td>server2</td>
+ </tr>
+</table>
+
+
+
+<!--
+<pre>
+			keep_hostname(yes)      keep_hostname(no)
+chain_hostname(yes)	server			server/server2
+chain_hostname(no)	server			server2
+</pre>
+-->
+		
+		<i>
+ 		<P>
+		I hope this makes things clear.
+
+		</i>
+ 		</P>
+
+		</LI>
+
+
+		<a name="compression">
+
+		<LI>
+ 		<P>
+ 		<b>
+
+		I archive my logs like this:
+<pre>
+file("/var/log/HOSTS/$HOST/$YEAR/$MONTH/$DAY/$FACILITY_$HOST_$YEAR_$MONTH_$DAY" 
+ owner(root) group(root) perm(0600) dir_perm(0700)  create_dirs(yes) ); 
+</pre>
+
+...and over time my archive takes up lots of space. When will syslog-ng
+implement compression so that I can compress them automatically?
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+		You don't need syslog-ng to compress them, install bzip2
+and run a nightly cronjob like this:
+<pre>
+ /usr/bin/find /var/log/HOSTS ! -name "*bz2" -type f ! -path "*`/bin/date +%Y/%m/%d`*" 
+  -exec /usr/bin/bzip2 {} \;
+</pre>
+
+ This might need some explaining: find all non-bzipped files that aren't
+from today (syslog-ng might still write to them) and compress them with
+bzip2. This was tested on Debian GNU/Linux with GNU find version 4.1.7.
+
+		</i>
+
+ 		</P>
+		</LI>
+
+
+		<a name="perms">
+
+		<LI>
+ 		<P>
+ 		<b>
+
+		My syslog-ng.conf has
+
+		</b>
+		<pre>destination std { file( "/var/log/$HOST/$YEAR$MONTH/$FACILITY" create_dirs(yes)); };</pre>
+
+		<b>
+		<p> 
+		What happens is if /var/log/$HOST/$YEAR$MONTH does not exist,
+		syslog-ng makes that dir, but it's owner is root:other. I think because
+		daemon's effective user ID is root. I want to change dir's owner. Is this possible?
+		</p> 
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+		Yes, you can do this using the owner(), group() and perm() options. 
+		<br>
+		For example:
+
+		</i>
+		<pre>destination d_file { file("/var/log/$HOST/log" create_dirs(yes) 
+ owner("log") group("log") perm(0600)); };</pre>
+
+ 		</P>
+		</LI>
+
+                <a name="message_length">
+		<LI>
+
+ 		<P>
+ 		<b>
+
+		
+		a) I have snmptrapd running so that any trap that it receives should be
+		logged to local1.   I have  a filter taking anything received via local1
+		to a specific file:</b>
+		
+<pre>
+filter snmptrap {facility(local1);};
+destination snmptraps { file("/var/log/snmptraps";};
+</pre>
+		
+<b>
+		Unfortunately a number of traps are getting cut off at a specific
+		point, and the remainder of the trap ends up in syslog and not in the
+		proper destination.
+		
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+syslog defaults to 1024 byte long messages, but this
+value is tunable in syslog-ng 1.5 where you can set it to a higher
+value.
+
+		</i>
+<pre>
+options { log_msg_size(8192); };
+</pre>
+
+
+
+ 		</P>
+ 		<P>
+
+		<b>
+
+b) Andreas Schulze points out: "We are running snmptrapd and syslog-ng
+1.5.x under Solaris 8 and observed exactly the same problem.
+</p>
+<p>
+This doesn't fix the problem for us.  It seems that there is a problem
+in the syslog(3) implementation at least on Solaris. Maybe on Linux,
+too.  This is important, because snmptrapd feeds its messages via
+syslog(3) to syslog-ng. So syslog-ng never gets the correct message,
+because its truncated in libc before syslog-ng receive it.
+</p>
+<p>
+Our solution was, to patch snmptrapd to log its messages via a local
+Unix DGRAM socket and use this socket as message source for syslog-ng.
+This fix the problem and works pretty fine and very stable for more than
+one year in our environment.
+
+		</b>
+
+ 		</P>
+ 		<P>
+		<i>
+		Basically you're screwed on Solaris, but hopefully other
+implementations aren't as brain-dead.
+		</i>
+ 		</P>
+		</LI>
+
+
+
+		<a name="clocks">
+
+		<LI>
+ 		<P>
+ 		<b>
+
+		It seems I have syslog clients with unsynchronized clocks and I
+		have files that were created with the time macros, and their date
+		is wrong. What I want is the files to be created with the time/date
+		they are received.
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+		It's an option. use_time_recvd() boolean.
+
+		</i>
+		<pre>options { use_time_recvd(true); };</pre>
+		
+
+ 		</P>
+		</LI>
+
+		<a name="sync">
+
+		<LI>
+ 		<P>
+ 		<b>
+
+		What conf settings can I use for my syslog-ng.conf file so that messages are
+		written to disk the instant they are received?
+
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+		Add sync(0) to your config file.
+		</i>
+		<pre>options { sync(0); };</pre>
+
+ 		</P>
+		</LI>
+
+		<a name="non_root">
+
+		<LI>
+ 		<P>
+ 		<b>
+
+		I want to run syslog-ng chrooted and as a non-root user.
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+
+		Use syslog-ng 1.5.x's own -C  and -u flags when starting it.
+
+
+		</i>
+ 		</P>
+		</LI>
+
+		<a name="template">
+
+		<LI>
+ 		<P>
+ 		<b>
+
+		I want to rewrite my logs into a specific format.
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+
+		Syslog-ng 1.5.3 added support for user definable log file
+		formats. Here's how to use it:
+
+</i>
+<pre>
+destination my_file {
+        file("/var/log/messages" template("$ISODATE $TAG $FULLHOST $MESSAGE"));
+};
+</pre>
+<i>
+
+		For an explanation of available macros read
+		<a href="http://lists.balabit.hu/pipermail/syslog-ng/2001-January/001153.html">
+		this post</a>.
+
+
+
+		</i>
+ 		</P>
+		</LI>
+
+
+
+		<LI>
+ 		<P>
+ 		<b>
+<a name="maxconnections">
+<a name="max_conn">
+
+  I have been experiencing a problem with a syslog-ng (1.4.11) server
+ seemingly only allowing 10 connections to a tcp() source. A quick tour of
+ the code found the offending code at line 341 in afinet.c:
+
+ 		</b>
+ <pre>self->super.max_connections = 10;</pre>
+
+
+ 		</P>
+ 		<P>
+		<i>
+It's limited because otherwise it'd be easy to mount a DoS attack against
+the logger host. You can change this limit run-time without changing the
+source with the max-connection option to tcp():
+
+		</i>
+<pre>source src { tcp(max-connections(100)); };</pre>
+
+
+
+ 		</P>
+		</LI>
+
+	<a name="capture_output">
+
+		<LI>
+ 		<P>
+ 		<b>
+ Can output from programs started by syslog-ng be captured and logged by syslog-ng?
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+ It's on the todo list. As long as it is not implemented, you might
+ try to redirect the program's output to a named pipe like this:
+</i>
+
+ <pre>destination d_swatch { program("swatch 2> /var/run/swatch.err"); }; 
+ source s_swatch { pipe("/var/run/swatch.err"); };</pre>
+
+
+
+ 		</P>
+		</LI>
+
+		</UL>
+
+
+
+
+</td>
+</tr>
+</table>
+
+
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+<p>
+</p>
+
+
+
+
+
+
+
+  
+
+
+<p>
+</p>
+
+<table width="95%" bgcolor="#000000" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td>
+
+<table width="100%" bgcolor="#000000" cellpadding="0" cellspacing="1" border="0">
+<tr>
+ <td>
+
+<table width="100%" bgcolor="#000000" cellpadding="4" cellspacing="0" border="0">
+<tr>
+
+    <th bgcolor="#CCCCCC"> 
+
+<h3>Getting fancy
+
+    </th>
+   <tr>
+ <td bgcolor="#FFFFFF">
+
+
+
+
+
+
+
+		<UL>
+		<a name="reporting">
+
+		<LI>
+ 		<P>
+ 		<b>
+
+		The whole point of setting up a loghost was to report on the logs. How can syslog-ng help?
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+ 		<P>
+		Syslog-ng is not about reporting on messages. Syslog-ng is a "sink" for syslog messages. Once
+		syslog-ng commits them to some sort of storage (filesystem, database, line printer, etc), it is up
+		to you to scan them.
+ 		</P>
+ 		<P>
+		That being said, Nate Campi's 
+		"newlogcheck" page shows how he filters all messages through swatch
+		in real time, and also uses syslog-ng's "match" option to alert on certain message strings.
+		<br>
+		The fact that this stuff works is a result of syslog-ng's flexibility, not because it was written to
+		be all things to all people. Syslog-ng is a quality daemon because it tries to stay good at 
+		one thing and one thing only: 
+		being a syslog server.
+ 		</P>
+ 		<P>
+		Look at the <a href="#links">links</a> part of this page for the link to Nate's newlogcheck page, and
+		for the link to the Log Analysis page. You'll find plenty of information on log parsing there.
+ 		</P>
+
+		</i>
+ 		</P>
+		</LI>
+
+		<a name="database">
+
+		<LI>
+ 		<P>
+ 		<b>
+
+		I want to input my logs into a database in real time - why can't I do it?
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+
+		You can, there's just nothing built into syslog-ng which knows about databases.
+		You simply need to take advantage of syslog-ng's ability to pipe to a program. 
+		Follow the links in the <a href="#links">links</a> part of this page 
+		to read up on how other have done it.
+
+		</i>
+ 		</P>
+		</LI>
+
+                <a name="how_fast">
+
+		<LI>
+ 		<P>
+ 		<b>
+		How much log volume can syslog-ng handle?
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+		A search of the mailing list archives shows sites that exceed
+		five gigabytes per day of log data. The limits to throughput in syslog-ng
+		are similar to that of most other network applications, where network and 
+		disk I/O are the limiting factors.
+		</i>
+ 		</P>
+		</LI>
+
+		<a name="catchall">
+
+		<LI>
+ 		<P>
+ 		<b>
+		How can I filter messages so that only
+		  not-already-routed lines will be routed/filtered again?
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+		This is a catchall statement, and should catch all messages which were not
+		accepted any of the previous statements.
+
+		</i>
+		<pre>log { source(src); filter(DEFAULT); destination(dst); };</pre>
+ 		</P>
+		</LI>
+
+		<a name="hup">
+
+
+		<LI>
+ 		<P>
+ 		<b>
+
+		I'm using syslog-ng over redirected ports inside an SSH
+		channel and whenever I HUP syslog-ng, the SSH channel closes
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+		syslog-ng closes TCP connections when a SIGHUP is received, but you can
+		change this behaviour with the keep-alive option.
+
+		</i>
+		<pre>destination remote_tcp { tcp("loghost" port(1514) keep-alive(yes)); };</pre>
+                <pre>source tcp_listen { tcp(ip("10.0.0.1") port(5140) keep-alive(yes)); };</pre>
+
+
+ 		</P>
+		</LI>
+
+                <a name="stunnel">
+
+
+		<LI>
+ 		<P>
+ 		<b>
+
+		I've successfully set up syslog-ng to tunnel through stunnel.
+		I'm having one problem though, all messages come through with a
+		hostname of "localhost", presumably since stunnel is coming from
+		localhost on the syslog server....
+
+ 		</b>
+ 		</P>
+ 		<P>
+		<i>
+		Keep the hostname as sent by the remote syslog daemon:
+		</i>
+
+		<pre>options { keep_hostname(yes); };</pre>
+
+ 		</P>
+		</LI>
+
+
+
+
+
+		</UL>
+
+
+
+</td>
+</tr>
+</table>
+
+
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+<p>
+</p>
+
+
+
+
+   </center>
+
+
+
+ 
+
+
+
+
+
+
+
+
+</td>
+</tr>
+</table>
+</center>
+
+</body>
+</html>
+
+
+    
+
+    
+
+    
+

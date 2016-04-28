@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Basic Setup</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/wl_basic.js"></script>
+
+</head>
+
+<body>
+	<div id="wrapper">    
+<? include(top_nav.inc) ?>
+
+<? include(left_wl.inc) ?>
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1><span id="wl_basic_title_span" style='font-weight:bold;font-size:16px;'>Basic Setup</span></h1>
+
+				<form id="basic_form" method="POST" action="wl_basic.cgi">
+				<input type="hidden" name="command" value="apply" />
+		 	    <input type="hidden" name="mypage" value="/wl_basic.html" />
+                <input type="hidden" name="wireless_index_vlan" id="wireless_index_vlan" value="1">
+                <input type="hidden" name="wep_key_mode" id="wep_key_mode" value="ascii">	
+                <input type="hidden" name="wep_key_len" id="wep_key_len" value="5">
+			    <input type="hidden" name="wpa_encrypt_mode" id="wpa_encrypt_mode" value="2">
+			    <input type="hidden" name="wep_auth_mode" id="wep_auth_mode" value="2">
+			    <input type="hidden" name="prissidchanged" id="prissidchanged" value="0">
+                
+
+                <input type="hidden" id="waiting_page" name="waiting_page" value="thankyou.html">            
+                <input type="hidden" name="confirm_page" id="confirm_page" value="wcb_confirm.html">
+                <input type="hidden" id="isconfirm" name="isconfirm" value="1">   
+                <input type="hidden" id="apply_page" name="apply_page" value="wl_basic.html"/>
+        
+                <table cellpadding="0" cellspacing="2" border="0">
+                    <tr>
+                        <td width="200"><label><span id="wl_fre_span">Multiple SSID</span>:</label></td>
+                        <td>
+                            <select name="wireless_index_ssid" id="wireless_index_ssid">
+                                <option value="1">SSID1-5G</option>
+                                <option value="2">SSID2-5G</option>
+                                <option value="3">SSID3-5G</option>
+                                <option value="4">SSID4-5G</option>
+                                <option value="5">SSID5-2.4G</option>
+                                <option value="6">SSID6-2.4G</option>
+                                <option value="7">SSID7-2.4G</option>
+                                <option value="8">SSID8-2.4G</option>
+                            </select>
+                        </td>
+                    </tr>                                               
+                </table>
+                
+				<span id="w24_span">	
+					<br>
+					<table cellpadding="0" cellspacing="2" border="0">
+						<tr>
+							<td width="200"><label><span id="wl_radio2_span">Wireless radio</span>:</label></td>
+                            <td>
+                                <select name="wireless_radio_enable" id="wireless_radio_enable">
+                                    <option value="1"><span id="radio_enable">On</span></option>
+                                    <option value="0"><span id="radio_disable">Off</span></option>
+                                </select>
+                            </td>
+						</tr>    					
+						<tr id="wl_basic_tr_ssidenable">
+							<td width="200"><label><span id="wl_ssid2_enable">SSID Enable</span>:</label></td>
+                            <td>
+                                <select name="wireless_ssid_enable" id="wireless_ssid_enable">
+                                    <option value="1"><span id="ssid_enable">On</span></option>
+                                    <option value="0"><span id="ssid_disable">Off</span></option>
+                                </select>
+                            </td>
+						</tr>     
+					
+                        <tr>
+                            <td><label><span id="wl_secu_broad">SSID Broadcast</span>:</label></td>
+                            <td>
+                                <input name="wl_broadcast" id="id_broadcaston" type="radio" value="1"  checked="checked"/>
+                                <label for="id_broadcaston"><span id="wl_secu_br_enab">Enable</span></label>
+                                <input name="wl_broadcast" id="id_broadcastoff" type="radio" value="0" /> 
+                                <label for="id_broadcastoff"><span id="wl_secu_br_disa">Disable</span></label>
+                            </td>
+                        </tr>   
+                        <tr>
+                            <td><label for="id2_transmit"><span id="wl_power2_span">Transmit Power</span>:</label></td>
+                            <td>
+                                <select name="wireless_trans_power" id="wireless_trans_power" >
+                                 <option value="100">100%&nbsp;</option>
+                                 <option value="70">70%&nbsp;</option>
+                                 <option value="50">50%&nbsp;</option>
+                                 <option value="35">35%&nbsp;</option>
+                                </select>
+                            </td>
+                        </tr>
+
+						<tr>
+							<td width="200"><label for="id2_band"><span id="wl_band2_span">Wireless Band</span>:</label></td>
+							<td>
+								<select name="wireless_dot11_mode" id="wireless_dot11_mode">
+				                 <option value="0">2.4 GHz (B)&nbsp;</option>
+				                 <option value="1">2.4 GHz (G)&nbsp;</option>
+				                 <option value="2">2.4 GHz (N)&nbsp;</option> 
+				                 <option value="3">2.4 GHz (B+G)&nbsp;</option> 
+				                 <option value="4">2.4 GHz (G+N)&nbsp;</option> 
+				                 <option value="5">2.4 GHz (B+G+N)&nbsp;</option> 				                 
+				                </select>
+							</td>
+						</tr>
+<!--						
+						<tr>
+							<td><label for="id2_rate"><span id="wl_rate2_span">Wireless Data Rate</span>:</label></td>
+							<td>
+								<select name="wireless_data_rate" id="wireless_data_rate">		
+								 <option value="0">Auto&nbsp;</option>
+				                 <option value="1">1M&nbsp;</option>
+				                 <option value="2">2M&nbsp;</option> 
+				                 <option value="3">5.5M&nbsp;</option>
+				                 <option value="4">11M&nbsp;</option>
+				                </select>
+							</td>
+						</tr>
+-->						
+						<tr>
+							<td><label for="id2_ssid"><span id="wl_name2_span">Wireless Network Name</span>:</label></td>
+							<td>
+								<input name="wireless_ssid" id="wireless_ssid" type="text" size="32" maxlength="32" style="height: 16px"/>
+							</td>
+						</tr>
+						<tr>
+							<td><label for="id2_chanwidth"><span id="wl_width2_span">Wireless Channel Width</span>:</label></td>
+							<td>
+								<select name="wireless_channelwidth" id="wireless_channelwidth">
+				                 <option value="0">20MHz&nbsp;</option>
+				                 <option value="1">40MHz Upper&nbsp;</option>
+				                 <option value="2">40MHz Lower&nbsp;</option>
+				                 <option value="3">Auto&nbsp;</option>                 
+				                </select>
+							</td>
+						</tr>
+						<tr>
+							<td><label for="id2_channel"><span id="wl_number2_span">Wireless Channel Number</span>:</label></td>
+							<td>
+								<select name="wireless_channel" id="wireless_channel" >
+				                 <option value="0">Automatic&nbsp;</option>
+				                 <option value="1">1</option>
+				                 <option value="2">2</option>
+				                 <option value="3">3</option>
+				                 <option value="4">4</option>
+				                 <option value="5">5</option>
+				                 <option value="6">6</option>
+				                 <option value="7">7</option>
+				                 <option value="8">8</option>
+				                 <option value="9">9</option>
+				                 <option value="10">10</option>
+				                 <option value="11">11</option>
+				                </select>
+							</td>
+						</tr>
+<!--						
+						<tr>
+							<td><label for="id2_transmit"><span id="wl_power2_span">Transmit Power</span>:</label></td>
+							<td>
+								<select name="wireless_trans_power" id="wireless_trans_power" >
+				                 <option value="0">100%&nbsp;</option>
+				                 <option value="1">70%&nbsp;</option>
+				                 <option value="2">50%&nbsp;</option>
+				                 <option value="3">35%&nbsp;</option>
+				                 <option value="4">15%&nbsp;</option>				                
+				                </select>
+							</td>
+						</tr>
+-->						
+						<tr>
+							<td><label for="id2_security"><span id="wl_secur2_span">Wireless Security Type</span>:</label></td>
+							<td>
+								<select name="wireless_security_type" id="wireless_security_type">
+				                 <option value="0">Open&nbsp;</option>
+				                 <option value="1">WEP&nbsp;</option>
+				                 <option value="2">WPA PSK&nbsp;</option>
+				                 <option value="4">WPA2 PSK&nbsp;</option>
+				                 <option value="6">WPA/WPA2 Mixed&nbsp;</option>
+				              </select>
+							</td>
+						</tr>						
+					</table>
+					<span id="password2_tr">
+						<table cellpadding="0" cellspacing="2" border="0">
+							<tr>
+								<td width="200"><label for="id2_psk"><span id="wl_pass2_span">Password Phrase</span>:</label></td>
+								<td>
+									<input name="wireless_key" id="wireless_key" type="text" size="32" maxlength="64" onkeyup='checkPassword(this.value, "pwdindication");' style="height: 16px"/>
+                                    &nbsp;<span id="pwdindication"></span>
+								</td>
+							</tr>
+						</table>
+					</span>
+				</span>
+				
+				</span>
+				</form>
+
+				<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="220">&nbsp;</td>
+						<td>
+							<div><a class="button" href="###" id="diy_apply_btn"><span id="apply_btn_span">Apply</span></a></div>
+						</td>
+					</tr>
+				</table>
+				
+				<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+<? include(wcb_footer.inc) ?>
+        
+	</div>
+</body>
+</html>

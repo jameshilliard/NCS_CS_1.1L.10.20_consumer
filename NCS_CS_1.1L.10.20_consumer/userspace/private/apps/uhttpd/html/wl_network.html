@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Wireless Network List</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/wl_network.js"></script>
+</head>
+
+<body>
+	<div id="wrapper">    
+	
+<? include(top_nav.inc) ?>
+
+	
+<? include(left_wl.inc) ?>
+
+
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1><span id='wl_net_list_title' style='font-weight:bold;font-size:16px;'>Wireless Network List</span></h1>	        	
+
+				<span id="private_span">
+					<br>
+					<table cellpadding="0" cellspacing="1" border="0" width="550px">
+					  <tr><td colspan="5"><strong>Private WiFi Network:</strong></td></tr>
+					  <tr>
+					  	<td align="center" width="20%" bgcolor="#3f78ad"><strong class="white">Name</strong></td>
+					  	<td align="center" width="20%" bgcolor="#3f78ad"><strong class="white">Frequency</strong></td>
+					  	<td align="center" width="20%" bgcolor="#3f78ad"><strong class="white">MAC Address</strong></td>
+					  	<td align="center" width="30%" bgcolor="#3f78ad"><strong class="white">Security Mode</strong></td>
+					  	<td align="center" width="10%" bgcolor="#3f78ad"><strong class="white">Action</strong></td>
+					  </tr>				
+					  <span id="private_list_tr">
+
+					  </span>
+					</table>
+				</span>
+
+				<span id="public_span" style="display:none">
+					<br>
+					<table cellpadding="0" cellspacing="1" border="0" width="550px">
+					  <tr><td colspan="5"><strong>Public WiFi Network:</strong></td></tr>
+					  <tr>
+					  	<td align="center" width="20%" bgcolor="#3f78ad"><strong class="white">Name</strong></td>
+					  	<td align="center" width="20%" bgcolor="#3f78ad"><strong class="white">Frequency</strong></td>
+					  	<td align="center" width="20%" bgcolor="#3f78ad"><strong class="white">MAC Address</strong></td>
+					  	<td align="center" width="30%" bgcolor="#3f78ad"><strong class="white">Security Mode</strong></td>
+					  	<td align="center" width="10%" bgcolor="#3f78ad"><strong class="white">Action</strong></td>
+					  </tr>				  				  
+					</table>
+				</span>
+
+				<br><br>
+	        	<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+<? include(wcb_footer.inc) ?>
+
+	</div>
+</body>
+</html>

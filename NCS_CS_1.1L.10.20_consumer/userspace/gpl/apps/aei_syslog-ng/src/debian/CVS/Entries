@@ -1,0 +1,22 @@
+D/patches////
+/FAQ.unofficial.html/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/README.Debian/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/control/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/copyright/1.1.2.1/Mon Jun 27 08:55:22 2005//Tsyslog_ng_1_6
+/expanded-syslog-ng.conf/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/syslog-ng.conf/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/syslog-ng.conf.example/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/syslog-ng.default/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/syslog-ng.docs/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/syslog-ng.examples/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/syslog-ng.files/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/syslog-ng.init/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/syslog-ng.logcheck.ignore/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/syslog-ng.logrotate/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/syslog-ng.logrotate.example/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/syslog-ng.postinst/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/syslog-ng.postrm/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/syslog-ng.preinst/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/syslog-ng.prerm/1.1.2.1/Mon Jun 27 08:50:20 2005//Tsyslog_ng_1_6
+/rules/1.1.2.2/Thu Jun 30 10:04:44 2005//Tsyslog_ng_1_6
+/changelog.in/1.1.2.1/Mon Jun 27 10:32:12 2005//Tsyslog_ng_1_6

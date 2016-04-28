@@ -1,0 +1,17 @@
+#!/bin/sh
+ 
+while true
+do
+sleep 10
+TR69CHECK=`ps -aux | grep tr69 | grep -v grep | grep -v watchdog_tr69 | wc -l`
+#echo $TR69CHECK
+ 
+if  [ $TR69CHECK -eq 0 ] ; then
+    echo "tr69 not running."  
+    tr69 &
+    sleep 1
+    msg -p
+    sleep 3
+    msg -u
+fi
+done

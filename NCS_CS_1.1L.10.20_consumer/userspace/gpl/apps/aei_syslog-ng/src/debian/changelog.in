@@ -1,0 +1,6 @@
+@PACKAGE@ (@VERSION@) @RELEASE_TAG@; urgency=low
+
+  * New upstream version.
+
+ -- Balazs Scheidler <bazsi@balabit.hu>  @DATE@
+

@@ -1,0 +1,14 @@
+<pages>
+	<page> 
+<!-- 0-5 -->	
+		<t>Thank You!</t>
+		<t>Please wait while we apply the new settings to your device.</t>
+		<t>After new settings are applied successfully, we'll take you back to the page where the selection was made.</t>
+        <t>The Device is restoring to default setting.</t>
+        <t>Please wait </t>
+        <t> seconds ...</t>
+
+<!-- 0-5 -->	
+		<a>Username is invalid</a>
+	</page>
+</pages>

@@ -1,0 +1,1 @@
+<div id="footer"><span id="wcb_footer_span">Copyright &copy; 2015 Actiontec Inc. All Rights Reserved</span></div>  

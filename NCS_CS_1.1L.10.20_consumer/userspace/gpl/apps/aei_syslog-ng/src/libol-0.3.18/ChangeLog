@@ -1,0 +1,448 @@
+2006-03-27  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped to 0.3.18
+
+2006-03-13  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/io.c: removed fd counting loop, cache maximum number of fds
+	and allocate the fds array dynamically
+
+2006-01-23  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/io.c (do_write): added support for platforms without an
+	MSG_DONTWAIT flag
+
+2005-11-23  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped version number to 0.3.17
+
+	* src/io.c (do_write): added workaround for broken destination
+	sockets
+
+	* src/pkt_buffer.c (do_flush_stream): make sure data is not lost
+	if A_WRITE returns failure by pushing it back to the buffer
+
+2005-05-03  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped version number to 0.3.16
+
+	* src/io.c (io_iter): fixed possible nonblocking_fd leaks as
+	unlinking an fd might have dropped some valid structures
+
+	* src/werror.c: fixed werror_hexdump and related functions,
+	still #if 0ed but useful for tracking down gc related problems
+
+2005-02-04  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped verison number to 0.3.15
+
+2005-02-01  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/werror.c (msg_vformat): fixed signed/unsigned comparison wrt
+	the length variable, a stack overflow (not buffer overflow) can be
+	caused by a very long format result (werror("%2147483648i", 1)),
+	credits go to Thief_hu for reporting it; it is believed not to be
+	exploitable as werror format strings do not contain dynamic values
+
+2004-08-05  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped version number to 0.3.14, cleaned up to
+	work with autoconf2.50 and automake 1.7
+
+	* src/objtypes.h: removed colliding macro names to avoid warnings
+	on BSD derived systems
+
+2004-07-04  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/io.c (get_inaddr): use in_addr_t for the private definition
+	of INADDR_NONE if one is not found.
+
+2004-05-06  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* added libol.spec.in patch by jpo
+
+2004-05-04  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: use CFLAGS from environment if set
+
+2004-01-19  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped version number to 0.3.13
+
+2004-01-13  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* src/io.c, src/read_line.c, src/werror.c: HP-UX portability fixes
+	(to make it compile with HP's cc)
+
+2004-01-12  Balazs Scheidler  <bazsi@bzorp.balabit>
+
+	* configure.in: bumped version number to 0.3.12
+
+	* src/io.c (make_inet_address_c) use common initialization (fixes
+	a segfault which occurs when ADDRESS2SOCKADDR was called on
+	addresses initialized based on sockaddr_in
+
+2003-04-30  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/objbase.h: changed ol_string_header so it compiles using Sun
+	C compiler
+
+2003-04-11  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 0.3.10
+
+2003-01-31  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 0.3.9
+
+	* src/pkt_buffer.c: it is now possible whether flushing to the
+	output is done by message-by-message (UDP) or stream based (TCP),
+	as stream based flush could cause more than one message included
+	in a single UDP frame during high loads
+
+2003-01-20  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/pkt_buffer.c: fixed a bug which caused garbled output lines
+	when a target buffer was full
+
+	* src/io.c: bugfix, wait for timeout when no fds are available
+	instead of using all CPU time
+
+2002-12-18  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 0.3.6
+
+2002-11-12  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/io.c (sockaddr2info): do not take unknown address families
+	fatal, support AF_UNSPEC (returned by Solaris)
+
+2002-11-04  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/werror.c: allocate space for message as required (instead of
+	maximizing the number of bytes to 1024)
+
+2002-10-07  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 0.3.4
+
+	* src/io.c: also handle the case when recvfrom returns a 0 byte
+	length sockaddr
+
+2002-10-04  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/io.c: implemented a workaround for Linux 2.2 and 2.4 (unix
+	domain sockets and recvfrom)
+
+2002-09-16  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/io.c (inet_address2sockaddr_in): handle the case when the IP
+	of the host is NULL, but the port isn't
+
+2002-06-10  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: --with-debug changed to --enable-debug
+
+2002-05-29  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 0.3.3
+
+	* src/xalloc.c: when freeing a memory location in debug mode,
+	actively change the stored original block size, so references to
+	already freed memory locations can be detected easier,
+	(ol_string_free): added an assertion on s->use_cnt
+
+	* src/io.c: when a POLLHUP is received on an inactive fd, kill fd
+	immediately (earlier we waited for flushing, but in case of
+	POLLHUP we can't flush anyway) This fixes an abort() problem.
+
+2002-04-12  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 0.3.2
+
+	* utils/make_class.in: fixed a typo, which caused problems with
+	later syslog-ng versions
+
+2002-03-21  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* acconfig.h: removed 0 after #undef DEBUG_ALLOC because it
+	inserted a #define into olconfig.h, finally the alignment problems
+	should be resolved
+
+2001-10-24  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* acconfig.h: changed #define DEBUG_ALLOC 0 to #undef DEBUG_ALLOC
+
+2001-10-21  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/werror.c: use va_copy macros (caused crashes on PPC)
+
+	* src/format.h: applied va_copy detection
+
+2001-10-11  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* configure.in: bumped version number to 0.3.0
+
+	* branched libol_0_2
+
+2001-08-26  Balazs Scheidler  <bazsi@balabit.balabit>   
+
+	* io.c (prepare): BUF_CLOSE moved prior to BUF_PREPARE as closing
+	might affect BUF_PREPARE (when sync != 0),
+	(do_kill_fd): use close_fd instead of closekill_fd to let buffers
+	flush,
+	(write_callback): implemented fsync
+
+	* io.h (io_fd): added fsync attribute
+
+	* pkt_buffer.c (do_flush): write data in larger chunks instead of
+	a single write for each message
+
+2001-07-08  Balazs Scheidler  <bazsi@balabit.balabit>
+
+	* src/io.c: support storing the filename with its fd, changes
+	various function prototypes, (reopen_fd) new function to reopen a
+	file, only files with associated filenames can be reopened.
+
+2001-04-12  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/io.c: changed the way unix bind works, the sockaddr_un len
+	is calculated instead of blindly using sizeof(struct sockaddr_un)
+
+2001-02-25  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version to 0.2.21
+
+	* io.c: new functions io_callout_flush(), io_callout_set_drop()
+
+2000-09-29  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number to 0.2.20
+
+	* src/pkt_buffer.c (do_write_str): fixed a memory leak
+
+2000-09-06  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number to 0.2.19
+
+2000-09-01  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/io.c: attempt to fix an assertion bug when a new fd was
+	added to the list of fds while calling pre-poll callbacks
+
+2000-06-02  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/io.c (connect_inet_socket): added check for EINPROGRESS
+
+2000-05-26  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number to 0.2.17
+
+	* configure.in: DEBUG_ALLOC is included only if --with-debug is
+	enabled, caused unaligned access on Alpha
+
+2000-02-18  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number to 0.2.16
+
+	* src/io.c (do_kill_fd): use closekill_fd instead of close_fd
+	(bind_unix_socket): informational message about binding
+	(connect_unix_socket): -"- about connecting
+
+2000-02-17  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number to 0.2.15
+
+	* src/io.c (do_recv): 0 read bytes doesn't mean EOF on recvfrom()
+
+2000-02-12  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/abstract_io.h: removed dependency on sys/socket.h
+
+	* src/io.c (do_recv): added typecast to socklen_t *
+
+2000-01-17  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: test for socklen_t
+
+	* src/objtypes.h: if socklen_t is not defined, define it to
+	unsigned int
+
+	* src/io.c, src/abstract_io.h: avoid warnings on systems size_t !=
+	socklen_t by explicitly using socklen_t
+
+	* src/io.c (write_callback): a write callback may return ST_DIE to
+	close an fd immediately
+
+	* src/pkt_buffer.c (do_flush): return ST_DIE if write() returns error
+
+2000-01-03  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/gc.c (gc_maybe): changed gc_threshold to gc_idle_threshold
+	and gc_busy_threshold using the appropriate value depending on
+	busy
+
+	* src/io.c (io_iter): fixed a few bugs, closekill_fd changed to
+	close_fd
+
+	* configure.in: bumped version number to 0.2.11
+
+1999-12-22  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* src/io.c (bind_unix_socket): check if the socket to be created
+	exists, and is really a socket.
+
+1999-12-16  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* pkt_buffer.c: fixed a bug in flow control (*writable was set,
+	even if a packet was not dequeued)
+
+	* configure.in: bumped version number to 0.2.10
+
+1999-12-03  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number to 0.2.8
+
+	* src/io.c (io_iter): removed assertion, which sometimes caused a
+	coredump
+	(io_iter): when poll() returned EINTR callouts were not handled.
+
+1999-11-22  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number to 0.2.7
+
+	* src/queue.{c,h}: moved object_queue support from lsh
+
+	* src/io.c: inet_address_info sockaddr struct added
+
+1999-11-15  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version number to 0.2.6
+
+	* src/io.c: (io_callout_timeout): new function
+
+	* src/format.c: (c_format_vlength): added field length support to
+	c_format
+
+1999-08-25  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* io.c: listen_callback, sometimes accept() may return a zero sized 
+	"from" address, handle this case
+
+1999-08-16  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* io.c: changed fd_write to return the number of bytes written instead
+	of error code
+
+	* pkt_buffer.c: check the return value of A_WRITE in do_flush
+	* stream_buffer.c: -"-
+
+1999-08-07  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* io.c: changed a few werror()s to verbose() in io_iter()
+
+1999-08-04  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* io.c: made init_file() public
+
+1999-07-21  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version to 0.2.1
+
+1999-07-19  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* io_iter(): fixed a small bug in callout counting
+
+1999-07-10  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* added expr CLASS expressions to make_class (taken from lsh)
+
+	* lots of changes caused by the previous point
+
+	* bugfix: (pkt_buffer accepted input even in closed state)
+
+	* libol-config.in changes
+
+1999-06-20  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* configure.in: bumped version to 0.1.21
+
+	* fixed a bug in do_list_search (returned bad position, when an item 
+	was not found)
+
+1999-06-16  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* worked around yet another glibc 2.0 poll emulation bug
+
+1999-06-09  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* wait at most 60 seconds in poll (so that pending closes are really
+	closed in at most 60 seconds)
+	
+	* changed fatal() to werror() if the poll fails
+
+1999-05-28  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* fixed a nasty bug in pkt_buffer.c which caused >90% CPU load
+
+	* added --static-libs to libol-config
+
+	* debianized the package
+
+	* fixed a bug in prepare()
+
+1999-05-11  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* bug fixes, some debug messages removed
+
+	* glibc emulated poll() workaround added
+
+1999-05-06  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* added function c_format_cstring, appends an extra 0 character to 
+	the end of string
+
+1999-04-28  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* removed a configure test (which tried to link to libol itself), it 
+	was blindly copied from the configure.in of syslog-ng
+
+	* added include <sys/socket.h> to format.c before <netinet/in.h> is 
+	included, because BSD didn't like it.
+
+1999-04-26  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* released 0.1.7
+
+	* added KILL_RESOURCE to resource_list, REMEMBER_RESOURCE now returns 
+	the node where a given resource is stored
+
+	* some modifications to Makefile.am so the correct headers are 
+	installed with "make install"
+
+	* compiles to a shared lib as well as a static lib
+
+1999-04-20  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* released 0.1.6
+
+	* fixed some bugs
+
+	* added libol-config script
+
+1999-04-11  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* implemented callouts, added io_callout() function and callback class
+
+	* added %I (ip addr, specified as a struct in_addr) format specifier 
+	to c_format()
+
+	* fixed a couple of build problems (HAVE_ATTRIBUTE), and added some
+	some portability tests to configure.in
+
+1999-04-10  Balazs Scheidler  <bazsi@balabit.hu>
+
+	* released 0.1.2
+
+	* fixed a poll() bug in io.c (POLLHUP)
+

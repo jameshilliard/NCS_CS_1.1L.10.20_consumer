@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Advanced System Log</title>
+
+<? include(include_header.inc) ?>
+<script type="text/javascript" src="js/special/adv_systemlog.js"></script>
+
+</head>
+
+<body>
+	<div id="wrapper">    
+
+<? include(top_nav.inc) ?>
+
+<? include(left_adv.inc) ?>
+
+		
+		<div id="content_right">
+		    <div id="content_right_header"></div>
+		    <div id="content_right_contentarea">
+	        	<h1><span id="systemlog_title" style="font-weight:bold;font-size:16px;">System Log</span></h1>
+
+				<form id="systemlog_form" method="post" action="adv_systemlog.cgi">
+	        	<input type="hidden" name="command" id="id_command" value="apply" />
+				<input type="hidden" name="adv_autoconfig" id="adv_autoconfig" />
+		       
+                <input type="hidden" id="waiting_page" name="waiting_page" value="thankyou.html">            
+                <input type="hidden" name="confirm_page" id="confirm_page" value="wcb_confirm.html">
+                <input type="hidden" id="isconfirm" name="isconfirm" value="1">   
+                <input type="hidden" id="apply_page" name="apply_page" value="adv_systemlog.html"/>  
+
+                <input type="hidden" name="advanced_ssh_timeout" id="advanced_ssh_timeout" value="" />
+		       
+				<table cellpadding="0" cellspacing="2" border="0">
+
+					<tr>
+						<td width="250">
+							<B><span id="span_enabledisablename">Enable Logging To Syslog Server</span></B>:
+						</td>
+						<td>			
+							<input type="radio" id="systemlog_enable" name="adv_systemlog_enable" value="1" size=30 maxlength=63 checked>
+							<span id="span_enable">Enable</span>
+							<input type="radio" id="systemlog_disable" name="adv_systemlog_enable" value="0" size=30 maxlength=63>
+							<span id="span_disable">Disable</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<B><span id="span_ip">Syslog Server IP Address</span></B>:
+						</td>
+						<td>
+							<input type="text" id="adv_systemlog_ip" name="adv_systemlog_ip" value="" size=30 maxlength=63>
+						</td>
+					</tr>
+					
+				</table>
+
+				</form>
+
+				<table cellpadding="0" cellspacing="2" border="0">
+					<tr>
+						<td width="220">&nbsp;</td>
+						<td>
+							<div><a class="button" href="###" id="diy_apply_btn"><span id="apply_btn_span">Apply</span></a></div>
+						</td>
+					</tr>
+				</table>
+				
+	        	<div class="clear_left"></div>
+	        </div>
+	        <div id="content_right_footer"></div>
+		</div>
+        <div class="clear_left"></div>
+<? include(wcb_footer.inc) ?>
+
+</div>
+</body>
+</html>
+

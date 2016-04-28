@@ -1,0 +1,469 @@
+News for the 1.6.12 release
+	Fri, 02 Feb 2007 09:55:53 +0100
+
+	* Force the value for log_fifo_size to be at least 1000 items.
+
+News for the 1.6.11 release
+	Wed, 03 May 2006 13:08:38 +0200
+
+	* Using time_sleep() caused a parser error as a rule was missed from
+	  the configuration parser.
+	* Scalability improvements applied in 1.6.10 broke reading
+	  /proc/kmsg on Linux.
+
+News for the 1.6.10 release
+	Mon, 27 Mar 2006 16:43:08 +0200
+
+	* Updated documentation, documentation is now generated from XML
+          instead of SGML.
+	* Scalability improvements for many parallel syslog connections
+          tunable using the time_sleep() global option.
+
+News for the 1.6.9 release
+	Wed, 23 Nov 2005 09:52:30 +0100
+
+	* Fixed usertty destination, names in utmp records are not NUL
+          terminated. This might cause some logged in users not to be found.
+	* Fixed timezone calculation during daylight saving.
+	* Fixed a warning message in file destinations which indicated that
+          permissions would be changed even if no permission change was
+          requested.
+	* Added a workaround for lose-one-message when connection is broken.
+	* Owner and group information on files is set independently, so one can
+          work while the other fails, this fixes the behaviour when
+          syslog-ng is running as non-root and only the group information is
+          specified.
+	* Documentation updates.
+	* Updated bundled libol to 0.3.17
+
+News for the 1.6.8 release
+	Thu, 26 May 2005 10:24:33 +0200
+
+	* Some configure tweaking to detect proper ld options dynamically on
+	Linux, Solaris and HP-UX. Other platforms might still have problems
+	with static linking.
+	* Some minor manpage fixes.
+	* Use use_fqdn() option when determining local hostname instead of
+	directly using the possibly short hostname returned by gethostname().
+	* Fixed a 64 bit compatibility issue when resolving hostnames.
+
+News for the 1.6.7 release
+	Sat, 09 Apr 2005 12:46:51 +0200
+
+	* Fixed a memory leak and possible fd leak in spoof-source support.
+	* Fixed destination port byte order on little-endian machines,
+	  triggered when a non-514 port was used.
+	* Added fedora-core specific packaging files.
+
+News for the 1.6.6 release
+	Fri, 04 Feb 2005 13:06:22 +0100
+
+	* Fixed timezone handling problem on platforms which require an
+          explicit tzset() call.
+	* Fixed resolving the PRI macro which always expanded to an empty
+          string.
+	* Fixed possible hang during reload for one second.
+	* Fixed syslog2ng script which sometimes generated three dots when
+	  generating priority ranges. (debug...emerg)
+	* Added a notification about splitting message lines, if they are
+          over the configured log_msg_size() limit.
+ 	* Added a setsid() call to program destinations to avoid being in
+          the same process group as the child, as some shells send signals
+          to the whole process group they are in, effectively killing
+          syslog-ng. (triggered on OpenBSD for example)
+	* Added log_fifo_size option to TCP/UDP destinations.
+	* Added relogger.pl to contrib/ which replays existing syslog files.
+	* Updated documentation (manpages and SGML documentation)
+	* Link to various libraries residing in /usr statically by default,
+          also added an --enable-full-static configure option to make a
+          fully static version.
+
+News for the 1.6.5 release
+	Thu, 05 Aug 2004 13:50:11 +0200
+
+	* cleaned up libol and syslog-ng compilation warnings and made
+	  configure.in/Makefile.am files autoconf2.50 compliant
+	* fixed a BSD specific compilation problem
+	* check if the UDP datagram ends in a NL or NUL character and strip
+          that away if present
+
+News for the 1.6.4 release
+	Fri, 14 May 2004 16:42:25 +0200
+	
+	* fixed a STREAMS handling bug introduced by the IRIX compatibility
+	  patches integrated in 1.6.3
+
+News for the 1.6.3 release
+	Thu, 06 May 2004 11:05:46 +0200
+
+	* fixed possible abort when several UNIX domain sources refer to the
+	  same socket
+ 	* fixed afunix and afinet destination template handling, do not include
+ 	  the PRI value automatically, let the administrator do it
+ 	  explicitly in its template
+ 	* fixed possible segfault when the value of 0 is represented as a
+ 	  string in port specications (e.g. remoteport, localport, port)
+	* added MSGONLY macro which expands to the message only without the
+ 	  program name which sent the log message
+ 	* added global sanitize_filenames() option which changes control
+ 	  characters in all filenames to '.', defaults to TRUE, this might
+ 	  avoid escape sequence attacks embedded in filenames (imagine an
+ 	  administrator doing an ls in a directory where filenames contain
+ 	  any control characters)
+ 	* avoid using GNU extensions in strftime (more specificly the
+ 	  timezone expansion in $ISODATE used %z which is not portable for
+ 	  IRIX)
+ 	* added address spoofing support (use the original IP address when
+ 	  resending messages, read the file README.spoof for more information)
+ 	* couple of IRIX specific patches were integrated 
+ 	* updated documentation
+
+News for the 1.6.2 release
+	Fri, 23 Jan 2004 12:55:48 +0100
+	
+	* syslog-ng/libol have been ported to run on HP-UX more natively
+	  using the commercial HP ANSI C compiler (work was sponsored by HP)
+
+News for the 1.6.1 release
+	Fri,  9 Jan 2004 10:27:38 +0100
+
+	* added a new macro named "PRI" which inserts the decimal value of
+	  the message priority (pri + level value combined)
+	* fixed a problem in PIX timestamp parsing which inserted an
+	  unnecessary NUL character to the message
+
+News for the 1.6.0rc4 release
+	Fri,  3 Oct 2003 16:00:47 +0200
+
+	* close stderr when going into background
+	* set the fd for file sources into nonblocking mode to avoid
+	  blocking in the case both klogd and syslog-ng is reading
+	  /proc/kmsg
+	* added support to parse PIX timestamps
+
+News for the 1.6.0rc3 release
+	Fri, 25 Apr 2003 08:56:57 +0200
+
+	* fixed TCP wrapper detection for Solaris
+	* fixed macro expansion which had a bug in 1.6.0rc2
+
+News for the 1.6.0rc2 release
+	Thu, 10 Apr 2003 12:51:57 +0200
+
+	* added even more performance enhancements to the macro resolution
+	* fixed a libol version detection code in configure.in
+
+News for the 1.6.0rc1 release
+	Thu, 20 Feb 2003 11:19:52 +0100
+
+	* Reconnect if a problem occurs during connection establishment
+	  (earlier only ECONNREFUSED was handled)
+	* Fixed the file source to close the file descriptor prior to
+	  opening it again during HUP, fixes kernel log reading on BSD
+	  systems.
+	* applied a patch by Achim Gsell to add template() functions to all
+	  destination drivers
+
+News for the 1.5.26 release
+	Fri, 31 Jan 2003 10:31:51 +0100
+
+	* Fixed a buffering issue which could cause to include more than a
+	  single message in an UDP packet.
+	* Updated documentation about a couple of undocumented features.
+
+News for the 1.5.25 release
+	Mon, 20 Jan 2003 16:34:03 +0100
+
+	* The previous kernel bug workaround in libol fixed the issue for
+	  the 2.4.20rc? kernels only, the current workaround should also
+	  work for 2.4.20 final as well.
+	* Added bad_hostname() feature where the administrator can specify
+          a regular expression to match bad hostnames, works around bad
+	  programs such as ctld which uses a space within its program name.
+
+
+News for the 1.5.24 release
+	Wed, 18 Dec 2002 13:45:41 +0100
+
+	* A libol change works around the unix domain socket kernel bug that
+	  popped up in 2.4.20
+	* Fixed a couple of configure problems on different platforms
+
+News for the 1.5.23 release
+	Mon, 28 Oct 2002 09:26:08 +0100
+
+	As there was no NEWS entry for 1.5.22 this one includes a merged NEWS
+	entry.
+
+	* After receiving a SIGTERM do not wait more than 1 sec for buffers
+	  to flush
+	* Added res_init() configure test
+	* A quick signedness audit, changed to unsigned variables where
+	  possible, and checked signed/unsigned comparisons
+	* Fixed a crashbug which caused several crashes recently
+	* Implemented a more correct version of the previous security fix.
+
+News for the 1.5.21 release
+	Fri, 27 Sep 2002 11:09:38 +0200
+
+	* fixed a crashbug, which has security implications, as it is caused 
+          by a stack overflow, it occurs when destination file output
+          templates are used (file contents are specified by a template).
+	  Everybody is urged to upgrade to this version. 
+
+News for the 1.5.20 release
+	Thu, 22 Aug 2002 16:03:45 +0200
+
+	* fixed a kernel message mangling problem
+	* implemented check_hostname() which checks if a hostname is
+	  acceptable (contains characters [0-9a-zA-Z-_.], and if not, it is
+	  not parsed as hostname, this fixes problems with devices which
+          send messages which seem to contain a hostname, but in reality
+	  they don't
+
+News for the 1.5.19 release
+	Thu, 18 Jul 2002 15:16:37 +0200
+
+	* Fixed a compile problem, which prevented non-debug compiles
+	  (stdio.h in cfg-grammar.y)
+	* initial support for padded pipe sources (used on HP-UX /dev/log)
+	* Other minor fixes
+
+News for the 1.5.18 release
+	Wed, 29 May 2002 12:23:45 +0200
+
+	Changes:
+	* fixed a crash bug when an UDP destination was unreachable
+
+News for the 1.5.17 release
+	Fri, 26 Apr 2002 11:41:00 +0200
+
+	Changes:
+	* added support for runtime tuning the maximum length of a
+	  logmessage: log_msg_size() global option)
+	* fixed detection of TCP wrapper libraries on *BSD systems
+	* added new macros $HOST_FROM and $FULLHOST_FROM which represent the
+	  name of host the message was received from
+	* fixed a SIGHUP processing problem 
+
+News for the 1.5.16 release
+	Fri, 12 Apr 2002 09:42:28 +0200
+
+	Changes:
+	* added log_prefix support for file sources (for adding 'kernel: '
+          prefix to messages from /proc/kmsg)
+	* fixed the internal DNS cache, so now it really works
+	* fixed localip() and localport() directives for afinet destinations
+          (they erroneously changed the destination address)
+	* Detect O_LARGEFILE on the system and use it if available
+	* Never close fds 0, 1, 2 and, use /dev/null for 0 and 1, and keep 2
+          open for messages during reinitialization
+	* Added UNIXTIME, R_UNIXTIME, S_UNIXTIME macros to templates and
+          filenames
+	* Fixed TCP wrapper support.
+
+News for the 1.5.15 release
+	Thu, 28 Feb 2002 14:06:18 +0100
+
+	Bugfixes:
+	* fixed a HUP problem, local unix-stream loggers stopped logging
+	* configuration is reloaded after a second even if no I/O operation
+          is pending (earlier the config reload changed states iff some kind
+          of I/O event occured)
+
+News for the 1.5.14 release
+	Tue,  5 Feb 2002 11:35:52 +0100
+
+	New features:
+	* tcp wrapper support
+	* added several new macros in filename expansion
+	* support for simple log rotation (remove_if_older)
+
+News for the 1.5.13 release
+	Fri, 26 Oct 2001 18:08:15 +0200
+
+	Bugfixes:
+
+	* STATS: message shouldn't disappear after SIGHUP
+	* fixed 'Type Error!' problem that caused an abort
+
+News for the 1.5.12 release
+	Sun, 21 Oct 2001 13:03:53 +0200
+
+	Couple of bug fixes:
+
+	* a bug in libol causing problems on PPC was found
+	* fixed pipe chmod() problems
+	* fixed problem with losing log sources during SIGHUP
+
+News for the 1.5.11 release
+	Thu Oct 11 20:30:10 CEST 2001
+
+	The 1.5.11 release comes with a new libol branch, from now on
+	libol 0.3.0 is required for syslog-ng 1.5.x. Changes from
+	the previous release include:
+
+	* fixed the SIGKILL bug
+
+News for the 1.5.10 release
+	Mon,  3 Sep 2001 18:47:48 +0200
+
+	The 1.5.9 version was released in a hurry, some features were not
+	fully completed, and an appropriate NEWS entry was not written. So
+	this one summarizes the changes both in 1.5.9 and 1.5.10:
+
+	* finalized log statement processing flags
+	* changed syslog-ng buffering, so writing log messages is buffered (sync(10)
+	  now means that ten messages are grouped and written with a single write()
+	  syscall)
+	* implemented fsync() option to force an fsync(fd) to logfiles after each
+	  write
+	* implemented quick&dirty stats reporting (now configurable with the
+	  stats() global option)
+	* updated documentation, now includes recent changes as well (log
+	  processing, fsync and stats)
+
+News for the 1.5.8 release
+	Sun,  8 Jul 2001 17:53:28 +0200
+
+	* updated user contributions in /contrib, added syslog-ng.conf syntax highlighting for vim
+	  and a README file containing a short description for each file
+	* more log processing options
+          * catchall flag specifies that a given log statement catches all
+            messages regardless which sources it refers to
+          * final specifies that processing this statement ends message distribution
+          * fallback specifies that if a given message doesn't match
+            anything it'll be delivered to that statement
+        * new destination remctrl which can reopen files based on their
+          name
+
+News for the 1.5.7 release
+	Fri,  8 Jun 2001 09:31:51 +0200
+
+	* fixed various problems, including:
+	  - typos in the new chroot code when resolving usernames/groups
+	  - fixed portability problems in nscache.c
+	  - fixed filter() name resolving
+
+News for the 1.5.6 release
+	Fri,  4 May 2001 14:38:31 +0200
+
+	* added explicit chown/chmoding of files/directories for easier
+	  permission management
+	* added the possibility to use sync() on TCP destinations
+	* syslog-ng now outputs connection properties when a connection 
+	  is broken
+	* added special message parsing used by AIX (last message repeated &
+	  Message forwarded from)
+
+News for the 1.5.5 release
+	Fri, 30 Mar 2001 14:23:55 +0200
+
+	* Fixed a bug in -HUP handling (implemented a cleaner solution, 
+	  though less tested than in 1.4.11).
+	* Added DNS cache implemented by Gaël Roualland. 
+	* Added klogctl program to control kernel logging level on Linux
+	  (to make it easier to set up a completely klogd-less logging)
+	* Template support for output files.
+	* Documentation somewhat updated.
+
+News for the 1.5.2 release
+
+	* Added a utility to control kernel logging level on Linux, so
+	  you can avoid using klogd.
+
+News for the 1.5.3 release (01/18/2001)
+	Thu, 18 Jan 2001 22:25:26 +0100
+
+	* Added support for variable file formats (see template() for file
+	  destinations).
+	* Cosmetic changes in the configure script.
+
+News for the 1.5.2 release (01/15/2001)
+	Mon, 15 Jan 2001 11:07:30 +0100
+
+	Applied a patch by Matthew Crosby <mcrosby@marthon.org>, to
+	recognize services names as port numbers.
+
+News for the 1.5.0 release (11/29/2000)
+
+	syslog-ng was rebranched to 1.5.x and 1.4.x series. I made this branch
+	about 8 months ago, but I've never done anything on the development
+	series. Experimental patches are applied here.
+
+News for the 1.4.10 release (11/27/2000)
+
+	We found a remote DoS attack in 1.4.8 which affects all versions
+	prior to 1.4.8. The bugfix release changed log parsing
+	behaviour, which created problems with Solaris and Cisco
+	logging hosts. 1.4.10 fixes these problems.
+
+News for the 1.4.8 release (11/03/2000)
+
+	Fixed memory leak in destination files (occured if you had several
+	macro-expanded files)
+	
+	Added some new expansion macros: HOUR, MIN and SEC.
+	
+	Some new global options: 
+		time_reap()	the number of seconds when an idle destination 
+				file is closed
+		use_time_recvd()if you want your date expansion macros to use
+				the received time, instead of the time 
+				specified in the log message.
+
+	Updated documentation to include the changes above.
+	
+	Added contrib subdirectory to include init scripts and config files
+	for various platforms.
+
+News for the 1.4.4 release (05/26/2000)
+
+	file permission specifiers readded for pipe() 
+	
+	fixed a configure.in bug on systems without snprintf()
+	
+	updated documentation (New chapter: Finetuning, added some things
+	about DEFAULT filter evaluation)
+
+News for the 1.4.2 release (03/13/2000)
+
+	New option keep_hostname(), which allows you to keep reported
+	hostnames unmodified.
+
+News for the 1.4.1 release (03/10/2000)
+
+        Configuration file reading bugfixes, pipe driver cleanup.
+        Line reading cleaned up to avoid memmove()s.
+
+News for the 1.4.0 release (03/03/2000)
+
+	New features:
+	  * macro expansion
+	  * code cleanup (affects mainly) the sockets code
+	  * portability fixes (Alpha, PPC problems fixed, ReliantUnix, 
+	    AIX support added, HP-UX partially supported (untested))
+	  * improved stability
+
+	You should be running this version if you want stability and
+	features. The 1.5.x development cycle is forked so expect
+	exciting new stuff in those releases.
+
+News for the 1.4.0rc2 release
+
+        Changed the lexical scanner to be a bit more friendly wrt '..'. You
+        can now use debug..info instead of debug .. info.
+        
+        Portability and other bugfixes (fixed Alpha, PPC problems). 
+        Compiles on AIX.
+        
+News for the 1.3.15 release
+
+	Added the possibility to create directories on the fly. You'll need
+	to enable the create_dirs() option.
+	
+	Added a -V flag to display version number.
+	
+	Updated documentation, destination file() driver now fully documented.
+	
+	Fixed a few bugs.
